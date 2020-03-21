@@ -18,7 +18,7 @@ Link GitHub:
 - https://guides.github.com/activities/hello-world/
 - https://guides.github.com/introduction/flow/
 - https://www.youtube.com/githubguides
-- Slides Grisetti
+- Slides Grisetti (check out progetto_lab_assi/resources/os_02a_tools_git.pdf)
           
 Link linguaggi per il web:
 - https://www.youtube.com/watch?v=XQs5KcUj-Do&t=5021s
