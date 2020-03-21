@@ -1,6 +1,6 @@
 Web app per le previsioni meteo.
 
-Non vuole essere una User Story, solamente una bozza delle idee che abbiamo tirato su il 21/03/20
+Non vuole essere una User Story, solamente una bozza delle idee che abbiamo tirato giù il 21/03/20
 
 Funzionalità:
 	- Previsione meteo basata sulla media pesata delle previsioni di altri siti (ilMeteo.it, Google, 3bMeteo, ...) e dei dati raccolti dagli utenti registrati.
