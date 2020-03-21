@@ -1,10 +1,5 @@
 # Progetto-Lab-ASSI
 
-Team:
-- Giacomo Colizzi Coin
-- Renato Giamba
-- Davide Bazzana
-
 Idee:
 - Contratti e fatturazione elettronica
 - Previsioni meteo
