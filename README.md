@@ -13,6 +13,7 @@ Idee:
 Link GitHub:
 - https://guides.github.com/activities/hello-world/
 - https://guides.github.com/introduction/flow/
+- https://www.youtube.com/githubguides
 - Slides Grisetti
           
 Link linguaggi per il web:
