@@ -1,4 +1,4 @@
-# Progetto-Lab-ASSI
+# Progetto laboratorio architetture software e sicurezza informatica
 
 Team:
 - Davide Bazzana
