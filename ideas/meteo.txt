@@ -8,5 +8,5 @@ Funzionalità:
 	- Consultare il meteo non solo della propria località ma anche di altre utilizzando i servizi forniti da Maps.
 
 Utenti:
-	- ospiti: possono consultare la previsione del sito (media ponderata).
+	- ospiti: possono consultare le previsioni del sito (media ponderata - previsioni singoli siti - maps).
 	- registrati: possono fornire dati meteo in tempo reale e recensire i siti.
