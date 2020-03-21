@@ -19,6 +19,7 @@ Per ogni idea suggerirei di scrivere un piccolo file di testo per descriverla da
 - https://drive.google.com/drive/folders/1T2JZfEeW1re6kJRM72kzhaX7jIJiN8AX
 
 #### GitHub:
+- https://help.github.com/en/github
 - https://guides.github.com/activities/hello-world/
 - https://guides.github.com/introduction/flow/
 - https://www.youtube.com/githubguides
