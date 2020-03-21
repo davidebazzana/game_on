@@ -1,0 +1,12 @@
+Web app per le previsioni meteo.
+
+Non vuole essere una User Story, solamente una bozza delle idee che abbiamo tirato su il 21/03/20
+
+Funzionalità:
+	- Previsione meteo basata sulla media pesata delle previsioni di altri siti (ilMeteo.it, Google, 3bMeteo, ...) e dei dati raccolti dagli utenti registrati.
+	- Gli utenti registrati possono recensire i siti web che forniscono i dati modificando quindi i parametri della media pesata (Maggiore rating -> Maggiore peso nella media).
+	- Consultare il meteo non solo della propria località ma anche di altre utilizzando i servizi forniti da Maps.
+
+Utenti:
+	- ospiti: possono consultare la previsione del sito (media ponderata).
+	- registrati: possono fornire dati meteo in tempo reale e recensire i siti.
