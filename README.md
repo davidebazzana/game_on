@@ -14,9 +14,8 @@ Per ogni idea suggerirei di scrivere un piccolo file di testo per descriverla da
 
 DA CHIEDERE AL PROFESSORE: spiegazione su servizi esterni.
 
-Link lezioni youtube:
-- Lezione 1: https://www.youtube.com/watch?v=U9PSKaIqLis
-- Lezione 2: https://www.youtube.com/watch?v=OSp_sp0KOjw
+Link lezioni:
+- https://drive.google.com/drive/folders/1T2JZfEeW1re6kJRM72kzhaX7jIJiN8AX
 
 Link GitHub:
 - https://guides.github.com/activities/hello-world/
