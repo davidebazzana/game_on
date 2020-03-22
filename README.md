@@ -7,10 +7,9 @@
 
 ### Idee:
 - Contratti e fatturazione elettronica
+- Prevenzione coronavirus
 - Previsioni meteo
 - Risiko online
-
-Per ogni idea suggerirei di scrivere un piccolo file di testo per descriverla da aggiungere alla cartella progetto-lab-assi/ideas.
 
 **DA CHIEDERE AL PROFESSORE**: spiegazione su servizi esterni.
 
