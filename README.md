@@ -23,7 +23,8 @@
 - [GitHub's flow explained](https://guides.github.com/introduction/flow/)
 - [GitHub's YouTube channel]( https://www.youtube.com/githubguides)
 - [Slides Grisetti](../resources/os_02a_tools_git.pdf)
-          
-#### Linguaggi per il web:
+
+### Linguaggi:
+- [CS50](https://www.youtube.com/channel/UCcabW7890RKJzL968QWEykA)
 - [Html crash course](https://www.youtube.com/watch?v=XQs5KcUj-Do&t=5021s)
-- [Several languages courses](https://www.w3schools.com/)
+- [w3schools](https://www.w3schools.com/)
