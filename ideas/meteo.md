@@ -9,4 +9,8 @@
 - ospiti: possono consultare le previsioni del sito (media ponderata - previsioni singoli siti - maps).
 - registrati: possono fornire dati meteo in tempo reale e recensire i siti.
 
+### APIs:
+- [Il meteo](https://www.ilmeteo.it/portale/dati-meteo-xml)
+- [OpenWeather](https://openweathermap.org/api)
+
 **_Footnote_**: Non vuole essere una User Story, solamente una bozza delle idee che abbiamo tirato giù il 21/03/20
