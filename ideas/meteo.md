@@ -11,6 +11,7 @@
 
 ### APIs:
 - [il meteo](https://www.ilmeteo.it/portale/dati-meteo-xml)
+- [AccuWeather](https://developer.accuweather.com/)
 - [OpenWeatherMap](https://openweathermap.org/api)
 
 **_Footnote_**: Non vuole essere una User Story, solamente una bozza delle idee che abbiamo tirato giù il 21/03/20
