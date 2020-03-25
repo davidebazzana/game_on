@@ -32,6 +32,7 @@
 - [Cronologia Google Maps](https://github.com/alexattia/Maps-Location-History)
 
 #### Linguaggi:
+- [KML Documentation](https://developers.google.com/kml/documentation)
 - [CS50](https://www.youtube.com/channel/UCcabW7890RKJzL968QWEykA)
 - [Html crash course](https://www.youtube.com/watch?v=XQs5KcUj-Do&t=5021s)
 - [w3schools](https://www.w3schools.com/)
