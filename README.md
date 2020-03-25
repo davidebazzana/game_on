@@ -10,6 +10,11 @@
 - Prevenzione coronavirus
 - Previsioni meteo
 - Risiko online
+- Spotted
+
+### Next steps:
+- Cercare informazioni sulle API
+- Decidere idea ed inviare una descrizione con user stories del progetto al professore. Possiamo iniziare a lavorarci da subito, il professore risponde solamente se il progetto viene bocciato.
 
 **DA CHIEDERE AL PROFESSORE**:
 
