@@ -11,7 +11,7 @@
 - Previsioni meteo
 - Risiko online
 
-**DA CHIEDERE AL PROFESSORE**: spiegazione su servizi esterni.
+**DA CHIEDERE AL PROFESSORE**:
 
 ### Link utili
 #### Lezioni lab:
@@ -24,6 +24,7 @@
 - [GitHub's flow explained](https://guides.github.com/introduction/flow/)
 - [GitHub's YouTube channel]( https://www.youtube.com/githubguides)
 - [Slides Grisetti](../master/resources/os_02a_tools_git.pdf)
+- [Cronologia Google Maps](https://github.com/alexattia/Maps-Location-History)
 
 #### Linguaggi:
 - [CS50](https://www.youtube.com/channel/UCcabW7890RKJzL968QWEykA)
