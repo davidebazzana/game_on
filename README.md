@@ -22,6 +22,7 @@
 #### Lezioni lab:
 - [Drive video lezioni](https://drive.google.com/drive/folders/1T2JZfEeW1re6kJRM72kzhaX7jIJiN8AX)
 - [Repository GitHub Beraldi (RottenPotatoes)](https://github.com/RBeraldi/RottenCRUD)
+- [Saas book](http://www.saasbook.info/)
 
 #### GitHub:
 - [Documentation](https://help.github.com/en/github)
