@@ -5,20 +5,19 @@
 - Giacomo Colizzi Coin
 - Renato Giamba
 
-### Idee:
-- Contratti e fatturazione elettronica
-- Prevenzione coronavirus
-- Previsioni meteo
-- Risiko online
-- Spotted
+### Idea: piattaforma online di giochi
 
 ### Next steps:
+- Scrivere una descrizione con user stories del progetto ed inviarla al professore.
 - Cercare informazioni sulle API
-- Decidere idea ed inviare una descrizione con user stories del progetto al professore. Possiamo iniziare a lavorarci da subito, il professore risponde solamente se il progetto viene bocciato.
 
-**DA CHIEDERE AL PROFESSORE**:
+Possiamo iniziare a lavorarci da subito, il professore risponde solamente se il progetto viene bocciato.
 
 ### Link utili
+#### Hot links:
+- [Unity3d - embed unity game in HTML file webpage](https://youtu.be/K52l9P19_2o)
+- [Clamby - antivirus engine interface](https://github.com/kobaltz/clamby)
+
 #### Lezioni lab:
 - [Drive video lezioni](https://drive.google.com/drive/folders/1T2JZfEeW1re6kJRM72kzhaX7jIJiN8AX)
 - [Repository GitHub Beraldi (RottenPotatoes)](https://github.com/RBeraldi/RottenCRUD)
