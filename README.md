@@ -15,7 +15,7 @@ Possiamo iniziare a lavorarci da subito, il professore risponde solamente se il 
 
 ### Link utili
 #### Hot links:
-- [Unity3d - embed unity game in HTML file webpage](https://youtu.be/K52l9P19_2o)
+- [Unity3d - embed unity game in HTML webpage](https://youtu.be/K52l9P19_2o)
 - [Clamby - antivirus engine interface](https://github.com/kobaltz/clamby)
 
 #### Lezioni lab:
