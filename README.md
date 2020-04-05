@@ -21,6 +21,10 @@ Possiamo iniziare a lavorarci da subito, il professore risponde solamente se il 
 
 #### GitHub:
 - [Documentation](https://help.github.com/en/github)
+- [Mastering issues](https://guides.github.com/features/issues/)
+- [GitHub Project Management](https://www.youtube.com/watch?v=ff5cBkPg-bQ)
+- [About project boards](https://help.github.com/en/github/managing-your-work-on-github/about-project-boards)
+- [Forking Projects](https://guides.github.com/activities/forking/)
 - [Hello World - tutorial](https://guides.github.com/activities/hello-world/)
 - [GitHub's flow explained](https://guides.github.com/introduction/flow/)
 - [GitHub's YouTube channel]( https://www.youtube.com/githubguides)
