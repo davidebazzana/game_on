@@ -4,11 +4,12 @@
 
 #### Le stories sono in ordine decrescente di priorità.
 
-#### I numeri tra parentesi rappresentano la difficoltà della story. Il numero può assumere tre valori: 
+#### I numeri tra parentesi rappresentano la difficoltà della story (serviranno a noi nella fase di sviluppo - stima della velocità). Il numero può assumere tre valori: 
 - 1 facile
 - 2 medio
 - 3 difficile
-(Non fanno parte delle user stories, ma serviranno a noi per valutare la velocità di progresso del progetto)
+
+---
 
 1) Registrazione di un account (2):
 <br>Come visitatore
