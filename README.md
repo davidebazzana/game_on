@@ -7,10 +7,6 @@
 
 ### Idea: piattaforma online di giochi
 
-### Next steps:
-- Scrivere una descrizione con user stories del progetto ed inviarla al professore.
-- Cercare informazioni sulle API
-
 Possiamo iniziare a lavorarci da subito, il professore risponde solamente se il progetto viene bocciato.
 
 ### Link utili
