@@ -30,10 +30,14 @@
 <br>Come utente registrato/visitatore e amministratore
 <br>In modo che tutti gli utenti possano vedere i giochi caricati sul sito
 <br>Voglio vedere i giochi aggiunti dagli utenti
-9) Aggiungi gioco alla lista globale di giochi (3):
+9) Aggiungere gioco alla lista di giochi (3):
 <br>Come utente registrato
-<br>In modo da inserire un gioco nella lista di giochi globale del sito
+<br>In modo da inserire un gioco nella lista globale di giochi del sito
 <br>Voglio inserire un gioco nella lista globale
+5) Rimuovere gioco dalla lista di giochi (1):
+<br>Come utente registrato
+<br>In modo da rimuovere dalla lista globale di giochi uno dei giochi che avevo caricato in passato
+<br>Voglio rimuovere un gioco dalla lista globale dei giochi
 4) Giocare ad un gioco (3):
 <br>Come utente registrato/visitatore
 <br>In modo da giocare ad un gioco trovato nella lista di giochi globale
