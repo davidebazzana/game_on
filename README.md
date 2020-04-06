@@ -1,4 +1,4 @@
-# Progetto laboratorio architetture software e sicurezza informatica
+# Still not using [PivotalTracker](https://www.pivotaltracker.com/signup/new?source=navbar)? Oh. My. Gosh.
 
 ### Team:
 - Davide Bazzana
