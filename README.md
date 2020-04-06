@@ -2,9 +2,9 @@
 
 ### Team:
 - [Davide Bazzana](https://www.pivotaltracker.com/about-us)
-- Giacomo Colizzi Coin
-- Renato Giamba
-- Tracker Pivotal
+- [Giacomo Colizzi Coin](https://unity.com/our-company)
+- [Renato Giamba](https://www.gamestop.it/)
+- [Tracker Pivotal](https://www.youtube.com/watch?v=tb_2TJjsq4g)
 
 ### Idea: piattaforma online di giochi
 
