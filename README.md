@@ -4,6 +4,7 @@
 - Davide Bazzana
 - Giacomo Colizzi Coin
 - Renato Giamba
+- Pivotal Tracker
 
 ### Idea: piattaforma online di giochi
 
