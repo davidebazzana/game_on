@@ -1,8 +1,8 @@
 # Still not using [PivotalTracker](https://www.pivotaltracker.com/signup/new?source=navbar)? Ok boomer.
 
 ### Team:
-- [Davide Bazzana](https://www.pivotaltracker.com/about-us)
-- [Giacomo Colizzi Coin](https://unity.com/our-company)
+- [Davide Bazzana](https://www.pivotaltracker.com/)
+- [Giacomo Colizzi Coin](https://unity.com/)
 - [Renato Giamba](https://www.gamestop.it/)
 - [Tracker Pivotal](https://www.youtube.com/watch?v=tb_2TJjsq4g)
 
