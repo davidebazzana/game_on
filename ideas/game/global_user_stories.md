@@ -1,6 +1,5 @@
 
-
-PIVOTALTRAKER <3
+ <3 PIVOTALTRAKER <3
 
 1) Registrazione di un account (2):
 <br>Come visitatore
