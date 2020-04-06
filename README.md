@@ -1,14 +1,14 @@
 # Still not using [PivotalTracker](https://www.pivotaltracker.com/signup/new?source=navbar)? Oh. My. Gosh.
 
 ### Team:
-- Davide Bazzana
+- [Davide Bazzana](https://www.pivotaltracker.com/about-us)
 - Giacomo Colizzi Coin
 - Renato Giamba
-- Pivotal Tracker
+- PivotalTracker
 
 ### Idea: piattaforma online di giochi
 
-Possiamo iniziare a lavorarci da subito, il professore risponde solamente se il progetto viene bocciato.
+Possiamo iniziare a lavorarci da subito (magari usando PivotalTracker, ad esempio eh). Il professore risponde solamente se il progetto viene bocciato.
 
 ### Link utili
 #### Hot links:
@@ -21,7 +21,9 @@ Possiamo iniziare a lavorarci da subito, il professore risponde solamente se il 
 - [Saas book](http://www.saasbook.info/)
 
 #### GitHub:
-- [Documentation](https://help.github.com/en/github)
+- [Using common Git commands](https://help.github.com/en/github/using-git/using-common-git-commands)
+- [Git commands crib sheet](https://github.com/joshnh/Git-Commands)
+- [GitHub's documentation](https://help.github.com/en/github)
 - [Mastering issues](https://guides.github.com/features/issues/)
 - [GitHub Project Management](https://www.youtube.com/watch?v=ff5cBkPg-bQ)
 - [About project boards](https://help.github.com/en/github/managing-your-work-on-github/about-project-boards)
