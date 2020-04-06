@@ -1,4 +1,4 @@
-# Still not using [PivotalTracker](https://www.pivotaltracker.com/signup/new?source=navbar)? Oh. My. Gosh.
+# Still not using [PivotalTracker](https://www.pivotaltracker.com/signup/new?source=navbar)? Ok boomer.
 
 ### Team:
 - [Davide Bazzana](https://www.pivotaltracker.com/about-us)
