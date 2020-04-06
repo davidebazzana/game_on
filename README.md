@@ -4,7 +4,7 @@
 - [Davide Bazzana](https://www.pivotaltracker.com/about-us)
 - Giacomo Colizzi Coin
 - Renato Giamba
-- Pivotal Tracker
+- Tracker Pivotal
 
 ### Idea: piattaforma online di giochi
 
