@@ -23,6 +23,7 @@ Possiamo iniziare a lavorarci da subito (magari usando PivotalTracker, ad esempi
 #### GitHub:
 - [Using common Git commands](https://help.github.com/en/github/using-git/using-common-git-commands)
 - [Git commands crib sheet](https://github.com/joshnh/Git-Commands)
+- [PivotalTracker integration](https://www.pivotaltracker.com/help/articles/github_integration/)
 - [GitHub's documentation](https://help.github.com/en/github)
 - [Mastering issues](https://guides.github.com/features/issues/)
 - [GitHub Project Management](https://www.youtube.com/watch?v=ff5cBkPg-bQ)
