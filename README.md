@@ -4,7 +4,7 @@
 - [Davide Bazzana](https://www.pivotaltracker.com/)
 - [Giacomo Colizzi Coin](https://unity.com/)
 - [Renato Giamba](https://www.gamestop.it/)
-- [Tracker Pivotal](https://www.youtube.com/watch?v=tb_2TJjsq4g)
+- [Tracker Pivotal](https://www.youtube.com/watch?v=Qkuu0Lwb5EM)
 
 ### Idea: piattaforma online di giochi
 
