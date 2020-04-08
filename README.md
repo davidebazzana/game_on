@@ -14,6 +14,7 @@ Possiamo iniziare a lavorarci da subito (magari usando PivotalTracker, ad esempi
 #### Hot links:
 - [Unity3d - embed unity game in HTML webpages](https://youtu.be/K52l9P19_2o)
 - [Clamby - antivirus engine interface](https://github.com/kobaltz/clamby)
+- [GitHub OAuth](https://developer.github.com/apps/building-oauth-apps/authorizing-oauth-apps/)
 
 #### Lezioni lab:
 - [Drive video lezioni](https://drive.google.com/drive/folders/1T2JZfEeW1re6kJRM72kzhaX7jIJiN8AX)
