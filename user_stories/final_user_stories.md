@@ -17,7 +17,7 @@ mandare ad un altro utente una richiesta di amicizia la quale, una volta accetta
 
 - Google OAuth
 - GitHub OAuth
-- Unity3d APIs
+- Unity APIs
 
 ---
 
