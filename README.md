@@ -22,6 +22,7 @@ Possiamo iniziare a lavorarci da subito (magari usando PivotalTracker, ad esempi
 - [Saas book](http://www.saasbook.info/)
 
 #### GitHub:
+- [ProGit](https://git-scm.com/book/en/v2)
 - [Using common Git commands](https://help.github.com/en/github/using-git/using-common-git-commands)
 - [Git commands crib sheet](https://github.com/joshnh/Git-Commands)
 - [PivotalTracker integration](https://www.pivotaltracker.com/help/articles/github_integration/)
