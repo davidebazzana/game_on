@@ -6,6 +6,11 @@ capybara-*.html
 /db/*.sqlite3-[0-9]*
 /public/system
 /coverage/
+/pkg/
+/spec/reports/
+/spec/examples.txt
+/test/tmp/
+/test/version_tmp/
 /spec/tmp
 *.orig
 rerun.txt
@@ -32,6 +37,7 @@ config/master.key
 ## Environment normalization:
 /.bundle
 /vendor/bundle
+/lib/bundler/man/
 
 # these should all be checked in to normalize the environment:
 # Gemfile.lock, .ruby-version, .ruby-gemset
@@ -67,3 +73,20 @@ yarn-debug.log*
 /storage/*
 !/storage/.keep
 /public/uploads
+
+# unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
+.rvmrc
+
+## Documentation cache and generated files:
+/.yardoc/
+/_yardoc/
+/doc/
+/rdoc/
+
+## Specific to RubyMotion:
+.dat*
+.repl_history
+build/
+*.bridgesupport
+build-iPhoneOS/
+build-iPhoneSimulator/
