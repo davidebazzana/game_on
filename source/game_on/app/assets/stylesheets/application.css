@@ -49,18 +49,18 @@ h1.title {
   font-size: 2em;
   font-style: normal;
 }
-table#movies {
+table#games {
   margin: 10px;
   border-collapse: collapse;
   width: 100%;
   border-bottom: 2px solid black;
 }
-table#movies th {
+table#games th {
   border: 2px solid white;
   font-weight: bold;
   background-color: wheat;
 }
-table#movies th, table#movies td {
+table#games th, table#games td {
   padding: 4px;
   text-align: left;
 }
