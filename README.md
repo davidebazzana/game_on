@@ -16,6 +16,9 @@ Possiamo iniziare a lavorarci da subito (magari usando PivotalTracker, ad esempi
 - [Clamby - antivirus engine interface](https://github.com/kobaltz/clamby)
 - [GitHub OAuth](https://developer.github.com/apps/building-oauth-apps/authorizing-oauth-apps/)
 
+#### Rails:
+- [Active Storage](https://guides.rubyonrails.org/active_storage_overview.html)
+
 #### Lezioni lab:
 - [Drive video lezioni](https://drive.google.com/drive/folders/1T2JZfEeW1re6kJRM72kzhaX7jIJiN8AX)
 - [Repository GitHub Beraldi (RottenPotatoes)](https://github.com/RBeraldi/RottenCRUD)
