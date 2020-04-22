@@ -1,0 +1,17 @@
+%h2 Create a new game
+
+= form_tag games_path, :method => :post , :multipart=>true do
+
+    = label :game, :title, 'Title'
+    = text_field :game, :title
+    = label :game, :info, 'Info'
+    = text_field :game, :info
+    = label :game, :game_file, 'Allega file'
+    = file_field :game, :game_file 
+   
+    = submit_tag 'Save Changes'
+
+#{link_to 'Indietro', games_path}
+   
+
+    
