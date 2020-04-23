@@ -13,7 +13,7 @@ class PasswordValidator < ActiveModel::EachValidator
         unless value =~
             /(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9])/
             record.errors[attribute] << (options[:message] ||
-            "is not a vaild password")
+            "must contain at least a number and a symbol")
         end
     end
 end
