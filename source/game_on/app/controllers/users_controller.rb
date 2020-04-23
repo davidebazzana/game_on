@@ -1,7 +1,7 @@
 # This file is app/controllers/users_controller.rb
 class UsersController < ApplicationController
     def index
-      render html: 'users index'
+      @users = User.all
     end
   
     def show
@@ -9,6 +9,6 @@ class UsersController < ApplicationController
     end
 
     def new
-      render html: 'users new'
+      
     end
   end
