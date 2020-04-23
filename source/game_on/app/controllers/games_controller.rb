@@ -1,4 +1,4 @@
-# This file is app/controllers/movies_controller.rb
+# This file is app/controllers/games_controller.rb
 class GamesController < ApplicationController
   def index
     @games = Game.all
