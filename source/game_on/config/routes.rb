@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   # Provide mapping between URLs/HTTP verbs to controller
   resources :games
   resources :users
+  root :to => redirect('/games')
 end
