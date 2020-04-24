@@ -6,4 +6,4 @@
 Run `bundle install --path vendor/cache/` to install the needed gems.
 
 #### Database initialization 
-Run `rake db:migrate` to apply the migrations to the database.
+Run `rake db:drop && rake db:migrate` to apply the migrations to the database.
