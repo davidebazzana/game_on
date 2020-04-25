@@ -1,3 +1,9 @@
+- if @current_user
+  = link_to 'Logout', logout_path
+- else
+  = link_to 'Sign up', signup_path
+  or 
+  = link_to 'Login', login_path
 %h1 Users
 
 %table#users

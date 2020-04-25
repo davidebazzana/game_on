@@ -20,8 +20,8 @@ class GamesController < ApplicationController
     else
       flash[:notice] = @game.errors.full_messages
       redirect_to games_path
-   end
- end
+    end
+  end
 
   def new
     

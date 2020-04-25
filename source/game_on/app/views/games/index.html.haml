@@ -1,4 +1,4 @@
-- if session[:current_user_id]
+- if @current_user
   = link_to 'Logout', logout_path
 - else
   = link_to 'Sign up', signup_path

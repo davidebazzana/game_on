@@ -2,9 +2,13 @@
 class UsersController < ApplicationController
   before_action :set_user, 
   only: [:show, :edit, :update, :destroy]
+  before_action :last_url,
+  only: [:new]
   
   skip_before_action :require_login,
   only: [:new, :create]
+  skip_before_action :save_last_url, only: [:create, :new]
+
 
 
 
@@ -23,7 +27,7 @@ class UsersController < ApplicationController
 
     if @user.save
       flash[:notice] = "User #{@user.username} was added"
-      redirect_to users_path
+      redirect_to last_url
     else
       flash[:warning] = @user.errors.full_messages
       render 'new'
