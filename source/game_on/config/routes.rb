@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :users
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'logins#new', as: 'login'
+  post 'login', to: 'logins#create', as: 'new_login'
+  get 'logout', to: 'logins#destroy', as: 'logout'
 
   root :to => redirect('/games')
 end

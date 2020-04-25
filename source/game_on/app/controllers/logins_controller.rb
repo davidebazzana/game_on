@@ -6,11 +6,15 @@ class LoginsController < ApplicationController
   end
 
   def create
-    if user = User.authenticate(params[:email], 
-      params[:password])
+    if user = 
+      User.find_by_email(params[:login][:email]
+      ).authenticate(params[:login][:password])
 
       session[:current_user_id] = user.id
       redirect_to games_path, notice: 'Logged in'
+    else
+      flash[:warning] = 'Invalid email or password'
+      render 'new'
     end
   end
 
@@ -20,4 +24,8 @@ class LoginsController < ApplicationController
     @_current_user = nil
     redirect_to games_path, notice: 'Logged out'
   end
+
+  private
+
+    
 end
