@@ -1,0 +1,8 @@
+%h1 New User
+
+= render :partial=>'form'
+
+//comandi temporanei per tornare da chi ha chiamato la new 
+//la versione definitiva sfrutterà session
+= link_to 'Back to users', users_path
+= link_to 'Back to games', games_path

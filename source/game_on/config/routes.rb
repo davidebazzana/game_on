@@ -3,4 +3,8 @@ Rails.application.routes.draw do
 
   # Provide mapping between URLs/HTTP verbs to controller
   resources :games
+  resources :users
+  get 'signup', to: 'users#new', as: 'signup'
+
+  root :to => redirect('/games')
 end

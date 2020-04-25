@@ -49,29 +49,34 @@ h1.title {
   font-size: 2em;
   font-style: normal;
 }
-table#games {
+table {
   margin: 10px;
   border-collapse: collapse;
   width: 100%;
   border-bottom: 2px solid black;
 }
-table#games th {
+table th {
   border: 2px solid white;
   font-weight: bold;
   background-color: wheat;
 }
-table#games th, table#games td {
+table th, table td {
   padding: 4px;
   text-align: left;
 }
-#notice, #warning {
+/*#notice, #warning {
   background: rosybrown;
   margin: 1em 0;
   padding: 4px;
-}
+}*/
 form label {
   display: block;
   line-height: 25px;
   font-weight: bold;
   color: maroon;
+}
+.message {
+  color: darkred;
+  background-color: wheat;
+  text-align: center;
 }
