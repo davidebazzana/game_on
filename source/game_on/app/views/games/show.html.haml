@@ -5,3 +5,4 @@
 %p#description= @game.info
 
 = link_to 'Back to game list', games_path
+= link_to 'Delete game', game_path(@game), :method => :delete
