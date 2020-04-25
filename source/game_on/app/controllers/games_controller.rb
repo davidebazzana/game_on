@@ -33,7 +33,7 @@ class GamesController < ApplicationController
     # destroy the game
     @game.destroy
     
-    flash[:notice] = "Game '#{@game.title}' deleted."
+    flash[:notice] = "'#{@game.title}' deleted successfully"
     redirect_to games_path
   end
   
