@@ -1,5 +1,7 @@
 # This file is app/controllers/games_controller.rb
 class GamesController < ApplicationController
+  skip_before_action :require_login, only: [:index, :show]
+
   def index
     @games = Game.all
   end
@@ -26,9 +28,8 @@ class GamesController < ApplicationController
   end
 
 
-   private
+  private
     
-
     def game_params
        params.require(:game).permit(:title, :info, :game_file)
     end

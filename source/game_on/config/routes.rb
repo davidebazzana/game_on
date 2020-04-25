@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :games
   resources :users
   get 'signup', to: 'users#new', as: 'signup'
+  get 'login', to: 'logins#new', as: 'login'
 
   root :to => redirect('/games')
 end
