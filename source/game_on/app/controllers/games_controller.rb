@@ -10,10 +10,14 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.new(params[:game].permit!)
+    @game = Game.new(game_params)
 
-    if @game.save && @game.game_file.attached?
-      flash[:notice] = "Game #{@game.title} was added"
+    if @game.save
+      if @game.game_file.attached?
+        flash[:notice] = "Game #{@game.title} was added"
+      else
+        flash[:notice] = "'#{@game.title}' added, no file provided"
+      end
       redirect_to games_path
     else
       flash[:notice] = @game.errors.full_messages
