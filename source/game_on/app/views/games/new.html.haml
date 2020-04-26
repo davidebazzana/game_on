@@ -6,12 +6,12 @@
     = text_field :game, :title
     = label :game, :info, 'Info'
     = text_field :game, :info
-    = label :game, :game_file, 'Allega file'
+    = label :game, :game_file, 'Attach a file'
     = file_field :game, :game_file 
    
-    = submit_tag 'Save Changes'
+    = submit_tag 'Submit game'
 
-#{link_to 'Indietro', games_path}
+#{link_to 'Games list', games_path}
    
 
     

@@ -10,27 +10,41 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.new(params[:game].permit!)
+    @game = Game.new(game_params)
 
     if @game.save
-      flash[:notice] = "Game #{@game.title} was added"
+      if @game.game_file.attached?
+        flash[:notice] = "Game #{@game.title} was added"
+      else
+        flash[:notice] = "'#{@game.title}' added, no file provided"
+      end
       redirect_to games_path
     else
       flash[:notice] = @game.errors.full_messages
       redirect_to games_path
-   end
- end
-
+    end
+  end
+  
   def new
     
   end
 
+  def destroy
+    @game = Game.find(params[:id])
 
-   private
+    # delete the file attached
+    @game.game_file.purge
+    # destroy the game
+    @game.destroy
     
-
-    def game_params
-       params.require(:game).permit(:title, :info, :game_file)
-    end
+    flash[:notice] = "'#{@game.title}' deleted successfully"
+    redirect_to games_path
+  end
+  
+  private
+    
+  def game_params
+    params.require(:game).permit(:title, :info, :game_file)
+  end
 
 end
