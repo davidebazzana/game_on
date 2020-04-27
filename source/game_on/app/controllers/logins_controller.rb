@@ -1,5 +1,4 @@
 class LoginsController < ApplicationController
-
   skip_before_action :require_login, only: [:new, :create]
   skip_before_action :save_last_url, only: [:new, :create]
 

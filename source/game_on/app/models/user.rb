@@ -23,7 +23,7 @@ class User < ApplicationRecord
 
     validates :username, presence: true #, uniqueness: true?
     validates :email, presence: true, uniqueness: true, email: true
-    validates :password, length: { minimum: 8 }, password: true
+    validates :password, length: { minimum: 8 }, password: true, on: :create
 
 end
 
