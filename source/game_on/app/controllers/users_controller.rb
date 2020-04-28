@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   
   skip_before_action :require_login,
   only: [:new, :create]
-  skip_before_action :save_last_url, only: [:create, :new, :show]
+  skip_before_action :save_last_url, only: [:create, :new, :show, :edit, :update]
 
 
 

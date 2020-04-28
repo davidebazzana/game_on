@@ -28,8 +28,7 @@ class ApplicationController < ActionController::Base
 
   def last_url
     @last_url = session[:last_url]
-    session.delete(:last_url)
-    @last_url || games_path
+    @last_url ||= games_path
   end
 
 end
