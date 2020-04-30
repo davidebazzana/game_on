@@ -75,14 +75,7 @@ class GamesController < ApplicationController
   end
 
   def edit_game_params
-    checked_params = params
-    if params[:game][:title].blank?
-      checked_params = params[:game].except(:title)
-    end
-    if params[:game][:info].blank?
-      checked_params = params[:game].except(:info)
-    end
-    checked_params.require(:game).permit(:title, :info)
+    params.require(:game).permit(:info)
   end
   
 end
