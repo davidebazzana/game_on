@@ -70,6 +70,7 @@ class GamesController < ApplicationController
 
   def require_permission
     if current_user.id != Game.find(params[:id]).user_id
+      flash[:alert] = "You must be the owner of the game to perform this action"
       redirect_to games_path
     end
   end
