@@ -23,7 +23,7 @@ class GamesController < ApplicationController
       end
       redirect_to games_path
     else
-      flash[:notice] = @game.errors.full_messages
+      flash[:error] = @game.errors.full_messages
       redirect_to games_path
     end
   end
@@ -66,7 +66,7 @@ class GamesController < ApplicationController
 
   def require_permission
     if current_user.id != Game.find(params[:id]).user_id
-      flash[:notice] = "You must be the owner of the game to perform this action"
+      flash[:warning] = "You must be the owner of the game to perform this action"
       redirect_to games_path
     end
   end
