@@ -6,5 +6,5 @@
 
 = link_to 'Games list', games_path
 
-- if @show_edit_link
+- if @current_user != nil && @current_user.id == @game.user_id
   = link_to 'Edit game', edit_game_path(@game)

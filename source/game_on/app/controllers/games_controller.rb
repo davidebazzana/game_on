@@ -10,10 +10,6 @@ class GamesController < ApplicationController
   def show
     id = params[:id]
     @game = Game.find(id)
-    @show_edit_link = false
-    if current_user != nil && current_user.id == @game.user_id
-      @show_edit_link = true
-    end
   end
 
   def create
@@ -21,7 +17,7 @@ class GamesController < ApplicationController
 
     if @game.save
       if @game.game_file.attached?
-        flash[:notice] = "Game '#{@game.title}' was added"
+        flash[:notice] = "'#{@game.title}' was added"
       else
         flash[:notice] = "'#{@game.title}' added, no file provided"
       end
