@@ -1,5 +1,7 @@
 - if @current_user
   = link_to 'Logout', logout_path
+  |
+  = link_to 'Your account', user_path(@current_user)
 - else
   = link_to 'Sign up', signup_path
   or 
@@ -18,4 +20,4 @@
         %td= link_to "More about #{game.title}", game_path(game)
 
 
-#{link_to 'Add new game', new_game_path}
+= link_to 'Add new game', new_game_path

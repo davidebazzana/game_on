@@ -3,11 +3,11 @@ class UsersController < ApplicationController
   before_action :set_user, 
   only: [:show, :edit, :update, :destroy]
   before_action :last_url,
-  only: [:new]
+  only: [:new, :show]
   
   skip_before_action :require_login,
   only: [:new, :create]
-  skip_before_action :save_last_url, only: [:create, :new]
+  skip_before_action :save_last_url, only: [:create, :new, :show, :edit, :update]
 
 
 
@@ -34,10 +34,30 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @user.update(edit_user_params)
+      flash[:notice] = "Your account is now changed!"
+      redirect_to user_path(@user)
+    else
+      flash[:error] = @user.errors.full_messages
+      render 'edit'
+    end
+  end
+
   private
 
     def user_params
       params.require(:user).permit(:username, :email, :password, :password_confirmation)
+    end
+
+    def edit_user_params
+      if params[:user][:password].blank?
+        params[:user].delete(:password)
+      end
+      params.require(:user).permit(:username, :email)
     end
 
     def set_user

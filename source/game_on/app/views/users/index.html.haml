@@ -1,5 +1,7 @@
 - if @current_user
   = link_to 'Logout', logout_path
+  |
+  = link_to 'Your account', user_path(@current_user)
 - else
   = link_to 'Sign up', signup_path
   or 
