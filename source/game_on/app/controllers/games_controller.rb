@@ -1,7 +1,8 @@
 # This file is app/controllers/games_controller.rb
 class GamesController < ApplicationController
   skip_before_action :require_login, only: [:index, :show]
-
+  before_action :require_permission, only: [:edit, :update, :destroy]
+  
   def index
     @games = Game.all
   end
@@ -12,23 +13,37 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.new(game_params)
+    @game = Game.new(game_params.merge(:user_id => session[:current_user_id]))
 
     if @game.save
       if @game.game_file.attached?
-        flash[:notice] = "Game #{@game.title} was added"
+        flash[:notice] = "'#{@game.title}' was added"
       else
         flash[:notice] = "'#{@game.title}' added, no file provided"
       end
       redirect_to games_path
     else
-      flash[:notice] = @game.errors.full_messages
+      flash[:error] = @game.errors.full_messages
       redirect_to games_path
+    end
+  end
+
+  def update
+    @game = Game.find(params[:id])
+    if @game.update(edit_game_params)
+      flash[:notice] = "'#{@game.title}' updated successfully"
+      redirect_to games_path
+    else
+      flash[:error] = @game.errors.full_messages
+      render 'edit'
     end
   end
   
   def new
-    
+  end
+
+  def edit
+    @game = Game.find(params[:id])
   end
 
   def destroy
@@ -46,8 +61,19 @@ class GamesController < ApplicationController
   private
     
   def game_params
-    params.require(:game).permit(:title, :info, :game_file)
+    params.require(:game).permit(:title, :info, :game_file, :user_id)
   end
 
+  def require_permission
+    if current_user.id != Game.find(params[:id]).user_id
+      flash[:warning] = "You must be the owner of the game to perform this action"
+      redirect_to games_path
+    end
+  end
+
+  def edit_game_params
+    params.require(:game).permit(:info)
+  end
+  
 end
 

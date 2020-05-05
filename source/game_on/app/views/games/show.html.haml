@@ -5,4 +5,6 @@
 %p#description= @game.info
 
 = link_to 'Games list', games_path
-= link_to 'Delete game', game_path(@game), :method => :delete
+
+- if @current_user != nil && @current_user.id == @game.user_id
+  = link_to 'Edit game', edit_game_path(@game)
