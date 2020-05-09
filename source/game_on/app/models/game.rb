@@ -4,5 +4,4 @@ class Game < ApplicationRecord
   
   # Before creating or updating a Game object, check if the title is provided
   validates :title, presence: true
-  
 end

@@ -8,8 +8,7 @@ class GamesController < ApplicationController
   end
 
   def show
-    id = params[:id]
-    @game = Game.find(id)
+    @game = Game.find(params[:id])
   end
 
   def create
@@ -72,7 +71,7 @@ class GamesController < ApplicationController
   end
 
   def edit_game_params
-    params.require(:game).permit(:info)
+    params.require(:game).permit(:title, :info)
   end
   
 end
