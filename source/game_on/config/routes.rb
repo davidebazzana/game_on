@@ -2,7 +2,14 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # Provide mapping between URLs/HTTP verbs to controller
-  resources :games
+  resources :games do
+    collection do
+      get 'DebugBuild.wasm.code.unityweb', to: 'games#unity_code'
+      get 'DebugBuild.wasm.framework.unityweb', to: 'games#unity_framework'
+      get 'DebugBuild.data.unityweb', to: 'games#unity_data'
+    end
+  end
+  
   resources :users
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'logins#new', as: 'login'

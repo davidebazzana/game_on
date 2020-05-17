@@ -8,7 +8,15 @@ class GamesController < ApplicationController
   end
 
   def show
+=begin
+    byebug
     @game = Game.find(params[:id])
+=end
+    # @game = Game.find(params[:id])
+    respond_to do |format|
+      format.html { @game = Game.find(params[:id]) } # show.html.haml
+      format.json { render json: File.read("#{Rails.root}/app/assets/javascripts/Build/DebugBuild.json") }
+    end
   end
 
   def create
@@ -55,6 +63,21 @@ class GamesController < ApplicationController
     
     flash[:notice] = "'#{@game.title}' deleted successfully"
     redirect_to games_path
+  end
+
+  def unity_code
+    @unityweb = "#{Rails.root}/app/assets/javascripts/Build/DebugBuild.wasm.code.unityweb"
+    send_file(@unityweb)
+  end
+
+  def unity_framework
+    @unityweb = "#{Rails.root}/app/assets/javascripts/Build/DebugBuild.wasm.framework.unityweb"
+    send_file(@unityweb)
+  end
+
+  def unity_data
+    @unityweb = "#{Rails.root}/app/assets/javascripts/Build/DebugBuild.data.unityweb"
+    send_file(@unityweb)
   end
   
   private
