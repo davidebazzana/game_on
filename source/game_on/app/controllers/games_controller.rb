@@ -2,6 +2,9 @@
 class GamesController < ApplicationController
   skip_before_action :require_login, only: [:index, :show]
   before_action :require_permission, only: [:edit, :update, :destroy]
+  respond_to do |format|
+    format.js
+  end
   
   def index
     @games = Game.all
