@@ -25,6 +25,8 @@ class User < ApplicationRecord
     # user_id is a foreign key for games
     has_many :games
     
+    acts_as_voter
+    
     validates :username, presence: true #, uniqueness: true?
     validates :email, presence: true, uniqueness: true, email: true
     validates :password, length: { minimum: 8 }, password: true, on: :create
