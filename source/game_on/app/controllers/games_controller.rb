@@ -59,6 +59,31 @@ class GamesController < ApplicationController
     flash[:notice] = "'#{@game.title}' deleted successfully"
     redirect_to games_path
   end
+
+  def like
+    @game = Game.find(params[:id])
+    if !current_user.liked? @game
+      if current_user.disliked? @game
+        @game.undisliked_by current_user
+      end
+      @game.liked_by current_user
+    else
+      @game.unliked_by current_user
+    end
+  end
+  
+  def dislike
+    @game = Game.find(params[:id])
+    if !current_user.disliked? @game
+      if current_user.liked? @game
+        @game.unliked_by current_user
+      end
+      @game.disliked_by current_user
+    else
+      @game.undisliked_by current_user
+    end
+  end
+
   
   private
     
