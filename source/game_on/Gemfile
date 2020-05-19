@@ -72,3 +72,7 @@ group :test do
   gem 'launchy'
   gem 'factory_bot_rails'
 end
+
+gem 'acts_as_votable'
+
+gem 'responders'
