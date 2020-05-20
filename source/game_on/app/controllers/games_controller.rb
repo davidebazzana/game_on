@@ -1,6 +1,7 @@
 # This file is app/controllers/games_controller.rb
 class GamesController < ApplicationController
   skip_before_action :require_login, only: [:index, :show]
+  skip_before_action :save_last_url, only: [:like, :dislike]
   before_action :require_permission, only: [:edit, :update, :destroy]
   respond_to do |format|
     format.js
