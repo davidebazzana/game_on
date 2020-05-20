@@ -70,3 +70,6 @@ group :test do
   gem 'launchy'
   gem 'factory_bot_rails'
 end
+
+# needed for handling uploaded zip files
+gem 'rubyzip'

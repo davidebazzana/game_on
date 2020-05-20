@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :save_last_url
   before_action :current_user
   before_action :require_login
+  
   private
 
   # Finds the User with ID stored in session

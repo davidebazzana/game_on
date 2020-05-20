@@ -6,8 +6,8 @@
     = text_field :game, :title
     = label :game, :info, 'Info'
     = text_field :game, :info
-    = label :game, :game_file, 'Attach a file'
-    = file_field :game, :game_file 
+    = label :game, :files, 'Attach build files (YourProject/Build/*)'
+    = file_field :game, :files, multiple: true
    
     = submit_tag 'Submit game'
 

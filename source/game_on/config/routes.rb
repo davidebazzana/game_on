@@ -3,10 +3,20 @@ Rails.application.routes.draw do
 
   # Provide mapping between URLs/HTTP verbs to controller
   resources :games do
+    member do
+      patch :launch
+    end
+
     collection do
-      get 'DebugBuild.wasm.code.unityweb', to: 'games#unity_code'
-      get 'DebugBuild.wasm.framework.unityweb', to: 'games#unity_framework'
-      get 'DebugBuild.data.unityweb', to: 'games#unity_data'
+      get 'download_loader', to: 'games#download_loader'
+      get ':file_name', to: 'games#unity_code', file_name: /[A-Z,a-z,0-9]{1,33}.wasm.code.unityweb/
+      get ':file_name', to: 'games#unity_framework', file_name: /[A-Z,a-z,0-9]{1,33}.wasm.framework.unityweb/
+      get ':file_name', to: 'games#unity_data', file_name: /[A-Z,a-z,0-9]{1,33}.data.unityweb/
+=begin
+      get 'Desktop.wasm.code.unityweb', to: 'games#unity_code'
+      get 'Desktop.wasm.framework.unityweb', to: 'games#unity_framework'
+      get 'Desktop.data.unityweb', to: 'games#unity_data'
+=end
     end
   end
   

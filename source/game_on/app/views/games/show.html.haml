@@ -5,24 +5,19 @@
 %p#description= @game.info
 
 - if @current_user != nil
-  = javascript_include_tag 'UnityProgress.js'
-  = javascript_include_tag 'UnityLoader.js'
-  = javascript_include_tag 'quit_unity.js'
-
-  :javascript
-    var unityInstance = UnityLoader.instantiate("unityContainer", 'DebugBuild.json', {onProgress: UnityProgress}); <!-- was "Build/DebugBuild.json" then became "%UNITY_WEBGL_BUILD_URL%" and finally is "DebugBuilder.json" -->
-
-  .webgl-content
+  .gameplay{:id => "gameplay"}
+    = link_to 'Play', launch_game_path(@game), method: :patch, remote: true
+  .webgl-content{:id => "webgl-canvas", :style => "visibility: hidden;"}
     #unityContainer{:style => "width: 960px; height: 600px"}
     .footer
       .webgl-logo
       .fullscreen{:onclick => "unityInstance.SetFullscreen(1)"}
-      .title kloby
 
 - if @current_user == nil
   = link_to 'Games list', games_path
 - else
-  = link_to 'Games list', games_path, :onclick => "quitUnity();"
+  = link_to 'Games list', games_path
 
 - if @current_user != nil && @current_user.id == @game.user_id
-  = link_to 'Edit game', edit_game_path(@game), :onclick => "quitUnity();"
+  = link_to 'Edit game', edit_game_path(@game)
+

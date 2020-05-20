@@ -12,5 +12,6 @@
 //
 //= require rails-ujs
 //= require activestorage
-//= require turbolinks
 //= require_tree .
+
+// not requiring turbolinks to avoid issues with the gameplay.
