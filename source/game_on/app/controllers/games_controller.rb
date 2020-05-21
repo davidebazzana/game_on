@@ -68,15 +68,7 @@ class GamesController < ApplicationController
     send_build_file "UnityLoader.js"
   end
   
-  def unity_code
-    send_build_file params[:file_name].to_s
-  end
-
-  def unity_framework
-    send_build_file params[:file_name].to_s
-  end
-
-  def unity_data
+  def unity_build_files
     send_build_file params[:file_name].to_s
   end
   
