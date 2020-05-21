@@ -16,7 +16,7 @@
     #unityContainer{:style => "width: 960px; height: 600px; background: #202020;"}
     .footer
       .webgl-logo
-      .fullscreen{:onclick => "unityInstance.SetFullscreen(1)"}
+      .fullscreen{:id => "unity_fullscreen", :style => "visibility: hidden;", :onclick => "unityInstance.SetFullscreen(1)"}
 
   %div{:style => "width: 0px; height: 640px; position: relative;"}
   %footer{:style => "width: 960px; height: 50px; position: absolute;"}
