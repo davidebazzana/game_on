@@ -1,0 +1,8 @@
+<% if current_user.disliked? @game %>
+  $('.dislike-btn').addClass('disliked');
+  $('.like-btn').removeClass('liked');
+<% else %>
+  $('.dislike-btn').removeClass('disliked');
+<% end %>
+$('.dislikes-count').html('<%= @game.get_dislikes.size %>');
+$('.likes-count').html('<%= @game.get_likes.size %>');

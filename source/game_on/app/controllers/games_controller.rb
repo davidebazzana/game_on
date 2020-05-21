@@ -1,7 +1,11 @@
 # This file is app/controllers/games_controller.rb
 class GamesController < ApplicationController
   skip_before_action :require_login, only: [:index, :show]
+  skip_before_action :save_last_url, only: [:like, :dislike]
   before_action :require_permission, only: [:edit, :update, :destroy]
+  respond_to do |format|
+    format.js
+  end
   
   def index
     @games = Game.all
@@ -56,6 +60,31 @@ class GamesController < ApplicationController
     flash[:notice] = "'#{@game.title}' deleted successfully"
     redirect_to games_path
   end
+
+  def like
+    @game = Game.find(params[:id])
+    if !current_user.liked? @game
+      if current_user.disliked? @game
+        @game.undisliked_by current_user
+      end
+      @game.liked_by current_user
+    else
+      @game.unliked_by current_user
+    end
+  end
+  
+  def dislike
+    @game = Game.find(params[:id])
+    if !current_user.disliked? @game
+      if current_user.liked? @game
+        @game.unliked_by current_user
+      end
+      @game.disliked_by current_user
+    else
+      @game.undisliked_by current_user
+    end
+  end
+
   
   private
     

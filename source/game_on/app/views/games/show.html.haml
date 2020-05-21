@@ -4,6 +4,19 @@
 
 %p#description= @game.info
 
+%div
+  %vote.likes-count= @game.get_likes.size
+  - if current_user != nil && current_user.liked?(@game)
+    %vote= link_to 'like', like_game_path(@game), method: :put, remote: true, class: 'like-btn liked'
+  - else
+    %vote= link_to 'like', like_game_path(@game), method: :put, remote: true, class: 'like-btn'
+  
+  %vote.dislikes-count= @game.get_dislikes.size
+  - if current_user != nil && current_user.disliked?(@game)
+    %vote= link_to 'dislike', dislike_game_path(@game), method: :put, remote: true, class: 'dislike-btn disliked'
+  - else
+    %vote= link_to 'dislike', dislike_game_path(@game), method: :put, remote: true, class: 'dislike-btn'
+
 = link_to 'Games list', games_path
 
 - if @current_user != nil && @current_user.id == @game.user_id
