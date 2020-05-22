@@ -1,6 +1,6 @@
 %h2 Details about #{@game.title}
  
-%h3{:id => "description"} Description:
+%h3 Description:
 
 %p#description= @game.info
 
@@ -18,5 +18,5 @@
       .webgl-logo
       .fullscreen{:id => "unity_fullscreen", :style => "visibility: hidden;", :onclick => "unityInstance.SetFullscreen(1)"}
 
-  %div{:style => "width: 0px; height: 640px; position: relative;"}
-  %footer{:style => "width: 960px; height: 50px; position: absolute;"}
+  .canvas-placeholder{:style => "width: 0px; height: 650px; position: relative;"}
+  %footer{:style => "width: 100%; height: 50px; position: absolute;"}
