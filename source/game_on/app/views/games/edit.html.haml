@@ -2,13 +2,13 @@
 
 = form_tag game_path(@game), :method => :put do
 
-    = label :game, :title, 'Title'
-    = text_field :game, :title
+  = label :game, :title, 'Title'
+  = text_field :game, :title
 
-    = label :game, :info, 'Info'
-    = text_field :game, :info
+  = label :game, :info, 'Info'
+  = text_area :game, :info
    
-    = submit_tag 'Commit updates'
+  = submit_tag 'Commit updates'
 
-= link_to 'Games list', games_path
+= link_to 'Back to main menu', games_path
 = link_to 'Delete game', game_path(@game), :method => :delete

@@ -12,15 +12,18 @@ class GamesController < ApplicationController
   end
 
   def show
-    @game = Game.find(params[:id])
+    respond_to do |format|
+      format.html { @game = Game.find(params[:id]) } # show.html.haml
+      format.json { send_build_file "json" }
+    end
   end
 
   def create
     @game = Game.new(game_params.merge(:user_id => session[:current_user_id]))
-
+    
     if @game.save
-      if @game.game_file.attached?
-        flash[:notice] = "'#{@game.title}' was added"
+      if @game.files.attached?
+        flash[:notice] = "'#{@game.title}' was added successfully"
       else
         flash[:notice] = "'#{@game.title}' added, no file provided"
       end
@@ -52,8 +55,8 @@ class GamesController < ApplicationController
   def destroy
     @game = Game.find(params[:id])
 
-    # delete the file attached
-    @game.game_file.purge
+    # delete any file attached
+    @game.files.purge
     # destroy the game
     @game.destroy
     
@@ -61,6 +64,18 @@ class GamesController < ApplicationController
     redirect_to games_path
   end
 
+  def launch
+    cookies.signed[:game] = { value: params[:id], expires: 1.minute }
+  end
+
+  def download_loader
+    send_build_file "UnityLoader.js"
+  end
+  
+  def unity_build_files
+    send_build_file params[:file_name].to_s
+  end
+  
   def like
     @game = Game.find(params[:id])
     if !current_user.liked? @game
@@ -84,12 +99,11 @@ class GamesController < ApplicationController
       @game.undisliked_by current_user
     end
   end
-
   
   private
     
   def game_params
-    params.require(:game).permit(:title, :info, :game_file, :user_id)
+    params.require(:game).permit(:title, :info, files: [])
   end
 
   def require_permission
@@ -101,6 +115,19 @@ class GamesController < ApplicationController
 
   def edit_game_params
     params.require(:game).permit(:title, :info)
+  end
+
+  def send_build_file file_name
+    if cookies.signed[:game] != nil
+      game = Game.find(cookies.signed[:game])
+      game.files.each do |file|
+        if file.filename == file_name || file_name == "json" && file.filename.to_s.include?(".json")
+          send_data file.download, filename: file.filename.to_s, content_type: file.content_type
+          return
+        end
+      end
+    end
+    head :no_content # HTTP 204 no content
   end
   
 end
