@@ -80,3 +80,29 @@ form label {
   background-color: wheat;
   text-align: center;
 }
+vote {
+}
+.like-btn {
+  color: green;
+  text-decoration: none;
+}
+.dislike-btn {
+  color: red;
+  text-decoration: none;
+}
+.liked {
+  background-color: green;
+  color: white;
+}
+.disliked {
+  background-color: red;
+  color: white;
+}
+.likes-count {
+  color: green;
+  font-weight: bold;
+}
+.dislikes-count {
+  color: red;
+  font-weight: bold;
+}

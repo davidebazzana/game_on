@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   # Provide mapping between URLs/HTTP verbs to controller
   resources :games do
     member do
+      put 'like' => 'games#like'
+      put 'dislike' => 'games#dislike'
       patch :launch
     end
 
