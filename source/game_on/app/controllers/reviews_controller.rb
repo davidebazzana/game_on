@@ -1,9 +1,9 @@
 class ReviewsController < ApplicationController
-  before_action :set_review
+  before_action :set_review, only: [:edit, :update, :destroy]
   before_action :set_game
 
     def new
-      
+      @review = Review.new
     end
 
     def create
@@ -27,10 +27,24 @@ class ReviewsController < ApplicationController
     def show
       @reviews = Review.where(game_id: @game.id)
     end
+
+    def edit
+    
+    end
+
+    def update
+      @review.update(review_params)
+      respond_with(@review)
+    end
+  
+    def destroy
+      @review.destroy
+      respond_with(@review)
+    end
     
     private
       def set_review
-        @review = Review.find(params[:game_id])
+        @review = Review.find(params[:id])
       end
 
       def set_game
