@@ -26,6 +26,7 @@ class ReviewsController < ApplicationController
    
     def show
       @reviews = Review.where(game_id: @game.id)
+      @user=current_user
     end
 
     def edit

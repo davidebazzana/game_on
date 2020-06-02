@@ -3,7 +3,7 @@
   <h3>No reviews yet. Be the first to write one!</h3>
   <% else %>
   <% @reviews.each do |review| %>
-  <p><%= @user_username %></p>
+  <p><%= @user.username %></p>
   <p><%= review.comments %></p>
   <% end %>
   <% end %>
