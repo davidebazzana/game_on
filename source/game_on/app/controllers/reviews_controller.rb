@@ -8,7 +8,7 @@ class ReviewsController < ApplicationController
 
     def create
       @review = Review.new(review_params)
-      @review.user_id = current_user.id
+      @review.user_id= current_user.id
       @review.game_id = @game.id
 
       if @review.save
@@ -26,7 +26,6 @@ class ReviewsController < ApplicationController
    
     def show
       @reviews = Review.where(game_id: @game.id)
-      @user=current_user
     end
 
     def edit
