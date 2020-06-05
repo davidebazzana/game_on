@@ -29,5 +29,8 @@ module GameOn
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # Making manifests for production
+    config.assets.precompile += ['webgl.js']
   end
 end

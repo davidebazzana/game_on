@@ -23,3 +23,7 @@ end
 Given("I am the owner of the game {string}") do |game_title|
   create(:game, title: game_title, user_id: @test_user[:id])
 end
+
+Then("I should be able to play the game {string}") do |string|
+  pending # Write code here that turns the phrase above into concrete actions
+end
