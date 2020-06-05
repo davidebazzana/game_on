@@ -18,6 +18,7 @@
     %vote= link_to 'dislike', dislike_game_path(@game), method: :put, remote: true, class: 'dislike-btn'
 
 = link_to 'Games list', games_path
+#{link_to 'Add a review', new_game_review_path(@game)},#{link_to 'View the reviews', game_review_path(@game)}
 
 - if @current_user != nil && @current_user.id == @game.user_id
   = link_to 'Edit game', edit_game_path(@game)

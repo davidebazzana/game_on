@@ -13,6 +13,8 @@
  *= require_tree .
  *= require_self
  */
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
 
 html, body {
   margin: 0;
@@ -105,4 +107,9 @@ vote {
 .dislikes-count {
   color: red;
   font-weight: bold;
+}
+
+.nomicoloratiperpif{
+  color: #fa0000;
+  text-transform: uppercase;
 }

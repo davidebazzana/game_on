@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_19_050546) do
+ActiveRecord::Schema.define(version: 2020_05_22_091550) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -38,6 +38,14 @@ ActiveRecord::Schema.define(version: 2020_05_19_050546) do
     t.text "info"
     t.integer "user_id"
     t.index ["user_id"], name: "index_games_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.text "comments"
+    t.integer "user_id"
+    t.integer "game_id"
+    t.index ["game_id"], name: "index_reviews_on_game_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

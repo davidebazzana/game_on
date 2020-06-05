@@ -20,7 +20,7 @@ end
 
 class User < ApplicationRecord
     has_secure_password
-
+    has_many :reviews
     # creates a one-to-many relationship with games
     # user_id is a foreign key for games
     has_many :games
@@ -32,4 +32,6 @@ class User < ApplicationRecord
     validates :password, length: { minimum: 8 }, password: true, on: :create
 
 end
+
+
 

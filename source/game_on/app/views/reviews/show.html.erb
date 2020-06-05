@@ -1,0 +1,10 @@
+<div >
+  <% if @reviews.blank? %>
+  <h3>No reviews yet. Be the first to write one!</h3>
+  <% else %>
+  <% @reviews.each do |review| %>
+  <p class="nomicoloratiperpif"><%= review.user.username %></p>
+  <p><%= review.comments %></p>
+  <% end %>
+  <% end %>
+</div>

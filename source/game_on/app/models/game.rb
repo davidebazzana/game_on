@@ -1,4 +1,5 @@
 class Game < ApplicationRecord
+  has_many :reviews
   # Enable file attachments
   has_many_attached :files
   
