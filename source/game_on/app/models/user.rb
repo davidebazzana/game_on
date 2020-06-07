@@ -19,7 +19,7 @@ class PasswordValidator < ActiveModel::EachValidator
 end
 
 class User < ApplicationRecord
-    has_secure_password
+    # has_secure_password
     has_many :reviews
     # creates a one-to-many relationship with games
     # user_id is a foreign key for games
@@ -27,9 +27,9 @@ class User < ApplicationRecord
     
     acts_as_voter
     
-    validates :username, presence: true #, uniqueness: true?
-    validates :email, presence: true, uniqueness: true, email: true
-    validates :password, length: { minimum: 8 }, password: true, on: :create
+    # validates :username, presence: true #, uniqueness: true?
+    # validates :email, presence: true, uniqueness: true, email: true
+    # validates :password, length: { minimum: 8 }, password: true, on: :create
 
 end
 

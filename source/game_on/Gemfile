@@ -78,3 +78,5 @@ gem 'acts_as_votable'
 gem 'responders'
 
 gem 'bootstrap-sass'
+
+gem 'devise'
