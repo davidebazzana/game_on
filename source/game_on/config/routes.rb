@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   
 
@@ -18,11 +19,11 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :users
-  get 'signup', to: 'users#new', as: 'signup'
-  get 'login', to: 'logins#new', as: 'login'
-  post 'login', to: 'logins#create', as: 'new_login'
-  get 'logout', to: 'logins#destroy', as: 'logout'
+  # resources :users
+  # get 'signup', to: 'users#new', as: 'signup'
+  # get 'login', to: 'logins#new', as: 'login'
+  # post 'login', to: 'logins#create', as: 'new_login'
+  # get 'logout', to: 'logins#destroy', as: 'logout'
 
-  root :to => redirect('/games')
+  root to: 'games#index'
 end
