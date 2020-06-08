@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
     sessions: 'users/sessions',
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    omniauth_callbacks: 'users/omniauth_callbacks'
   }
   devise_scope :user do
     get 'signup', to: 'users/registrations#new'
     get 'login', to: 'users/sessions#new'
     post 'login', to: 'users/sessions#create'
-    delete 'logout', to: 'users/sessions#destroy'
+    get 'logout', to: 'users/sessions#destroy'
   end
   devise_for :users, skip: :all
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
