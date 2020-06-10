@@ -36,12 +36,16 @@ ActiveRecord::Schema.define(version: 2020_06_08_190119) do
   create_table "games", force: :cascade do |t|
     t.string "title"
     t.text "info"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_games_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
     t.text "comments"
+    t.integer "user_id"
     t.integer "game_id"
     t.index ["game_id"], name: "index_reviews_on_game_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
