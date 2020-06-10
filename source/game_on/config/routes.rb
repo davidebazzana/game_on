@@ -8,10 +8,12 @@ Rails.application.routes.draw do
     get 'signup', to: 'users/registrations#new'
     get 'login', to: 'users/sessions#new'
     post 'login', to: 'users/sessions#create'
-    get 'logout', to: 'users/sessions#destroy'
+    delete 'logout', to: 'users/sessions#destroy'
   end
   devise_for :users, skip: :all
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  resources :users
   
 
   # Provide mapping between URLs/HTTP verbs to controller
