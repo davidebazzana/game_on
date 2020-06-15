@@ -17,7 +17,7 @@ class ReviewsController < ApplicationController
         else
           flash[:notice] = "Please insert your comment"
         end
-        redirect_to games_path #why not redirect to game_path(@game)
+        redirect_to game_path(@game)
       else
         flash[:error] = @review.errors.full_messages
         redirect_to games_path
