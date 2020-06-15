@@ -6,13 +6,13 @@
 
 %div
   %vote.likes-count= @game.get_likes.size
-  - if current_user != nil && current_user.liked?(@game)
+  - if current_user && current_user.liked?(@game)
     %vote= link_to 'like', like_game_path(@game), method: :put, remote: true, class: 'like-btn liked'
   - else
     %vote= link_to 'like', like_game_path(@game), method: :put, remote: true, class: 'like-btn'
   
   %vote.dislikes-count= @game.get_dislikes.size
-  - if current_user != nil && current_user.disliked?(@game)
+  - if current_user && current_user.disliked?(@game)
     %vote= link_to 'dislike', dislike_game_path(@game), method: :put, remote: true, class: 'dislike-btn disliked'
   - else
     %vote= link_to 'dislike', dislike_game_path(@game), method: :put, remote: true, class: 'dislike-btn'
@@ -20,10 +20,10 @@
 = link_to 'Games list', games_path
 #{link_to 'Add a review', new_game_review_path(@game)},#{link_to 'View the reviews', game_review_path(@game)}
 
-- if @current_user != nil && @current_user.id == @game.user_id
+- if @game.user == current_user
   = link_to 'Edit game', edit_game_path(@game)
 
-- if @current_user != nil
+- if user_signed_in?
   .gameplay{:id => "play_game"}
     = link_to 'Play', launch_game_path(@game), method: :patch, remote: true
   .webgl-content{:id => "webglCanvas", :style => "position: relative; width: 960px; height: 0px"}

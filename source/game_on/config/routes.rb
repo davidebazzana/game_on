@@ -1,5 +1,19 @@
 Rails.application.routes.draw do
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations',
+    omniauth_callbacks: 'users/omniauth_callbacks'
+  }
+  devise_scope :user do
+    get 'signup', to: 'users/registrations#new'
+    get 'login', to: 'users/sessions#new'
+    post 'login', to: 'users/sessions#create'
+    delete 'logout', to: 'users/sessions#destroy'
+  end
+  devise_for :users, skip: :all
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  resources :users
   
 
   # Provide mapping between URLs/HTTP verbs to controller
@@ -18,11 +32,7 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :users
-  get 'signup', to: 'users#new', as: 'signup'
-  get 'login', to: 'logins#new', as: 'login'
-  post 'login', to: 'logins#create', as: 'new_login'
-  get 'logout', to: 'logins#destroy', as: 'logout'
+  # resources :users
 
-  root :to => redirect('/games')
+  root to: 'games#index'
 end

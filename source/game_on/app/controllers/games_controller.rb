@@ -1,7 +1,7 @@
 # This file is app/controllers/games_controller.rb
 class GamesController < ApplicationController
-  skip_before_action :require_login, only: [:index, :show]
   skip_before_action :save_last_url, only: [:like, :dislike]
+  skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :require_permission, only: [:edit, :update, :destroy]
   respond_to do |format|
     format.js
@@ -19,8 +19,8 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.new(game_params.merge(:user_id => session[:current_user_id]))
-    
+    @game = Game.new(game_params)
+    @game.user = current_user
     if @game.save
       if @game.files.attached?
         flash[:notice] = "'#{@game.title}' was added successfully"
@@ -78,25 +78,33 @@ class GamesController < ApplicationController
   
   def like
     @game = Game.find(params[:id])
-    if !current_user.liked? @game
-      if current_user.disliked? @game
-        @game.undisliked_by current_user
+    if user_signed_in?
+      if !current_user.liked? @game
+        if current_user.disliked? @game
+          @game.undisliked_by current_user
+        end
+        @game.liked_by current_user
+      else
+        @game.unliked_by current_user
       end
-      @game.liked_by current_user
     else
-      @game.unliked_by current_user
+      redirect_to login_path # not working...
     end
   end
   
   def dislike
     @game = Game.find(params[:id])
-    if !current_user.disliked? @game
-      if current_user.liked? @game
-        @game.unliked_by current_user
+    if user_signed_in?
+      if !current_user.disliked? @game
+        if current_user.liked? @game
+          @game.unliked_by current_user
+        end
+        @game.disliked_by current_user
+      else
+        @game.undisliked_by current_user
       end
-      @game.disliked_by current_user
     else
-      @game.undisliked_by current_user
+      redirect_to login_path # not working...
     end
   end
   

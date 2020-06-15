@@ -1,0 +1,7 @@
+%div
+  - if @reviews.blank?
+    %h3 No reviews yet. Be the first to write one!
+  - else
+    - @reviews.each do |review|
+      %p.nomicoloratiperpif= review.user.username
+      %p= review.comments

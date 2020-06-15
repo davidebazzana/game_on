@@ -8,8 +8,8 @@ class ReviewsController < ApplicationController
 
     def create
       @review = Review.new(review_params)
-      @review.user_id= current_user.id
-      @review.game_id = @game.id
+      @review.user = current_user
+      @review.game = @game
 
       if @review.save
         if @review.comments?
@@ -17,7 +17,7 @@ class ReviewsController < ApplicationController
         else
           flash[:notice] = "Please insert your comment"
         end
-        redirect_to games_path
+        redirect_to game_path(@game)
       else
         flash[:error] = @review.errors.full_messages
         redirect_to games_path
