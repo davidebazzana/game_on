@@ -25,4 +25,6 @@ Rails.application.routes.draw do
   get 'logout', to: 'logins#destroy', as: 'logout'
 
   root :to => redirect('/games')
+
+  resources :friendships 
 end
