@@ -38,8 +38,6 @@ ActiveRecord::Schema.define(version: 2020_06_21_165857) do
     t.integer "friend_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["friend_id"], name: "index_friendships_on_friend_id"
-    t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
   create_table "games", force: :cascade do |t|
