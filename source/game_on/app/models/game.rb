@@ -1,4 +1,6 @@
 class Game < ApplicationRecord
+  extend ActiveModel::Naming
+
   has_many :reviews
   # Enable file attachments
   has_many_attached :files
@@ -6,4 +8,21 @@ class Game < ApplicationRecord
   acts_as_votable
   # Before creating or updating a Game object, check if the title is provided
   validates :title, presence: true
+
+  # Scan files for viruses before saving them
+  before_create :scan_for_viruses
+  
+  private
+
+  def scan_for_viruses
+    self.files.each do |file|
+      path = ActiveStorage::Blob.service.send(:path_for, file.key)
+      unless Clamby.safe?(path)
+        File.delete(path)
+        errors = ActiveModel::Errors.new(self)
+        errors.add(:virus, "Virus found.")
+      end
+      byebug
+    end
+  end
 end

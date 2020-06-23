@@ -4,7 +4,13 @@ class ApplicationController < ActionController::Base
   before_action :require_login
   
   helper_method :last_url, :current_user
-
+  
+=begin
+  rescue_from Exception::VirusDetected do |exception|
+    redirect_to root_url, alert:"Virus found on uploaded file."
+  end
+=end
+  
   private
 
   # Finds the User with ID stored in session
