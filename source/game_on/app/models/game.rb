@@ -1,6 +1,4 @@
 class Game < ApplicationRecord
-  extend ActiveModel::Naming
-
   has_many :reviews
   # Enable file attachments
   has_many_attached :files
