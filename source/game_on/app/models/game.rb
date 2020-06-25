@@ -17,7 +17,7 @@ class Game < ApplicationRecord
       path = ActiveStorage::Blob.service.send(:path_for, file.key)
       unless Clamby.safe?(path)
         File.delete(path)
-        raise SecurityError, "A virus on #{file.filename} has been found, uploading aborted."
+        raise SecurityError, "A virus has been found on #{file.filename}, upload aborted."
       end
     end
   end
