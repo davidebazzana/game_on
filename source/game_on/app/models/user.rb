@@ -34,6 +34,10 @@ class User < ApplicationRecord
     validates :email, presence: true, uniqueness: true, email: true
     validates :password, length: { minimum: 8 }, password: true, on: :create
 
+    def friend_with?(other_user)
+        friendships.find_by(friend_id: other_user.id)
+      end
+
 end
 
 

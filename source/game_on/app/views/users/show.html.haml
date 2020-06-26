@@ -6,29 +6,49 @@
 %h3 Email:
 %p#email= @user.email
 
-%h2 Aggiungi amici:
-#users
-  - for user in @users
-    .user
-      %p
-        %strong= h user.username
-        = link_to "Add Friend", friendships_path(:friend_id => user), :method => :post
-      .clear
+-if @current_user != @user
 
-%h2 Friends
-%ul
-  - for friendship in @user.friendships
-    %li
-      = h friendship.friend.username
-      (#{link_to "remove", friendship, :method => :delete})
+  %h1 Aggiungi amici:
 
-%h2 Friended by Users
-%ul
-  - for user in @user.inverse_friends
-    %li= h user.username
+  %ul
+    -if current_user.friend_with? @user
+      %p You are friends
+    -else
+      = link_to "Add Friend", friendships_path(:friend_id => @user), :method => :post
+
+-else
+
+  %h2 Friends
+
+  %table
+    %thead
+      %tr
+        %th Friends
+
+    %tbody
+      - for friendship in @user.friendships
+        %td
+          = h friendship.friend.username
+          = link_to "remove", friendship, :method => :delete
+
+  %h2 Friended by Users
+
+  %table
+    %thead
+      %tr
+        %th Friended by Users
+
+    %tbody
+      - for user in @user.inverse_friends
+        %td
+          = h user.username
+
+%br
+
+%p= link_to "Find Friends", users_path
+= link_to 'Edit', edit_user_path
+= link_to('Delete', @user, method: :delete, data: {})
+= link_to 'Back to main menu', games_path
+
 
 //= link_to 'Edit', edit_user_path
-/*= link_to('Delete', @user, method: :delete, data: {})*/
-= link_to 'Back to main menu', games_path
-- if @current_user == @user
-  = link_to 'Edit', edit_user_path
