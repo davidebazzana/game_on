@@ -21,15 +21,21 @@ class GamesController < ApplicationController
   def create
     @game = Game.new(game_params)
     @game.user = current_user
-    if @game.save
-      if @game.files.attached?
-        flash[:notice] = "'#{@game.title}' was added successfully"
+    
+    begin
+      if @game.save
+        if @game.files.attached?
+          flash[:notice] = "'#{@game.title}' was added successfully"
+        else
+          flash[:notice] = "'#{@game.title}' added, no file provided"
+        end
+        redirect_to games_path
       else
-        flash[:notice] = "'#{@game.title}' added, no file provided"
+        flash[:error] = @game.errors.full_messages
+        redirect_to games_path
       end
-      redirect_to games_path
-    else
-      flash[:error] = @game.errors.full_messages
+    rescue SecurityError => e
+      flash[:error] = e.message
       redirect_to games_path
     end
   end
