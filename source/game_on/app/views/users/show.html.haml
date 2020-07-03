@@ -8,22 +8,22 @@
 
 -if @current_user != @user
 
-  %h1 Aggiungi amici:
+  %h1 Add Follow:
 
   %ul
     -if current_user.friend_with? @user
-      %p You are friends
+      %p you already follow him
     -else
-      = link_to "Add Friend", friendships_path(:friend_id => @user), :method => :post
+      = link_to "Follow", friendships_path(:friend_id => @user), :method => :post
 
 -else
 
-  %h2 Friends
+  %h2 Follow
 
   %table
     %thead
       %tr
-        %th Friends
+        %th Follow
 
     %tbody
       - for friendship in @user.friendships
@@ -31,12 +31,12 @@
           = h friendship.friend.username
           = link_to "remove", friendship, :method => :delete
 
-  %h2 Friended by Users
+  %h2 Follower
 
   %table
     %thead
       %tr
-        %th Friended by Users
+        %th Follower
 
     %tbody
       - for user in @user.inverse_friends
@@ -45,7 +45,7 @@
 
 %br
 
-%p= link_to "Find Friends", users_path
+%p= link_to "Find people", users_path
 = link_to 'Edit', edit_user_path
 = link_to('Delete', @user, method: :delete, data: {})
 = link_to 'Back to main menu', games_path
