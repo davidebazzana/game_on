@@ -1,13 +1,13 @@
-%h2 User #{@user.id}
+%h2= @user.username
 
-%h3 Username:
-%p#description=  @user.username
+%p
+  %h3 Username
+  %div= @user.username
 
-%h3 Email:
-%p#email= @user.email
+%p
+  %h3 Email
+  %div= @user.email
 
-//= link_to 'Edit', edit_user_path
-/*= link_to('Delete', @user, method: :delete, data: {})*/
-= link_to 'Back to main menu', games_path
-- if @current_user == @user
-  = link_to 'Edit', edit_user_path
+= link_to 'HomePage', games_path
+- if @user == current_user
+  = link_to 'Edit', edit_user_registration_path

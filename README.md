@@ -10,6 +10,21 @@
 
 Possiamo iniziare a lavorarci da subito (magari usando PivotalTracker, ad esempio eh). Il professore risponde solamente se il progetto viene bocciato.
 
+### Usage
+
+This application needs both ClamAV and ClamAV Daemon to run. 
+
+To install them, run:
+`sudo apt-get install clamav clamav-daemon`
+
+If you get the error: `ERROR: could not connect to clamd on LocalSocket /var/run/clamav/clamd.ctl: No such file or directory`
+then run the following commands:
+```
+sudo systemctl stop clamav-daemon.service
+sudo rm /var/log/clamav/freshclam.log
+sudo systemctl start clamav-daemon.service
+```
+
 ### Link utili
 #### Hot links:
 - [Unity3d - embed unity game in HTML webpages](https://youtu.be/K52l9P19_2o)

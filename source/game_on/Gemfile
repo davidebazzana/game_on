@@ -81,3 +81,7 @@ gem 'bootstrap-sass'
 
 # use clamby to scan files from viruses
 gem'clamby'
+
+gem 'devise'
+
+gem 'omniauth-google-oauth2'
