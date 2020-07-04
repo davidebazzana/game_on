@@ -15,7 +15,7 @@ class Game < ApplicationRecord
     if search.empty?
       Game.all
     else
-      self.where("title like ?", "%#{search}%").all
+      self.where("title like ?", "%#{search}%")
     end
   end
   
