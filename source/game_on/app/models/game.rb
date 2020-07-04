@@ -10,6 +10,14 @@ class Game < ApplicationRecord
 
   # Scan files for viruses before saving them
   before_create :scan_for_viruses
+
+  def self.search(search)
+    if search.empty?
+      Game.all
+    else
+      self.where("title like ?", "%#{search}%").all
+    end
+  end
   
   private
 

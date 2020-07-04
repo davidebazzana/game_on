@@ -8,7 +8,11 @@ class GamesController < ApplicationController
   end
   
   def index
-    @games = Game.all
+    if params[:game]
+      @games = Game.search(params[:game][:search])
+    else
+      @games = Game.all
+    end
   end
 
   def show
@@ -117,7 +121,7 @@ class GamesController < ApplicationController
   private
     
   def game_params
-    params.require(:game).permit(:title, :info, files: [])
+    params.require(:game).permit(:title, :info, :search, files: [])
   end
 
   def require_permission
