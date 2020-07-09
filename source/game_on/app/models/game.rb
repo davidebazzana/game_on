@@ -15,7 +15,31 @@ class Game < ApplicationRecord
     if search.empty?
       Game.all
     else
-      self.where("title like ?", "%#{search}%")
+      # QUERY:
+      #
+      # SELECT *
+      # FROM games
+      # WHERE title LIKE '%#{word_000}%'
+      #
+      # UNION
+      #
+      # SELECT *
+      # FROM games
+      # WHERE title LIKE '%#{word_001}%'
+      #
+      # UNION
+      #
+      # ad libitum... (the number of unions will depend on the number of words in the name searched)
+      
+      words = search.scan(/[\w']+/)
+      
+      query = "SELECT * FROM games WHERE title LIKE '%#{words[0]}%'"
+
+      words.drop(1).each do |word|
+        query += " UNION SELECT * FROM games WHERE title LIKE '%#{word}%'"
+      end
+
+      self.find_by_sql(query)
     end
   end
   
