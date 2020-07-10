@@ -27,9 +27,10 @@
 
     %tbody
       - for friendship in @user.friendships
-        %td
-          = h friendship.friend.username
-          = link_to "remove", friendship, :method => :delete
+        %tr
+          %td
+            = h friendship.friend.username
+            = link_to "remove", friendship, :method => :delete
 
   %h2 Follower
 
