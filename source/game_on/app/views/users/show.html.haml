@@ -41,8 +41,8 @@
 
     %tbody
       - for user in @user.inverse_friends
-        %td
-          = h user.username
+        %tr
+          %td= h user.username
 
 %br
 
