@@ -14,6 +14,15 @@ class Game < ApplicationRecord
   CATEGORIES = ['Action', 'Adventure', 'Casual', 'Indie', 'Racing', 'RPG', 'Simulation', 'Sports', 'Strategy', 'Other']
 
   validates :category, inclusion: { in: CATEGORIES }
+
+  def self.search(search)
+    if search.empty?
+      Game.all
+    else
+      query = "SELECT * FROM games WHERE category = '#{search[:category]}'"
+      self.find_by_sql(query)
+    end
+  end
   
   private
 
