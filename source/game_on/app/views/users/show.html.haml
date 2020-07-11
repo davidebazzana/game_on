@@ -12,13 +12,11 @@
 
   %ul
     -if current_user.friend_with? @user
-      %p you already follow him
+      %p you already follow #{@user.username}
     -else
       = link_to "Follow", friendships_path(:friend_id => @user), :method => :post
 
 -else
-
-  %h2 Following
 
   %table
     %thead
@@ -31,8 +29,6 @@
           %td
             = h friendship.friend.username
             = link_to "remove", friendship, :method => :delete
-
-  %h2 Followers
 
   %table
     %thead
