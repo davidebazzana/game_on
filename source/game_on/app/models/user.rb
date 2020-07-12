@@ -9,6 +9,9 @@ class User < ApplicationRecord
 
   has_many :games
   has_many :reviews
+  
+  has_many :favorites
+  has_many :favorite_games, through: :favorites, source: :favorited, source_type: 'Game'
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

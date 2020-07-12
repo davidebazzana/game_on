@@ -12,8 +12,10 @@ class GamesController < ApplicationController
   end
 
   def show
+    @game = Game.find(params[:id])
+    @favorite_exists = !(Favorite.where(user: current_user, favorited: @game) == [])
     respond_to do |format|
-      format.html { @game = Game.find(params[:id]) } # show.html.haml
+      format.html {} # show.html.haml
       format.json { send_build_file "json" }
     end
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_08_190119) do
+ActiveRecord::Schema.define(version: 2020_07_12_203250) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -33,10 +33,21 @@ ActiveRecord::Schema.define(version: 2020_06_08_190119) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "favorited_type"
+    t.integer "favorited_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["favorited_type", "favorited_id"], name: "index_favorites_on_favorited_type_and_favorited_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
   create_table "games", force: :cascade do |t|
     t.string "title"
     t.text "info"
     t.integer "user_id"
+    t.string "category"
     t.index ["user_id"], name: "index_games_on_user_id"
   end
 

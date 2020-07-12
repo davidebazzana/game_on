@@ -1,4 +1,4 @@
-%h1 All Games
+%h1 Favorite Games
 
 %table#games
   %thead
@@ -6,11 +6,10 @@
       %th Game Title
       %th Info
   %tbody
-    - @games.each do |game|
+    - @favorites.each do |game|
       %tr
         %td= game.title
         %td= link_to "More about #{game.title}", game_path(game)
 
 
-= link_to 'Add new game', new_game_path
-= link_to 'Favorite games', favorite_games_path
+= link_to 'HomePage', games_path
