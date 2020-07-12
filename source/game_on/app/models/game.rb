@@ -16,7 +16,7 @@ class Game < ApplicationRecord
   validates :category, inclusion: { in: CATEGORIES }
 
   def self.search(search)
-    if search.empty?
+    if search.empty? || search[:category].eql?('Any')
       Game.all
     else
       query = "SELECT * FROM games WHERE category = '#{search[:category]}'"

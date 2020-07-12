@@ -3,7 +3,7 @@
 = form_tag games_path, :method => :get do
 
   = label :game, :category, 'Search by category'
-  = select(:game, :category, options_for_select(Game::CATEGORIES, @category))
+  = select(:game, :category, options_for_select(['Any'] + Game::CATEGORIES, @category))
   = submit_tag 'search'
 
 = link_to 'Show all', games_path
