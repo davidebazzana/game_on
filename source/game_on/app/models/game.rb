@@ -11,24 +11,31 @@ class Game < ApplicationRecord
   # Scan files for viruses before saving them
   before_create :scan_for_viruses
 
+  SORTING_CRITERIA = ['Alphabetic', 'Newest', 'Hottest']
+  
   def self.search(search)
-    if search.empty?
-      Game.all
-    elsif "alpha".in?(search[:sort])
+    byebug
+    if search.empty? || search[:sort].eql?('Any')
+      return Game.all
+    elsif search[:sort] == SORTING_CRITERIA[0]
       byebug
-      Game.all
-    elsif "time".in?(search[:sort])
+      query = SORT_BY_ALPHA
+    elsif search[:sort] == SORTING_CRITERIA[1]
       byebug
-      Game.all
-    elsif "like".in?(search[:sort])
+      query = SORT_BY_NEWEST
+    elsif search[:sort] == SORTING_CRITERIA[2]
       byebug
       query = SORT_BY_LIKES
-      self.find_by_sql(query)
     end
+    self.find_by_sql(query)
   end
   
   private
 
+  SORT_BY_ALPHA = "SELECT * FROM games ORDER BY games.title"
+
+  SORT_BY_NEWEST = "SELECT * FROM games ORDER BY games.created_at DESC"
+  
   SORT_BY_LIKES = "SELECT * FROM games ORDER BY cached_votes_score DESC"
   
   def scan_for_viruses

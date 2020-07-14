@@ -1,12 +1,8 @@
 %h1 All Games
 
 = form_tag games_path, :method => :get do
-  = label :game, :alpha, 'Alphabetic sorting'
-  = check_box_tag('sort[]', :alpha)
-  = label :game, :time, 'Time sort'
-  = check_box_tag('sort[]', :time)
-  = label :game, :like, 'Like sort'
-  = check_box_tag('sort[]', :like)
+  = label :game, :sort, 'Sorting criterion'
+  = select(:game, :sort, options_for_select(['Any'] + Game::SORTING_CRITERIA, @sorting_criteria))
   = submit_tag 'search'
 
 %table#games

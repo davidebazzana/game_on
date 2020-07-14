@@ -8,10 +8,12 @@ class GamesController < ApplicationController
   end
   
   def index
-    if params[:sort].nil?
+    if params[:game].nil?
       @games = Game.all
+      @sorting_criteria = nil
     else
-      @games = Game.search(params)
+      @games = Game.search(search_game_params)
+      @sorting_criteria = search_game_params[:sort]
     end
   end
 
@@ -133,6 +135,10 @@ class GamesController < ApplicationController
 
   def edit_game_params
     params.require(:game).permit(:title, :info)
+  end
+
+  def search_game_params
+    params.require(:game).permit(:sort)
   end
 
   def send_build_file file_name
