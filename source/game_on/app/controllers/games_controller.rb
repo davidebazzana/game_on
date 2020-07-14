@@ -9,12 +9,11 @@ class GamesController < ApplicationController
   
   def index
     byebug
-    if params[:game].nil?
+    if params[:sort].nil?
       @games = Game.all
     else
-      @games = Game.search(search_game_params)
+      @games = Game.search(params)
     end
-    @games = Game.all
   end
 
   def show
@@ -135,10 +134,6 @@ class GamesController < ApplicationController
 
   def edit_game_params
     params.require(:game).permit(:title, :info)
-  end
-
-  def search_game_params
-    params.require(:game).permit(:alpha, :time, :like)
   end
 
   def send_build_file file_name
