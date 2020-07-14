@@ -1,0 +1,20 @@
+!!! 5
+%html
+  %head
+    %title Game-on
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+    = yield :head
+
+  %body
+    - if flash[:notice]
+      #notice.message= flash[:notice]
+    - elsif flash[:warning]
+      #warning.message= flash[:warning]
+    - elsif flash[:alert]
+      #alert.message= flash[:alert]
+    - elsif flash[:error]
+      #error.message= flash[:error]
+    #main
+      = yield

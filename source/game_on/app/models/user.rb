@@ -1,44 +1,28 @@
-class EmailValidator < ActiveModel::EachValidator
-    def validate_each(record, attribute, value)
-        unless value =~ 
-            /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
-            record.errors[attribute] << (options[:message] ||
-            "is not a vaild email")
-        end
-    end
-end
-
-class PasswordValidator < ActiveModel::EachValidator
-    def validate_each(record, attribute, value)
-        unless value =~
-            /(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9])/
-            record.errors[attribute] << (options[:message] ||
-            "must contain at least a number and a symbol")
-        end
-    end
-end
-
 class User < ApplicationRecord
-    has_secure_password
-    has_many :reviews
-    # creates a one-to-many relationship with games
-    # user_id is a foreign key for games
-    has_many :games
-    has_many :friendships
-    has_many :friends, :through => :friendships
-    has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
-    has_many :inverse_friends, :through => :inverse_friendships, :source => :user
-    acts_as_voter
-    
-    validates :username, presence: true #, uniqueness: true?
-    validates :email, presence: true, uniqueness: true, email: true
-    validates :password, length: { minimum: 8 }, password: true, on: :create
+# Include default devise modules. Others available are:
+# :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+  :recoverable, :rememberable, :validatable
+  devise :omniauthable, omniauth_providers: [:google_oauth2]
 
-    def friend_with?(other_user)
-        friendships.find_by(friend_id: other_user.id)
-      end
+  acts_as_voter
+  has_many :games
+  has_many :reviews
+  has_many :friendships
+  has_many :friends, :through => :friendships
+  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+  has_many :inverse_friends, :through => :inverse_friendships, :source => :user
 
+  def friend_with?(other_user)
+    friendships.find_by(friend_id: other_user.id)
+  end
+
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20]
+      user.username = auth.info.name
+
+    end
+  end
 end
-
-
-
