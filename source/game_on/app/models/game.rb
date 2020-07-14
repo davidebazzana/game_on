@@ -14,17 +14,13 @@ class Game < ApplicationRecord
   SORTING_CRITERIA = ['Alphabetic', 'Newest', 'Hottest']
   
   def self.search(search)
-    byebug
     if search.empty? || search[:sort].eql?('Any')
       return Game.all
     elsif search[:sort] == SORTING_CRITERIA[0]
-      byebug
       query = SORT_BY_ALPHA
     elsif search[:sort] == SORTING_CRITERIA[1]
-      byebug
       query = SORT_BY_NEWEST
     elsif search[:sort] == SORTING_CRITERIA[2]
-      byebug
       query = SORT_BY_LIKES
     end
     self.find_by_sql(query)
