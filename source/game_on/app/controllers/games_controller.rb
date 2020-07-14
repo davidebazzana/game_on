@@ -8,7 +8,6 @@ class GamesController < ApplicationController
   end
   
   def index
-    byebug
     if params[:sort].nil?
       @games = Game.all
     else
