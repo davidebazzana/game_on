@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   # before_action :configure_permitted_parameters, if: :devise_controller?
   
-  helper_method :last_url
+  helper_method :last_url, :favorite_text
 
   protected
 
@@ -23,6 +23,10 @@ class ApplicationController < ActionController::Base
   def last_url
     @last_url = session[:last_url]
     @last_url ||= games_path
+  end
+
+  def favorite_text
+    return @favorite_exists ? 'Remove from favorites' : 'Add to favorites'
   end
 
 end

@@ -8,6 +8,10 @@ class User < ApplicationRecord
   acts_as_voter
   has_many :games
   has_many :reviews
+  
+  has_many :favorites
+  has_many :favorite_games, through: :favorites, source: :favorited, source_type: 'Game'
+  
   has_many :friendships
   has_many :friends, :through => :friendships
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
