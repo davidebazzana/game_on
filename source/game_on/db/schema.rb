@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 2020_07_12_203250) do
     t.string "title"
     t.text "info"
     t.integer "user_id"
+    t.string "category"
     t.index ["user_id"], name: "index_games_on_user_id"
   end
 

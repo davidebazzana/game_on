@@ -2,9 +2,16 @@
 
 = form_tag games_path, :method => :get do
 
-  = label :game, :search, 'Search by name'
-  = text_field :game, :search
-  = submit_tag 'search'
+  %table
+    %td
+      = label :game, :title, 'Search by name'
+      = text_field :game, :title
+
+    %td
+      = label :game, :category, 'Search by category'
+      = select(:game, :category, options_for_select(['Any'] + Game::CATEGORIES, @category))
+
+    %td= submit_tag 'search'
 
 = link_to 'Show all', games_path
 

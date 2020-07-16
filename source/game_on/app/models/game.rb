@@ -11,10 +11,19 @@ class Game < ApplicationRecord
   # Scan files for viruses before saving them
   before_create :scan_for_viruses
 
+  CATEGORIES = ['Action', 'Adventure', 'Casual', 'Indie', 'Racing', 'RPG', 'Simulation', 'Sports', 'Strategy', 'Other']
+
+  validates :category, inclusion: { in: CATEGORIES }
+
   def self.search(search)
-    if search.empty?
-      Game.all
-    else
+    if search[:title].empty?
+      if search[:category].eql?('Any')
+        return Game.all
+      else
+        query = "SELECT * FROM games WHERE category = '#{search[:category]}'"
+        return self.find_by_sql(query)
+      end
+    elsif !search[:title].empty?
       # QUERY:
       #
       # SELECT *
@@ -31,14 +40,21 @@ class Game < ApplicationRecord
       #
       # ad libitum... (the number of unions will depend on the number of words in the name searched)
       
-      words = search.scan(/[\w']+/)
+      words = search[:title].scan(/[\w']+/)
       
       query = "SELECT * FROM games WHERE title LIKE '%#{words[0]}%'"
-
+      
+      if(!search[:category].eql?('Any'))
+        query += " AND category = '#{search[:category]}'"
+      end
+      
       words.drop(1).each do |word|
         query += " UNION SELECT * FROM games WHERE title LIKE '%#{word}%'"
+        if(!search[:category].eql?('Any'))
+          query += " AND category = '#{search[:category]}'"
+        end
       end
-
+      
       self.find_by_sql(query)
     end
   end

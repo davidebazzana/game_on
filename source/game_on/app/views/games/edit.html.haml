@@ -7,6 +7,9 @@
 
   = label :game, :info, 'Info'
   = text_area :game, :info
+
+  = label :game, :category, 'Category'
+  = select(:game, :category, options_for_select(Game::CATEGORIES, 'Other'))
    
   = submit_tag 'Commit updates'
 

@@ -1,5 +1,8 @@
 %h2 Details about #{@game.title}
- 
+
+- if @game.category != 'Other'
+  %h4 Category: #{@game.category}
+
 %h3 Description:
 
 %p#description= @game.info
