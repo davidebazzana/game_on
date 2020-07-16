@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   devise_for :users, skip: :all
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  resources :users
+  resources :favorite_games, only: [:index, :update]
+  
+  resources :users, only: [:index, :show]
   
 
   # Provide mapping between URLs/HTTP verbs to controller
@@ -32,7 +34,7 @@ Rails.application.routes.draw do
     end
   end
   
-  # resources :users
+  resources :friendships
 
   root to: 'games#index'
 end

@@ -8,6 +8,45 @@
   %h3 Email
   %div= @user.email
 
-= link_to 'HomePage', games_path
+- if current_user != @user
+
+  %h1 Add Follow:
+
+  %ul
+    - if current_user.friend_with? @user
+      %p you already follow #{@user.username}
+    - else
+      = link_to "Follow", friendships_path(:friend_id => @user), :method => :post
+
+- else
+
+  %table
+    %thead
+      %tr
+        %th Follow
+
+    %tbody
+      - for friendship in @user.friendships
+        %tr
+          %td
+            = h friendship.friend.username
+            = link_to "remove", friendship, :method => :delete
+
+  %table
+    %thead
+      %tr
+        %th Follower
+
+    %tbody
+      - for user in @user.inverse_friends
+        %tr
+          %td= h user.username
+
+%br
+
+%p= link_to "Find people", users_path
 - if @user == current_user
   = link_to 'Edit', edit_user_registration_path
+  %p= link_to 'Favorite games', favorite_games_path
+  = link_to 'Delete', users_path(@user), method: :delete
+= link_to 'HomePage', games_path

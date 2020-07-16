@@ -16,12 +16,19 @@
     %vote= link_to 'dislike', dislike_game_path(@game), method: :put, remote: true, class: 'dislike-btn disliked'
   - else
     %vote= link_to 'dislike', dislike_game_path(@game), method: :put, remote: true, class: 'dislike-btn'
+  
+  = link_to favorite_text, favorite_game_path(game_id: @game), id: 'favorite_link', remote: true, method: :patch
 
 = link_to 'Games list', games_path
-#{link_to 'Add a review', new_game_review_path(@game)},#{link_to 'View the reviews', game_review_path(@game)}
 
-- if @game.user == current_user
-  = link_to 'Edit game', edit_game_path(@game)
+%div
+  = link_to 'Add a review', new_game_review_path(@game)
+  = link_to 'View the reviews', game_review_path(@game)
+
+
+%div
+  - if @game.user == current_user
+    = link_to 'Edit game', edit_game_path(@game)
 
 - if user_signed_in?
   .gameplay{:id => "play_game"}
