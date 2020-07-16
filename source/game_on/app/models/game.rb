@@ -69,8 +69,8 @@ class Game < ApplicationRecord
         end
       end
     end
-    query += ") SELECT * FROM search_query" + SORTING_CRITERIA[search[:sorting_criterion]]
-    byebug
+    query += ") SELECT * FROM search_query"
+    query += SORTING_CRITERIA[search[:sorting_criterion]] if !search[:sorting_criterion].eql?("Any")
     self.find_by_sql(query)
   end
   
