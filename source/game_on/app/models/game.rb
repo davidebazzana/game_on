@@ -53,20 +53,16 @@ class Game < ApplicationRecord
       else
         query += "SELECT * FROM games WHERE category = '#{search[:category]}'"
       end
-    elsif !search[:title].empty?
+    else
       words = search[:title].scan(/[\w']+/)
       
       query += "SELECT * FROM games WHERE title LIKE '%#{words[0]}%'"
       
-      if(!search[:category].eql?("Any"))
-        query += " AND category = '#{search[:category]}'"
-      end
+      query += " AND category = '#{search[:category]}'" if !search[:category].eql?("Any")
       
       words.drop(1).each do |word|
         query += " UNION SELECT * FROM games WHERE title LIKE '%#{word}%'"
-        if(!search[:category].eql?("Any"))
-          query += " AND category = '#{search[:category]}'"
-        end
+        query += " AND category = '#{search[:category]}'" if !search[:category].eql?("Any")
       end
     end
     query += ") SELECT * FROM search_query"
