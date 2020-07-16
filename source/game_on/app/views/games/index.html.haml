@@ -13,7 +13,7 @@
 
     %td
       = label :game, :sorting_criterion, 'Sorting criterion'
-      = select(:game, :sorting_criterion, options_for_select(['Any'] + Game::SORTING_CRITERIA, @sorting_criteria))
+      = select(:game, :sorting_criterion, options_for_select(['Any'] + Game::SORTING_CRITERIA.keys, @sorting_criteria))
 
     %td= submit_tag 'search'
 

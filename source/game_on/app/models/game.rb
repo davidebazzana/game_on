@@ -11,9 +11,12 @@ class Game < ApplicationRecord
   # Scan files for viruses before saving them
   before_create :scan_for_viruses
 
-  CATEGORIES = ['Action', 'Adventure', 'Casual', 'Indie', 'Racing', 'RPG', 'Simulation', 'Sports', 'Strategy', 'Other']
+  CATEGORIES = ["Action", "Adventure", "Casual", "Indie", "Racing", "RPG", "Simulation", "Sports", "Strategy", "Other"]
 
-  SORTING_CRITERIA = ['Alphabetic', 'Newest', 'Hottest', 'Controversial']
+  SORTING_CRITERIA = {"Alphabetic" => " ORDER BY title",
+                      "Newest" => " ORDER BY created_at DESC",
+                      "Hottest" => " ORDER BY cached_votes_score DESC",
+                      "Controversial" => " ORDER BY IFNULL((CAST((cached_votes_total - ABS(cached_votes_score)) AS FLOAT))/cached_votes_total, 0.0) DESC"}
 
   validates :category, inclusion: { in: CATEGORIES }
 
@@ -45,7 +48,7 @@ class Game < ApplicationRecord
 
     query = "WITH search_query AS ("
     if search[:title].empty?
-      if search[:category].eql?('Any')
+      if search[:category].eql?("Any")
         query += "SELECT * FROM games"
       else
         query += "SELECT * FROM games WHERE category = '#{search[:category]}'"
@@ -55,27 +58,19 @@ class Game < ApplicationRecord
       
       query += "SELECT * FROM games WHERE title LIKE '%#{words[0]}%'"
       
-      if(!search[:category].eql?('Any'))
+      if(!search[:category].eql?("Any"))
         query += " AND category = '#{search[:category]}'"
       end
       
       words.drop(1).each do |word|
         query += " UNION SELECT * FROM games WHERE title LIKE '%#{word}%'"
-        if(!search[:category].eql?('Any'))
+        if(!search[:category].eql?("Any"))
           query += " AND category = '#{search[:category]}'"
         end
       end
     end
-    query += ") SELECT * FROM search_query"
-    if search[:sorting_criterion] == SORTING_CRITERIA[0]
-      query += " ORDER BY title"
-    elsif search[:sorting_criterion] == SORTING_CRITERIA[1]
-      query += " ORDER BY created_at DESC"
-    elsif search[:sorting_criterion] == SORTING_CRITERIA[2]
-      query += " ORDER BY cached_votes_score DESC"
-    elsif search[:sorting_criterion] == SORTING_CRITERIA[3]
-      query += " ORDER BY IFNULL((CAST((cached_votes_total - ABS(cached_votes_score)) AS FLOAT))/cached_votes_total, 0.0) DESC"
-    end
+    query += ") SELECT * FROM search_query" + SORTING_CRITERIA[search[:sorting_criterion]]
+    byebug
     self.find_by_sql(query)
   end
   
