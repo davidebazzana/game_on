@@ -10,10 +10,14 @@ class GamesController < ApplicationController
   def index
     if params[:game].nil?
       @games = Game.all
+      @title = nil
       @category = nil
+      @sorting_criteria = nil
     else
       @games = Game.search(search_game_params)
+      @title = search_game_params[:title]
       @category = search_game_params[:category]
+      @sorting_criteria = search_game_params[:sorting_criterion]
     end
   end
 
@@ -140,7 +144,7 @@ class GamesController < ApplicationController
   end
 
   def search_game_params
-    params.require(:game).permit(:title, :category)
+    params.require(:game).permit(:title, :category, :sorting_criterion)
   end
 
   def send_build_file file_name
