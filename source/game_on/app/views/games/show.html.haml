@@ -18,7 +18,7 @@
     %vote= link_to 'dislike', dislike_game_path(@game), method: :put, remote: true, class: 'dislike-btn'
 
 = link_to 'Games list', games_path
-#{link_to 'Add a review', new_game_review_path(@game)},#{link_to 'View the reviews', game_review_path(@game)}
+#{link_to 'Add a review', new_game_review_path(@game)},#{link_to 'View the reviews', game_review_path(@game)},#{link_to 'invite a friend',new_invite_path(invite: { invitable_id: @game.id, invitable_type: 'Game'})}
 
 - if @game.user == current_user
   = link_to 'Edit game', edit_game_path(@game)

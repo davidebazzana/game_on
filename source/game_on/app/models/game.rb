@@ -3,6 +3,8 @@ class Game < ApplicationRecord
   has_many :reviews
   # Enable file attachments
   has_many_attached :files
+
+  invitable named_by: :title
   
   acts_as_votable
   # Before creating or updating a Game object, check if the title is provided
