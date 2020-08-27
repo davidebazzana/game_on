@@ -91,3 +91,6 @@ build/
 *.bridgesupport
 build-iPhoneOS/
 build-iPhoneSimulator/
+
+# Ignore application configuration
+/config/application.yml

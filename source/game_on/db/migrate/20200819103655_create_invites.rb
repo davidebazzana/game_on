@@ -13,6 +13,7 @@ class CreateInvites < ActiveRecord::Migration[5.2]
       t.index [:invitable_id, :invitable_type]
       t.index :recipient_id
       t.index :sender_id
+      t.integer :game_id
     end
   end
 end
