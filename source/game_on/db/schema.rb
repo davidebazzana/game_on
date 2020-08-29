@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_21_165857) do
+ActiveRecord::Schema.define(version: 2020_08_29_102158) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -45,6 +45,32 @@ ActiveRecord::Schema.define(version: 2020_06_21_165857) do
     t.text "info"
     t.integer "user_id"
     t.index ["user_id"], name: "index_games_on_user_id"
+  end
+
+  create_table "invitations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "invitefriends", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "invites", force: :cascade do |t|
+    t.string "email"
+    t.string "token"
+    t.integer "sender_id"
+    t.integer "recipient_id"
+    t.integer "invitable_id"
+    t.string "invitable_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_invites_on_email"
+    t.index ["invitable_id", "invitable_type"], name: "index_invites_on_invitable_id_and_invitable_type"
+    t.index ["recipient_id"], name: "index_invites_on_recipient_id"
+    t.index ["sender_id"], name: "index_invites_on_sender_id"
+    t.index ["token"], name: "index_invites_on_token"
   end
 
   create_table "reviews", force: :cascade do |t|
