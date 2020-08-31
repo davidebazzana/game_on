@@ -5,8 +5,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   layout "devise"
   before_action :configure_account_update_params, only: [:update]
 
-  before_action :set_invite_token, only: [:new]
-  after_action :process_invite_token, only: [:create]
 
   # GET /resource/sign_up
   # def new
