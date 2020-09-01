@@ -8,7 +8,17 @@ class GamesController < ApplicationController
   end
   
   def index
-    @games = Game.all
+    if params[:game].nil?
+      @games = Game.all
+      @title = nil
+      @category = nil
+      @sorting_criteria = nil
+    else
+      @games = Game.search(search_game_params)
+      @title = search_game_params[:title]
+      @category = search_game_params[:category]
+      @sorting_criteria = search_game_params[:sorting_criterion]
+    end
   end
 
   def show
@@ -119,7 +129,7 @@ class GamesController < ApplicationController
   private
     
   def game_params
-    params.require(:game).permit(:title, :info, files: [])
+    params.require(:game).permit(:title, :info, :category, files: [])
   end
 
   def require_permission
@@ -130,7 +140,11 @@ class GamesController < ApplicationController
   end
 
   def edit_game_params
-    params.require(:game).permit(:title, :info)
+    params.require(:game).permit(:title, :info, :category)
+  end
+
+  def search_game_params
+    params.require(:game).permit(:title, :category, :sorting_criterion)
   end
 
   def send_build_file file_name

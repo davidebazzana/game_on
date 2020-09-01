@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 2020_07_14_151441) do
     t.string "title"
     t.text "info"
     t.integer "user_id"
+    t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "cached_votes_total", default: 0
