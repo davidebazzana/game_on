@@ -33,7 +33,7 @@
         %tr
           %td
             = h friendship.friend.username
-            = link_to 'invite friend', new_invitefriend_path(:email=>friendship.friend.email,:user=>friendship.user.email,:game=>@game.title)
+            = link_to 'invite friend', new_invitefriend_path(:email=>friendship.friend.email,:user=>friendship.user.email,:game=>@game.title,:gameid=>@game.id)
 
 - if user_signed_in?
   .gameplay{:id => "play_game"}

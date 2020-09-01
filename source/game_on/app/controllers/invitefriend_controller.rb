@@ -3,7 +3,8 @@ class InvitefriendController < ApplicationController
         @email=params[:email]
         @user=params[:user]
         @game=params[:game]
-        UserMailer.send_invitation(@email,@user,@game).deliver
+        @gameid=params[:gameid]
+        UserMailer.send_invitation(@email,@user,@game,@gameid).deliver
         #redirect_to @user
     end
 end
