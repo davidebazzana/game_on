@@ -18,10 +18,22 @@
     %vote= link_to 'dislike', dislike_game_path(@game), method: :put, remote: true, class: 'dislike-btn'
 
 = link_to 'Games list', games_path
-#{link_to 'Add a review', new_game_review_path(@game)},#{link_to 'View the reviews', game_review_path(@game)}
+#{link_to 'Add a review', new_game_review_path(@game)},#{link_to 'View the reviews', game_review_path(@game)},#{link_to 'Invite a friend', new_invitetoplaygame_path(:game=>@game.title)}
 
 - if @game.user == current_user
   = link_to 'Edit game', edit_game_path(@game)
+
+%table
+  %thead
+    %tr
+      %th Invite a friend
+
+    %tbody
+      - for friendship in current_user.friendships
+        %tr
+          %td
+            = h friendship.friend.username
+            = link_to 'invite friend', new_invitefriend_path(:email=>friendship.friend.email,:user=>friendship.user.email,:game=>@game.title)
 
 - if user_signed_in?
   .gameplay{:id => "play_game"}
@@ -34,3 +46,4 @@
 
   .canvas-placeholder{:style => "width: 0px; height: 650px; position: relative;"}
   %footer{:style => "width: 100%; height: 50px; position: absolute;"}
+
