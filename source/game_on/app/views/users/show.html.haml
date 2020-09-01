@@ -31,7 +31,6 @@
           %td
             = h friendship.friend.username
             = link_to "remove", friendship, :method => :delete
-            = link_to 'invite friend', new_invitefriend_path(:email=>friendship.friend.email,:user=>friendship.user.email)
 
   %table
     %thead
