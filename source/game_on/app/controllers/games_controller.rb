@@ -2,12 +2,13 @@
 class GamesController < ApplicationController
   skip_before_action :save_last_url, only: [:like, :dislike]
   skip_before_action :authenticate_user!, only: [:index, :show]
-  before_action :require_permission, only: [:edit, :update, :destroy]
+  # before_action :require_permission, only: [:edit, :update, :destroy]
   respond_to do |format|
     format.js
   end
   
   def index
+    authorize! :read, Game
     if params[:game].nil?
       @games = Game.all
       @title = nil
@@ -23,6 +24,8 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+    authorize! :read, @game
+
     @favorite_exists = !(Favorite.where(user: current_user, favorited: @game) == [])
     respond_to do |format|
       format.html {} # show.html.haml
@@ -32,6 +35,7 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.new(game_params)
+    authorize! :create, Game
     @game.user = current_user
     
     begin
@@ -54,6 +58,7 @@ class GamesController < ApplicationController
 
   def update
     @game = Game.find(params[:id])
+    authorize! :update, @game
     if @game.update(edit_game_params)
       flash[:notice] = "'#{@game.title}' updated successfully"
       redirect_to games_path
@@ -64,14 +69,17 @@ class GamesController < ApplicationController
   end
   
   def new
+    authorize! :create, Game
   end
 
   def edit
     @game = Game.find(params[:id])
+    authorize! :update, @game
   end
 
   def destroy
     @game = Game.find(params[:id])
+    authorize! :destroy, @game
 
     # delete any file attached
     @game.files.purge
@@ -96,6 +104,7 @@ class GamesController < ApplicationController
   
   def like
     @game = Game.find(params[:id])
+    authorize! :vote, @game
     if user_signed_in?
       if !current_user.liked? @game
         if current_user.disliked? @game
@@ -112,6 +121,7 @@ class GamesController < ApplicationController
   
   def dislike
     @game = Game.find(params[:id])
+    authorize! :vote, @game
     if user_signed_in?
       if !current_user.disliked? @game
         if current_user.liked? @game

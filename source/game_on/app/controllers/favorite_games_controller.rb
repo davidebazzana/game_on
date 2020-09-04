@@ -3,10 +3,12 @@ class FavoriteGamesController < ApplicationController
 
   def index
     @favorites = current_user.favorite_games
+    authorize! :read, Favorite
   end
 
   def update
     favorite = Favorite.where(favorited: @game, user: current_user)
+    authorize! :update, favorite
     if favorite == []
       Favorite.create(user: current_user, favorited: @game)
       @favorite_exists = true

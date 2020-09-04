@@ -3,11 +3,14 @@ class ReviewsController < ApplicationController
   before_action :set_game
 
     def new
+      authorize! :create, Review
       @review = Review.new
     end
 
     def create
+      authorize! :create, Review
       @review = Review.new(review_params)
+
       @review.user = current_user
       @review.game = @game
 
@@ -33,11 +36,13 @@ class ReviewsController < ApplicationController
     end
 
     def update
+      authorize! :update, @review
       @review.update(review_params)
       respond_with(@review)
     end
   
     def destroy
+      authorize! :destroy, @review
       @review.destroy
       respond_with(@review)
     end

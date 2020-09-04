@@ -16,13 +16,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  def edit
+    authorize! :update, User.find(current_user.id)
+    super
+  end
 
   # PUT /resource
   def update
     @user = User.find(current_user.id)
+    authorize! :update, @user
+
     email_changed = @user.email != params[:user][:email]
     is_oauth_account = !@user.provider.blank?
 
@@ -41,9 +44,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   # DELETE /resource
-  # def destroy
-  #   super
-  # end
+  def destroy
+    authorize! :destroy, User.find(current_user.id)
+    super
+  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
