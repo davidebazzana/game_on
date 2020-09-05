@@ -20,7 +20,7 @@ class Ability
       can [:create, :read], Review
       can [:update, :destroy], Review, user_id: user.id
       can [:read], User
-      can [:update], User, id: user.id
+      can [:update, :destroy], User, id: user.id
       can [:read, :update], Favorite, user_id: user.id
       can [:create], Friendship
       can [:destroy], Friendship, user_id: user.id

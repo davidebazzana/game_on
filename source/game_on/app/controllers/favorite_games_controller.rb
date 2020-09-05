@@ -8,11 +8,12 @@ class FavoriteGamesController < ApplicationController
 
   def update
     favorite = Favorite.where(favorited: @game, user: current_user)
-    authorize! :update, favorite
     if favorite == []
-      Favorite.create(user: current_user, favorited: @game)
+      @favorite = Favorite.create(user: current_user, favorited: @game)
+      authorize! :update, @favorite
       @favorite_exists = true
     else
+      authorize! :update, favorite[0]
       favorite.destroy_all
       @favorite_exists = false
     end

@@ -23,12 +23,13 @@ class GamesController < ApplicationController
   end
 
   def show
-    @game = Game.find(params[:id])
-    authorize! :read, @game
-
-    @favorite_exists = !(Favorite.where(user: current_user, favorited: @game) == [])
     respond_to do |format|
-      format.html {} # show.html.haml
+      format.html { 
+        @game = Game.find(params[:id]) 
+        authorize! :read, @game
+
+        @favorite_exists = !(Favorite.where(user: current_user, favorited: @game) == [])
+      } # show.html.haml
       format.json { send_build_file "json" }
     end
   end
