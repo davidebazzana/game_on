@@ -11,7 +11,8 @@
         %td= user.username
         %td= user.email
         %td= link_to 'Show', user
-        //%td= link_to 'Edit', edit_user_path //ancora da implementare
+        - if can? :update, user
+          %td= link_to 'Edit', edit_user_path(user)
          
   
 %br

@@ -1,4 +1,7 @@
-%h2= @user.username
+%h2
+  = @user.username
+  \-
+  = @user.role
 
 %p
   %h3 Username
@@ -45,8 +48,7 @@
 %br
 
 %p= link_to "Find people", users_path
-- if @user == current_user
-  = link_to 'Edit', edit_user_registration_path
-  %p= link_to 'Favorite games', favorite_games_path
-  = link_to 'Delete', users_path(@user), method: :delete
+- if can? :update, @user
+  = link_to 'Edit', edit_user_path
+%p= link_to 'Favorite games', favorite_games_path
 = link_to 'HomePage', games_path

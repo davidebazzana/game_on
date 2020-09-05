@@ -27,7 +27,7 @@ class ReviewsController < ApplicationController
       end
     end
    
-    def show
+    def index
       @reviews = Review.where(game_id: @game.id)
     end
 
@@ -44,7 +44,7 @@ class ReviewsController < ApplicationController
     def destroy
       authorize! :destroy, @review
       @review.destroy
-      respond_with(@review)
+      redirect_to game_reviews_path(@game)
     end
     
     private

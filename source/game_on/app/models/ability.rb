@@ -13,17 +13,22 @@ class Ability
     #     can :read, :all
     #   end
 
-      can :read, Game
-      return unless user.present?
-      can [:create, :vote], Game
-      can [:update, :destroy], Game, user_id: user.id
-      can [:create, :read], Review
-      can [:update, :destroy], Review, user_id: user.id
-      can [:read], User
-      can [:update, :destroy], User, id: user.id
-      can [:read, :update], Favorite, user_id: user.id
-      can [:create], Friendship
-      can [:destroy], Friendship, user_id: user.id
+    can :read, Game
+    return unless user.present?
+    can [:create, :vote, :play], Game
+    can [:update, :destroy], Game, user_id: user.id
+    can [:create, :read], Review
+    can [:update, :destroy], Review, user_id: user.id
+    can [:read], User
+    can [:update, :destroy], User, id: user.id
+    can [:read, :update], Favorite, user_id: user.id
+    can [:create], Friendship
+    can [:destroy], Friendship, user_id: user.id
+    return unless user.role == "moderator" || user.role == "admin"
+    can [:manage], Review
+    can [:destroy], Game
+    return unless user.role == "admin"
+    can [:manage], :all
     #
     # The first argument to `can` is the action you are giving the user
     # permission to do.

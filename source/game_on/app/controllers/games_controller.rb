@@ -92,6 +92,7 @@ class GamesController < ApplicationController
   end
 
   def launch
+    authorize! :play, Game
     cookies.signed[:game] = { value: params[:id], expires: 1.minute }
   end
 
