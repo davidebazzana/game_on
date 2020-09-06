@@ -32,7 +32,7 @@
 %div
   - if can? :update, @game
     = link_to 'Edit game', edit_game_path(@game)
-  - if (current_user.role == "moderator" || current_user.role == "admin") && can?(:destroy, Game)
+  - if current_user && (current_user.role == "moderator" || current_user.role == "admin") && can?(:destroy, Game)
     #{button_to 'Delete game', game_path(@game), data: { confirm: "Are you sure?" }, method: :delete}
 
 
