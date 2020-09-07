@@ -23,10 +23,12 @@
 - if @game.user == current_user
   = link_to 'Edit game', edit_game_path(@game)
 
-%table
-  %thead
-    %tr
-      %th Invite a friend
+- if user_signed_in?
+
+  %table
+    %thead
+      %tr
+        %th Invite a friend
 
     %tbody
       - for friendship in current_user.friendships
@@ -35,7 +37,6 @@
             = h friendship.friend.username
             = link_to 'invite friend', new_invitefriend_path(:email=>friendship.friend.email,:user=>friendship.user.email,:game=>@game.title,:gameid=>@game.id)
 
-- if user_signed_in?
   .gameplay{:id => "play_game"}
     = link_to 'Play', launch_game_path(@game), method: :patch, remote: true
   .webgl-content{:id => "webglCanvas", :style => "position: relative; width: 960px; height: 0px"}
