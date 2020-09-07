@@ -34,3 +34,18 @@
 = link_to 'Add new game', new_game_path
 - if can? :read, Favorite
   = link_to 'Favorite games', favorite_games_path
+
+%br
+%br
+
+%h2 Admins
+%table#admins
+  %thead
+    %tr
+      %th Username
+      %th Email
+  %tbody
+    - User.where(role: "admin").each do |user|
+      %tr
+        %td= user.username
+        %td= user.email
