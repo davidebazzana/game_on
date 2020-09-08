@@ -10,5 +10,10 @@ class UsersController < ApplicationController
     authorize! :read, @user
     render :layout => "devise"
   end
+
+  def admins
+    authorize! :read, User
+    @admins = User.where(role: "admin")
+  end
   
 end

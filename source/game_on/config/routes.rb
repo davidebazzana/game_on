@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   resources :favorite_games, only: [:index, :update]
   
   resources :users, only: [:index, :show]
+
+  get 'admins' => 'users#admins', as: :admins
   
 
   # Provide mapping between URLs/HTTP verbs to controller
