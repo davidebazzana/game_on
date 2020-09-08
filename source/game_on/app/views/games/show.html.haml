@@ -22,6 +22,8 @@
 
 - if @game.user == current_user
   = link_to 'Edit game', edit_game_path(@game)
+- if user_signed_in? && @game.user != current_user
+  = link_to 'Report bug to developers', new_contactdev_path(:email=>@game.user.email,:game=>@game.title,:useremail=>current_user.email)
 
 - if user_signed_in?
 
