@@ -13,6 +13,10 @@ RSpec.describe Game, type: :model do
       FactoryBot.create(:game, :title => title)
     end
   }
+
+  after(:all) {
+    DatabaseCleaner.clean
+  }
   
   it "Search for all the games with 'cat' in their name" do
     search_game_params = {:title => "cat", :category => "Any", :sorting_criterion => "Any"}

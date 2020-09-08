@@ -99,6 +99,9 @@ GEM
     cucumber-tag_expressions (1.1.1)
     cucumber-wire (0.0.1)
     database_cleaner (1.8.5)
+    database_cleaner-active_record (1.8.0)
+      activerecord
+      database_cleaner (~> 1.8.0)
     devise (4.7.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -290,7 +293,7 @@ DEPENDENCIES
   clamby
   coffee-rails (~> 4.2)
   cucumber-rails
-  database_cleaner
+  database_cleaner-active_record
   devise
   factory_bot_rails
   haml

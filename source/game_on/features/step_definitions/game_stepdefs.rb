@@ -1,4 +1,5 @@
 Given("the game {string} exists") do |game_title|
+  create(:user)
   create(:game, title: game_title)
 end
 

@@ -67,7 +67,7 @@ gem 'bcrypt', '~> 3.1.7'
 # testing framework
 group :test do
   gem 'cucumber-rails', :require => false
-  gem 'database_cleaner'
+  gem 'database_cleaner-active_record'
   gem 'capybara'
   gem 'launchy'
   gem 'factory_bot_rails'

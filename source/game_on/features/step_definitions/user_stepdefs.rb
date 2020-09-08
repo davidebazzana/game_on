@@ -23,10 +23,10 @@ end
 
 Given("I log in my account username: {string}, email: {string}, password: {string}") do |username, email, password|
   @test_user = create(:user, username: username, email: email, password: password)
-  click_link "Login"
+  visit "http://www.example.com/login"
   puts email
   puts password
   fill_in 'Email', :with => email
   fill_in 'Password', :with => password
-  click_button("Login")
+  click_button("Log in")
 end
