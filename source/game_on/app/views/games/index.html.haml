@@ -15,7 +15,7 @@
       = label :game, :sorting_criterion, 'Sorting criterion'
       = select(:game, :sorting_criterion, options_for_select(['Any'] + Game::SORTING_CRITERIA.keys, @sorting_criteria))
 
-    %td= submit_tag 'search'
+    %td= submit_tag 'Search'
 
     %td= link_to 'Show all', games_path
 

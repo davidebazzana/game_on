@@ -9,15 +9,15 @@ RSpec.describe Game, type: :model do
               {:title => "Cat race", :category => "Racing"},
               {:title => "Purring cat", :category => "Casual"},
               {:title => "Mreow", :category => "Casual"}]
-              
-    
+
+
     FactoryBot.create(:user)
     FactoryBot.create(:game)
     games.each do |game|
       FactoryBot.create(:game, :title => game[:title], :category => game[:category])
     end
   }
-  
+
   it "Search for all the games with 'cat' in their name" do
     search_game_params = {:title => "cat", :category => "Any", :sorting_criterion => "Any"}
     search_result = Game.search(search_game_params)
