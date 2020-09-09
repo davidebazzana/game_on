@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   devise_for :users, skip: :all
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+  resources :favorite_games, only: [:index, :update]
+  
   resources :users, only: [:index, :show]
   
 
@@ -33,6 +35,10 @@ Rails.application.routes.draw do
   end
   
   resources :friendships
+
+  resources :invitefriend
+  resources :invitetoplaygame
+  
 
   root to: 'games#index'
 end
