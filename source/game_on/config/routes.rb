@@ -41,5 +41,9 @@ Rails.application.routes.draw do
   
   resources :friendships
 
+  resources :invitefriend
+  resources :invitetoplaygame
+  
+
   root to: 'games#index'
 end

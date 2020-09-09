@@ -60,7 +60,7 @@ table {
 table th {
   border: 2px solid white;
   font-weight: bold;
-  background-color: wheat;
+  background-color: white;
 }
 table th, table td {
   padding: 4px;
@@ -123,3 +123,10 @@ ul.hmenu {
 ul.hmenu li {
   display: inline;
 }
+
+.onlinestatus{
+  color: #00ff00;
+  text-transform: uppercase;
+}
+
+

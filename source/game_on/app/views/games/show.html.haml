@@ -37,6 +37,18 @@
 
 
 - if can? :play, @game
+  %table
+    %thead
+      %tr
+        %th Invite a friend
+
+    %tbody
+      - for friendship in current_user.friendships
+        %tr
+          %td
+            = h friendship.friend.username
+            = link_to 'invite friend', new_invitefriend_path(:email=>friendship.friend.email,:user=>friendship.user.email,:game=>@game.title,:gameid=>@game.id)
+
   .gameplay{:id => "play_game"}
     = link_to 'Play', launch_game_path(@game), method: :patch, remote: true
   .webgl-content{:id => "webglCanvas", :style => "position: relative; width: 960px; height: 0px"}

@@ -18,4 +18,5 @@ class FriendshipsController < ApplicationController
       flash[:notice] = "Not following #{User.find(@friendship.friend_id).username} anymore"
       redirect_to current_user
     end
+
 end

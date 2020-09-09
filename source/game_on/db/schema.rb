@@ -67,6 +67,17 @@ ActiveRecord::Schema.define(version: 2020_09_05_094931) do
     t.index ["user_id"], name: "index_games_on_user_id"
   end
 
+  create_table "invitefriends", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+
+  create_table "invitetoplaygames", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.text "comments"
     t.integer "user_id"
@@ -86,7 +97,11 @@ ActiveRecord::Schema.define(version: 2020_09_05_094931) do
     t.datetime "updated_at", null: false
     t.string "provider"
     t.string "uid"
+<<<<<<< HEAD
     t.string "role"
+=======
+    t.datetime "last_seen_at"
+>>>>>>> master
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
