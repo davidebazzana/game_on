@@ -1,0 +1,3 @@
+class Invitefriend < ApplicationRecord
+    
+end
