@@ -31,7 +31,11 @@
           %td
             = h friendship.friend.username
             = link_to "remove", friendship, :method => :delete
-
+          %td
+            - for user in @online_users 
+              - if friendship.friend == user  
+                .onlinestatus Online
+             
   %table
     %thead
       %tr
