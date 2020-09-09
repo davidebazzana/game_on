@@ -47,5 +47,6 @@
 %p= link_to "Find people", users_path
 - if @user == current_user
   = link_to 'Edit', edit_user_registration_path
-= link_to 'Delete', users_path(@user), method: :delete
+  %p= link_to 'Favorite games', favorite_games_path
+  = link_to 'Delete', users_path(@user), method: :delete
 = link_to 'HomePage', games_path
