@@ -66,6 +66,8 @@ Then("I should only see the games with the word {string} in their name and with 
   check_games games, title, category
 end
 
+private
+
 def check_games games, title, category
   test_positive_array = Array.new()
   test_negative_array = Array.new()
