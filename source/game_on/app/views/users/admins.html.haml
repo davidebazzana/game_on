@@ -11,7 +11,7 @@
         %td= user.username
         %td= user.email
         %td= link_to 'Show', user
-        - if can? :update, user
+        - if can?(:update, user) || can?(:assign_role, user)
           %td= link_to 'Edit', edit_user_path(user)
 
 = link_to 'Back', :back

@@ -171,6 +171,5 @@ class GamesController < ApplicationController
     end
     head :no_content # HTTP 204 no content
   end
-  
 end
 

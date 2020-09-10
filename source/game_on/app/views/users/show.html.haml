@@ -11,7 +11,7 @@
   %h3 Email
   %div= @user.email
 
-- if current_user != @user
+- if can? :follow, @user
 
   %h1 Add Follow:
 
@@ -33,7 +33,8 @@
         %tr
           %td
             = h friendship.friend.username
-            = link_to "remove", friendship, :method => :delete
+            - if can? :unfollow, friendship.friend
+              = link_to "remove", friendship, :method => :delete
           %td
             - for user in @online_users 
               - if friendship.friend == user  
@@ -52,7 +53,8 @@
 %br
 
 %p= link_to "Find people", users_path
-- if can? :update, @user
+- if (can? :update, @user) || (can? :assign_role, @user)
   = link_to 'Edit', edit_user_path
-%p= link_to 'Favorite games', favorite_games_path
+- if can? :read_favorites_list, @user
+  %p= link_to 'Favorite games', favorite_games_path
 = link_to 'HomePage', games_path

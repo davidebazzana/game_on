@@ -60,7 +60,7 @@ table {
 table th {
   border: 2px solid white;
   font-weight: bold;
-  background-color: white;
+  background-color: wheat;
 }
 table th, table td {
   padding: 4px;

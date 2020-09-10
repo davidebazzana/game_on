@@ -69,7 +69,12 @@ class Game < ApplicationRecord
     query += SORTING_CRITERIA[search[:sorting_criterion]] if !search[:sorting_criterion].eql?("Any")
     self.find_by_sql(query)
   end
-  
+
+  def self.favorited_by(user)
+    favorites = user.favorite_games
+    favorites.find(favorited: self) != nil
+  end
+
   private
   
   def scan_for_viruses
@@ -81,4 +86,5 @@ class Game < ApplicationRecord
       end
     end
   end
+
 end

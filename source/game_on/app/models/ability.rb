@@ -15,20 +15,31 @@ class Ability
 
     can :read, Game
     return unless user.present?
-    can [:create, :vote, :play], Game
+    can [:create, :vote, :play, :add_to_favorites], Game
+    can [:remove_from_favorites], Game do |game|
+      game.favorited_by? user
+    end
     can [:update, :destroy], Game, user_id: user.id
     can [:create, :read], Review
     can [:update, :destroy], Review, user_id: user.id
     can [:read], User
-    can [:update, :destroy], User, id: user.id
-    can [:read, :update], Favorite, user_id: user.id
-    can [:create], Friendship
-    can [:destroy], Friendship, user_id: user.id
+    can [:invite], User do |u|
+      u.friend_with? user
+    end
+    can [:contact, :follow, :unfollow], User do |u|
+      u.id != user.id
+    end
+    can [:update, :destroy, :read_favorites_list], User, id: user.id
+    # can [:read, :update], Favorite, user_id: user.id
     return unless user.role == "moderator" || user.role == "admin"
     can [:manage], Review
     can [:destroy], Game
     return unless user.role == "admin"
-    can [:manage], :all
+    can [:destroy, :assign_role], User do |u|
+      u.id != user.id
+    end
+    can [:manage], Game
+
     #
     # The first argument to `can` is the action you are giving the user
     # permission to do.

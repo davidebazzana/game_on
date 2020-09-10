@@ -20,7 +20,7 @@
       %vote= link_to 'dislike', dislike_game_path(@game), method: :put, remote: true, class: 'dislike-btn disliked'
     - else
       %vote= link_to 'dislike', dislike_game_path(@game), method: :put, remote: true, class: 'dislike-btn'
-  - if can? :update, Favorite
+  - if can? [:add_to_favorites, :remove_from_favorites], @game
     = link_to favorite_text, favorite_game_path(game_id: @game), id: 'favorite_link', remote: true, method: :patch
 
 
@@ -54,10 +54,11 @@
 
     %tbody
       - for friendship in current_user.friendships
-        %tr
-          %td
-            = h friendship.friend.username
-            = link_to 'invite friend', new_invitefriend_path(:email=>friendship.friend.email,:user=>friendship.user.email,:game=>@game.title,:gameid=>@game.id)
+        - if can? :invite, friendship.friend
+          %tr
+            %td
+              = h friendship.friend.username
+              = link_to 'invite friend', new_invitefriend_path(:email=>friendship.friend.email,:user=>friendship.user.email,:game=>@game.title,:gameid=>@game.id)
 
   .gameplay{:id => "play_game"}
     = link_to 'Play', launch_game_path(@game), method: :patch, remote: true

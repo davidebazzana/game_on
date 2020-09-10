@@ -3,6 +3,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   layout "devise"
+  before_action :set_user, only: [:edit, :update, :destroy]
   before_action :configure_account_update_params, only: [:update]
   
   # GET /resource/sign_up
@@ -18,21 +19,27 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/:id/edit
   def edit
-    @user = User.find(params[:id])
-    authorize! :update, @user
+    if !can? :assign_role, @user
+      authorize! :update, @user
+    else
+      authorize! :assign_role, @user
+    end
     # super
   end
 
   # PUT /resource/:id
   def update
-    @user = User.find(params[:id])
-    authorize! :update, @user
+    if !can? :assign_role, @user
+      authorize! :update, @user
+    else
+      authorize! :assign_role, @user
+    end
 
     email_changed = @user.email != params[:user][:email]
     is_oauth_account = !@user.provider.blank?
 
-    successfully_updated = if current_user.role == "admin"
-      @user.update_without_password account_update_params.except(:current_password)
+    successfully_updated = if can? :assign_role, @user
+      @user.update_without_password account_update_params.except([:current_password, :email, :password, :password_confirmation])
     elsif !is_oauth_account
       @user.update_with_password account_update_params
     else
@@ -50,7 +57,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # DELETE /resource/:id
   def destroy
-    @user = User.find(params[:id])
     authorize! :destroy, @user
     super
   end
@@ -66,6 +72,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
 
+  def set_user
+    @user = User.find(params[:id])
+  end
+
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up, keys: extra_params)
@@ -73,15 +83,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: extra_params)
+    if can? :assign_role, @user
+      devise_parameter_sanitizer.permit(:account_update, keys: [:role])
+    else
+      devise_parameter_sanitizer.permit(:account_update, keys: extra_params)
+    end
   end
 
   def extra_params
-    if current_user && current_user.role == "admin"
-      [:username, :role]
-    else
-      [:username]
-    end
+    [:username]
   end
 
   # The path used after sign up.
