@@ -43,7 +43,7 @@ Rails.application.routes.draw do
 
   resources :invitefriend
   resources :invitetoplaygame
-  
+  resources :contactdev
 
   root to: 'games#index'
 end
