@@ -1,3 +1,5 @@
+= link_to 'Back to main menu', games_path
+= link_to "Back to #{@game.title}", game_path(@game)
 %h2 Edit #{@game.title}
 
 = form_tag game_path(@game), :method => :put do
@@ -7,8 +9,10 @@
 
   = label :game, :info, 'Info'
   = text_area :game, :info
+
+  = label :game, :category, 'Category'
+  = select(:game, :category, options_for_select(Game::CATEGORIES, 'Other'))
    
   = submit_tag 'Commit updates'
-
-= link_to 'Back to main menu', games_path
+%br
 = link_to 'Delete game', game_path(@game), :method => :delete

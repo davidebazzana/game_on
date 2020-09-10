@@ -2,24 +2,41 @@
 class GamesController < ApplicationController
   skip_before_action :save_last_url, only: [:like, :dislike]
   skip_before_action :authenticate_user!, only: [:index, :show]
-  before_action :require_permission, only: [:edit, :update, :destroy]
+  # before_action :require_permission, only: [:edit, :update, :destroy]
   respond_to do |format|
     format.js
   end
   
   def index
-    @games = Game.all
+    authorize! :read, Game
+    if params[:game].nil?
+      @games = Game.all
+      @title = nil
+      @category = nil
+      @sorting_criteria = nil
+    else
+      @games = Game.search(search_game_params)
+      @title = search_game_params[:title]
+      @category = search_game_params[:category]
+      @sorting_criteria = search_game_params[:sorting_criterion]
+    end
   end
 
   def show
     respond_to do |format|
-      format.html { @game = Game.find(params[:id]) } # show.html.haml
+      format.html { 
+        @game = Game.find(params[:id]) 
+        authorize! :read, @game
+
+        @favorite_exists = !(Favorite.where(user: current_user, favorited: @game) == [])
+      } # show.html.haml
       format.json { send_build_file "json" }
     end
   end
 
   def create
     @game = Game.new(game_params)
+    authorize! :create, Game
     @game.user = current_user
     
     begin
@@ -42,6 +59,7 @@ class GamesController < ApplicationController
 
   def update
     @game = Game.find(params[:id])
+    authorize! :update, @game
     if @game.update(edit_game_params)
       flash[:notice] = "'#{@game.title}' updated successfully"
       redirect_to games_path
@@ -52,14 +70,17 @@ class GamesController < ApplicationController
   end
   
   def new
+    authorize! :create, Game
   end
 
   def edit
     @game = Game.find(params[:id])
+    authorize! :update, @game
   end
 
   def destroy
     @game = Game.find(params[:id])
+    authorize! :destroy, @game
 
     # delete any file attached
     @game.files.purge
@@ -71,6 +92,7 @@ class GamesController < ApplicationController
   end
 
   def launch
+    authorize! :play, Game
     cookies.signed[:game] = { value: params[:id], expires: 1.minute }
   end
 
@@ -84,6 +106,7 @@ class GamesController < ApplicationController
   
   def like
     @game = Game.find(params[:id])
+    authorize! :vote, @game
     if user_signed_in?
       if !current_user.liked? @game
         if current_user.disliked? @game
@@ -100,6 +123,7 @@ class GamesController < ApplicationController
   
   def dislike
     @game = Game.find(params[:id])
+    authorize! :vote, @game
     if user_signed_in?
       if !current_user.disliked? @game
         if current_user.liked? @game
@@ -117,7 +141,7 @@ class GamesController < ApplicationController
   private
     
   def game_params
-    params.require(:game).permit(:title, :info, files: [])
+    params.require(:game).permit(:title, :info, :category, files: [])
   end
 
   def require_permission
@@ -128,7 +152,11 @@ class GamesController < ApplicationController
   end
 
   def edit_game_params
-    params.require(:game).permit(:title, :info)
+    params.require(:game).permit(:title, :info, :category)
+  end
+
+  def search_game_params
+    params.require(:game).permit(:title, :category, :sorting_criterion)
   end
 
   def send_build_file file_name

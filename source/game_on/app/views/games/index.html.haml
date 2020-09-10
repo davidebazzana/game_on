@@ -1,4 +1,23 @@
-%h1 All Games
+%h1 Game-on
+
+= form_tag games_path, :method => :get do
+
+  %table
+    %td
+      = label :game, :title, 'Search by name'
+      = text_field :game, :title, :value => @title
+
+    %td
+      = label :game, :category, 'Search by category'
+      = select(:game, :category, options_for_select(['Any'] + Game::CATEGORIES, @category))
+
+    %td
+      = label :game, :sorting_criterion, 'Sorting criterion'
+      = select(:game, :sorting_criterion, options_for_select(['Any'] + Game::SORTING_CRITERIA.keys, @sorting_criteria))
+
+    %td= submit_tag 'search'
+
+    %td= link_to 'Show all', games_path
 
 %table#games
   %thead
@@ -13,3 +32,5 @@
 
 
 = link_to 'Add new game', new_game_path
+- if can? :read, Favorite
+  = link_to 'Favorite games', favorite_games_path

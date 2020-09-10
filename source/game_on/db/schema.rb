@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_07_100914) do
+
+ActiveRecord::Schema.define(version: 2020_09_05_094931) do
+
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -33,9 +35,20 @@ ActiveRecord::Schema.define(version: 2020_09_07_100914) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+
   create_table "contactdevs", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "favorited_type"
+    t.integer "favorited_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["favorited_type", "favorited_id"], name: "index_favorites_on_favorited_type_and_favorited_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+
   end
 
   create_table "friendships", force: :cascade do |t|
@@ -49,6 +62,16 @@ ActiveRecord::Schema.define(version: 2020_09_07_100914) do
     t.string "title"
     t.text "info"
     t.integer "user_id"
+    t.string "category"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "cached_votes_total", default: 0
+    t.integer "cached_votes_score", default: 0
+    t.integer "cached_votes_up", default: 0
+    t.integer "cached_votes_down", default: 0
+    t.integer "cached_weighted_score", default: 0
+    t.integer "cached_weighted_total", default: 0
+    t.float "cached_weighted_average", default: 0.0
     t.index ["user_id"], name: "index_games_on_user_id"
   end
 
@@ -56,6 +79,7 @@ ActiveRecord::Schema.define(version: 2020_09_07_100914) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
 
   create_table "invitetoplaygames", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -81,6 +105,7 @@ ActiveRecord::Schema.define(version: 2020_09_07_100914) do
     t.datetime "updated_at", null: false
     t.string "provider"
     t.string "uid"
+    t.string "role"
     t.datetime "last_seen_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

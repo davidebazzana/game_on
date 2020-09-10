@@ -9,11 +9,18 @@ Rails.application.routes.draw do
     get 'login', to: 'users/sessions#new'
     post 'login', to: 'users/sessions#create'
     delete 'logout', to: 'users/sessions#destroy'
+    get 'users/:id/edit', to: 'users/registrations#edit', :as => :edit_user
+    put 'users/:id', to: 'users/registrations#update', :as => :user_update
+    delete 'users/:id', to: 'users/registrations#destroy', :as => :user_destroy
   end
   devise_for :users, skip: :all
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+  resources :favorite_games, only: [:index, :update]
+  
   resources :users, only: [:index, :show]
+
+  get 'admins' => 'users#admins', as: :admins
   
 
   # Provide mapping between URLs/HTTP verbs to controller

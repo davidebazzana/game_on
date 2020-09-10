@@ -1,4 +1,7 @@
-%h2= @user.username
+%h2
+  = @user.username
+  \-
+  = @user.role
 
 %p
   %h3 Username
@@ -31,7 +34,11 @@
           %td
             = h friendship.friend.username
             = link_to "remove", friendship, :method => :delete
-
+          %td
+            - for user in @online_users 
+              - if friendship.friend == user  
+                .onlinestatus Online
+             
   %table
     %thead
       %tr
@@ -45,7 +52,7 @@
 %br
 
 %p= link_to "Find people", users_path
-- if @user == current_user
-  = link_to 'Edit', edit_user_registration_path
-= link_to 'Delete', users_path(@user), method: :delete
+- if can? :update, @user
+  = link_to 'Edit', edit_user_path
+%p= link_to 'Favorite games', favorite_games_path
 = link_to 'HomePage', games_path
