@@ -1,0 +1,2 @@
+class Contactdev < ApplicationRecord
+end

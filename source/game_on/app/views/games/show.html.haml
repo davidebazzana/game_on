@@ -25,6 +25,15 @@
 
 
 %div
+
+
+
+= link_to 'Games list', games_path
+
+- if user_signed_in? && @game.user != current_user
+  = link_to 'Report bug to developers', new_contactdev_path(:email=>@game.user.email,:game=>@game.title,:useremail=>current_user.email)
+
+
   = link_to 'Add a review', new_game_review_path(@game)
   = link_to 'View the reviews', game_reviews_path(@game)
 
@@ -34,6 +43,7 @@
     = link_to 'Edit game', edit_game_path(@game)
   - if current_user && (current_user.role == "moderator" || current_user.role == "admin") && can?(:destroy, Game)
     #{button_to 'Delete game', game_path(@game), data: { confirm: "Are you sure?" }, method: :delete}
+
 
 
 - if can? :play, @game
