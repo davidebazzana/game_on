@@ -1,5 +1,6 @@
 class FriendshipsController < ApplicationController
     def create
+      authorize! :create, Friendship
       @friendship = current_user.friendships.build(:friend_id => params[:friend_id])
       if @friendship.save
         flash[:notice] = "Following #{User.find(@friendship.friend_id).username}"
@@ -12,8 +13,10 @@ class FriendshipsController < ApplicationController
     
     def destroy
       @friendship = current_user.friendships.find(params[:id])
+      authorize! :destroy, @friendship
       @friendship.destroy
       flash[:notice] = "Not following #{User.find(@friendship.friend_id).username} anymore"
       redirect_to current_user
     end
+
 end

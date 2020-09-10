@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+
 # Include default devise modules. Others available are:
 # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -6,8 +7,10 @@ class User < ApplicationRecord
   devise :omniauthable, omniauth_providers: [:google_oauth2, :github]
 
   acts_as_voter
-  has_many :games
+  has_many :games, dependent: :destroy
   has_many :reviews
+
+  ROLES = %i[admin moderator player]
   
   has_many :favorites
   has_many :favorite_games, through: :favorites, source: :favorited, source_type: 'Game'
@@ -26,6 +29,7 @@ class User < ApplicationRecord
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
       user.username = auth.info.name
+      user.role = :player
 
     end
   end
