@@ -60,12 +60,25 @@ class GamesController < ApplicationController
   def update
     @game = Game.find(params[:id])
     authorize! :update, @game
-    if @game.update(edit_game_params)
-      flash[:notice] = "'#{@game.title}' updated successfully"
+    begin
+      if @game.update(edit_game_params)
+        if !params[:game][:files].nil?
+          # Delete old files
+          @game.files.purge
+          # Attach new ones
+          @game.files.attach(params[:game][:files])
+          flash[:notice] = "'#{@game.title}' updated successfully, released new patch"
+        else
+          flash[:notice] = "'#{@game.title}' updated successfully"
+        end
+        redirect_to games_path
+      else
+        flash[:error] = @game.errors.full_messages
+        render 'edit'
+      end
+    rescue SecurityError => e
+      flash[:error] = e.message
       redirect_to games_path
-    else
-      flash[:error] = @game.errors.full_messages
-      render 'edit'
     end
   end
   

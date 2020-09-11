@@ -10,6 +10,7 @@ class Game < ApplicationRecord
 
   # Scan files for viruses before saving them
   before_create :scan_for_viruses
+  before_update :scan_for_viruses
 
   CATEGORIES = ["Action", "Adventure", "Casual", "Indie", "Racing", "RPG", "Simulation", "Sports", "Strategy", "Other"]
 

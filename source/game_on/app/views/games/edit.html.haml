@@ -2,7 +2,7 @@
 = link_to "Back to #{@game.title}", game_path(@game)
 %h2 Edit #{@game.title}
 
-= form_tag game_path(@game), :method => :put do
+= form_tag game_path(@game), :method => :put, :multipart=>true do
 
   = label :game, :title, 'Title'
   = text_field :game, :title
@@ -12,7 +12,10 @@
 
   = label :game, :category, 'Category'
   = select(:game, :category, options_for_select(Game::CATEGORIES, 'Other'))
-   
+
+  = label :game, :files, 'Attach build files (Not every file of the build is needed, select just the files in foo/Build/*)'
+  = file_field :game, :files, multiple: true
+
   = submit_tag 'Commit updates'
 %br
 = link_to 'Delete game', game_path(@game), :method => :delete
