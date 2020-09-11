@@ -1,4 +1,4 @@
-Feature: Anybody (Guest/User/Owner) can see a game's infos
+Feature: A visitor can see a game's infos
 
 Scenario Outline: Show a game's infos
 	  Given I am on the Game-on home page
