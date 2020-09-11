@@ -40,15 +40,20 @@ class GamesController < ApplicationController
     @game.user = current_user
     
     begin
-      if @game.save
-        if @game.files.attached?
-          flash[:notice] = "'#{@game.title}' was added successfully"
+      if game_params[:files].nil? || game_params[:files].length() == 5
+        if @game.save
+          if @game.files.attached?
+            flash[:notice] = "'#{@game.title}' was added successfully"
+          else
+            flash[:notice] = "'#{@game.title}' added, no file provided"
+          end
+          redirect_to games_path
         else
-          flash[:notice] = "'#{@game.title}' added, no file provided"
+          flash[:error] = @game.errors.full_messages
+          redirect_to games_path
         end
-        redirect_to games_path
       else
-        flash[:error] = @game.errors.full_messages
+        flash[:error] = "Error while creating new game: provide 0 or 5 files"
         redirect_to games_path
       end
     rescue SecurityError => e

@@ -13,7 +13,7 @@
   = label :game, :category, 'Category'
   = select(:game, :category, options_for_select(Game::CATEGORIES, 'Other'))
 
-  = label :game, :files, 'Attach build files (Not every file of the build is needed, select just the files in foo/Build/*)'
+  = label :game, :files, 'Ready to release a new patch? (Not every file of the build is needed, select just the files in foo/Build/*)'
   = file_field :game, :files, multiple: true
 
   = submit_tag 'Commit updates'
