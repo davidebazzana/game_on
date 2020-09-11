@@ -30,18 +30,18 @@
 
 = link_to 'Games list', games_path
 
-- if user_signed_in? && @game.user != current_user
+- if can? :contact, @game.user
   = link_to 'Report bug to developers', new_contactdev_path(:email=>@game.user.email,:game=>@game.title,:useremail=>current_user.email)
-
-
+- if can? :create, Review
   = link_to 'Add a review', new_game_review_path(@game)
+- if can? :read, Review
   = link_to 'View the reviews', game_reviews_path(@game)
 
 
 %div
   - if can? :update, @game
     = link_to 'Edit game', edit_game_path(@game)
-  - if current_user && (current_user.role == "moderator" || current_user.role == "admin") && can?(:destroy, Game)
+  - if (can?(:destroy, @game) && !can?(:update, @game)) || can?(:manage, @game)
     #{button_to 'Delete game', game_path(@game), data: { confirm: "Are you sure?" }, method: :delete}
 
 
@@ -58,7 +58,7 @@
           %tr
             %td
               = h friendship.friend.username
-              = link_to 'invite friend', new_invitefriend_path(:email=>friendship.friend.email,:user=>friendship.user.email,:game=>@game.title,:gameid=>@game.id)
+              = link_to 'invite friend', new_invitefriend_path(:friend=>friendship.friend,:user=>friendship.user.email,:game=>@game.title,:gameid=>@game.id)
 
   .gameplay{:id => "play_game"}
     = link_to 'Play', launch_game_path(@game), method: :patch, remote: true

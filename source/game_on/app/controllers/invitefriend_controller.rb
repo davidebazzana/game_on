@@ -1,11 +1,11 @@
 class InvitefriendController < ApplicationController
     def new
-        @email=params[:email]
+        @friend=params[:friend]
         @user=params[:user]
         @game=params[:game]
         @gameid=params[:gameid]
-        authorize! :invite, @user
-        UserMailer.send_invitation(@email,@user,@game,@gameid).deliver
+        authorize! :invite, @friend
+        UserMailer.send_invitation(@friend.email,@user,@game,@gameid).deliver
         #redirect_to @user
     end
 end
