@@ -67,14 +67,16 @@ class GamesController < ApplicationController
     authorize! :update, @game
     begin
       if @game.update(edit_game_params)
-        if !params[:game][:files].nil?
+        if params[:game][:files].nil?
+          flash[:notice] = "'#{@game.title}' updated successfully"
+        elsif params[:game][:files].length() == 5
           # Delete old files
           @game.files.purge
           # Attach new ones
           @game.files.attach(params[:game][:files])
           flash[:notice] = "'#{@game.title}' updated successfully, released new patch"
         else
-          flash[:notice] = "'#{@game.title}' updated successfully"
+          flash[:error] = "Error while releasing new patch: provide 5 files"
         end
         redirect_to games_path
       else
