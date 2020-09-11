@@ -77,6 +77,11 @@ ActiveRecord::Schema.define(version: 2020_09_07_100914) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "invitetoplaygames", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.text "comments"
     t.integer "user_id"
@@ -96,6 +101,8 @@ ActiveRecord::Schema.define(version: 2020_09_07_100914) do
     t.datetime "updated_at", null: false
     t.string "provider"
     t.string "uid"
+    t.datetime "last_seen_at"
+    t.string "role"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

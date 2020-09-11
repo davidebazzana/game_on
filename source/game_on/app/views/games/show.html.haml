@@ -1,3 +1,4 @@
+%h3= link_to 'Games list', games_path
 %h2 Details about #{@game.title}
 
 - if @game.category != 'Other'
@@ -6,34 +7,58 @@
 %h3 Description:
 
 %p#description= @game.info
+%div
+  - if can? :vote, @game
+    %vote.likes-count= @game.get_likes.size
+    - if current_user && current_user.liked?(@game)
+      %vote= link_to 'like', like_game_path(@game), method: :put, remote: true, class: 'like-btn liked'
+    - else
+      %vote= link_to 'like', like_game_path(@game), method: :put, remote: true, class: 'like-btn'
+    
+    %vote.dislikes-count= @game.get_dislikes.size
+    - if current_user && current_user.disliked?(@game)
+      %vote= link_to 'dislike', dislike_game_path(@game), method: :put, remote: true, class: 'dislike-btn disliked'
+    - else
+      %vote= link_to 'dislike', dislike_game_path(@game), method: :put, remote: true, class: 'dislike-btn'
+  - if can? :update, Favorite
+    = link_to favorite_text, favorite_game_path(game_id: @game), id: 'favorite_link', remote: true, method: :patch
+
 
 %div
-  %vote.likes-count= @game.get_likes.size
-  - if current_user && current_user.liked?(@game)
-    %vote= link_to 'like', like_game_path(@game), method: :put, remote: true, class: 'like-btn liked'
-  - else
-    %vote= link_to 'like', like_game_path(@game), method: :put, remote: true, class: 'like-btn'
-  
-  %vote.dislikes-count= @game.get_dislikes.size
-  - if current_user && current_user.disliked?(@game)
-    %vote= link_to 'dislike', dislike_game_path(@game), method: :put, remote: true, class: 'dislike-btn disliked'
-  - else
-    %vote= link_to 'dislike', dislike_game_path(@game), method: :put, remote: true, class: 'dislike-btn'
-  
-  = link_to favorite_text, favorite_game_path(game_id: @game), id: 'favorite_link', remote: true, method: :patch
+
+
 
 = link_to 'Games list', games_path
 
-%div
+- if user_signed_in? && @game.user != current_user
+  = link_to 'Report bug to developers', new_contactdev_path(:email=>@game.user.email,:game=>@game.title,:useremail=>current_user.email)
+
+
   = link_to 'Add a review', new_game_review_path(@game)
-  = link_to 'View the reviews', game_review_path(@game)
+  = link_to 'View the reviews', game_reviews_path(@game)
 
 
 %div
-  - if @game.user == current_user
+  - if can? :update, @game
     = link_to 'Edit game', edit_game_path(@game)
+  - if current_user && (current_user.role == "moderator" || current_user.role == "admin") && can?(:destroy, Game)
+    #{button_to 'Delete game', game_path(@game), data: { confirm: "Are you sure?" }, method: :delete}
 
-- if user_signed_in?
+
+
+- if can? :play, @game
+  %table
+    %thead
+      %tr
+        %th Invite a friend
+
+    %tbody
+      - for friendship in current_user.friendships
+        %tr
+          %td
+            = h friendship.friend.username
+            = link_to 'invite friend', new_invitefriend_path(:email=>friendship.friend.email,:user=>friendship.user.email,:game=>@game.title,:gameid=>@game.id)
+
   .gameplay{:id => "play_game"}
     = link_to 'Play', launch_game_path(@game), method: :patch, remote: true
   .webgl-content{:id => "webglCanvas", :style => "position: relative; width: 960px; height: 0px"}
@@ -44,3 +69,7 @@
 
   .canvas-placeholder{:style => "width: 0px; height: 650px; position: relative;"}
   %footer{:style => "width: 100%; height: 50px; position: absolute;"}
+- else
+  %br
+
+  You have to be signed in to play!

@@ -32,4 +32,5 @@
 
 
 = link_to 'Add new game', new_game_path
-= link_to 'Favorite games', favorite_games_path
+- if can? :read, Favorite
+  = link_to 'Favorite games', favorite_games_path
