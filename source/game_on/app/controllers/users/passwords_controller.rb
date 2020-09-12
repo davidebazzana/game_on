@@ -7,9 +7,15 @@ class Users::PasswordsController < Devise::PasswordsController
   # end
 
   # POST /resource/password
-  # def create
-  #   super
-  # end
+  def create
+    user = User.where(email: params[:user][:email]).first
+    if user && user.provider != nil
+      flash[:notice] = "You cannot modify your password, your have to sign in with oauth"
+      redirect_to login_path
+    else
+      super
+    end
+  end
 
   # GET /resource/password/edit?reset_password_token=abcdef
   # def edit
@@ -21,11 +27,12 @@ class Users::PasswordsController < Devise::PasswordsController
   #   super
   # end
 
-  # protected
+  protected
 
-  # def after_resetting_password_path_for(resource)
-  #   super(resource)
-  # end
+  def after_resetting_password_path_for(resource)
+    sign_in(resource)
+    games_path
+  end
 
   # The path used after sending reset password instructions
   # def after_sending_reset_password_instructions_path_for(resource_name)
