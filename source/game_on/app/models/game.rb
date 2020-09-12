@@ -21,6 +21,30 @@ class Game < ApplicationRecord
 
   validates :category, inclusion: { in: CATEGORIES }
 
+  def input_handler(params)
+    # regex taken from semver.org
+    semver = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/
+
+    if (!params[:version].empty? && !semver.match?(params[:version]))
+      raise ArgumentError, "invalid version number (visit semver.org for reference and examples)"
+    end
+    if !params[:files].nil? && params[:files].length() != 5
+      raise ArgumentError, "provide 0 or 5 files"
+    end
+  end
+
+  def self.build_file(file_name, game_id)
+    if file_name != nil && game_id != nil
+      game = Game.find(game_id)
+      game.files.each do |file|
+        if file.filename == file_name || file_name == "json" && file.filename.to_s.include?(".json")
+          return file
+        end
+      end
+    end
+    raise IOError
+  end
+  
   def self.search(search)
 
     # QUERY:
@@ -70,7 +94,7 @@ class Game < ApplicationRecord
     query += SORTING_CRITERIA[search[:sorting_criterion]] if !search[:sorting_criterion].eql?("Any")
     self.find_by_sql(query)
   end
-  
+
   private
   
   def scan_for_viruses
