@@ -181,6 +181,7 @@ class GamesController < ApplicationController
     params.require(:game).permit(:title, :info, :category, :version, files: [])
   end
 
+  # deprecated because of role model authorization
   def require_permission
     if current_user.id != Game.find(params[:id]).user_id
       flash[:warning] = "You must be the owner of the game to perform this action"

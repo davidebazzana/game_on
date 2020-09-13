@@ -14,6 +14,7 @@ class Ability
     #   end
 
     can :read, Game
+    can :create, User
     return unless user.present?
     can [:create, :vote, :play, :add_to_favorites], Game
     can [:remove_from_favorites], Game do |game|
@@ -22,6 +23,7 @@ class Ability
     can [:update, :destroy], Game, user_id: user.id
     can [:create, :read], Review
     can [:update, :destroy], Review, user_id: user.id
+    cannot :create, User
     can [:read], User
     can [:invite], User do |u|
       u.friend_with? user

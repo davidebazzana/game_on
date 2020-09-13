@@ -3,6 +3,7 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def google_oauth2
+    authorize! :create, User
     @user = User.from_omniauth(request.env['omniauth.auth'])
 
     if @user.persisted?
@@ -16,6 +17,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def github
+    authorize! :create, User
     @user = User.from_omniauth(request.env['omniauth.auth'])
 
     if @user.persisted?

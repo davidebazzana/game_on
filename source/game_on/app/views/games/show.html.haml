@@ -34,7 +34,7 @@
 = link_to 'Games list', games_path
 
 - if can? :contact, @game.user
-  = link_to 'Report bug to developers', new_contactdev_path(:email=>@game.user.email,:game=>@game.title,:useremail=>current_user.email)
+  = link_to 'Report bug to developers', new_contactdev_path(:dev=>@game.user,:game=>@game,:user=>current_user)
 - if can? :create, Review
   = link_to 'Add a review', new_game_review_path(@game)
 - if can? :read, Review
@@ -62,7 +62,7 @@
             %tr
               %td
                 = h user.username
-                = link_to 'invite friend', new_invitefriend_path(:friend=> user,:user=>current_user.email,:game=>@game.title,:gameid=>@game.id)
+                = link_to 'invite friend', new_invitefriend_path(:friend=> user,:user=>current_user,:game=>@game)
 
     .gameplay{:id => "play_game"}
       = link_to 'Play', launch_game_path(@game), method: :patch, remote: true

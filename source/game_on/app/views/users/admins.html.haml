@@ -6,7 +6,7 @@
       %th Username
       %th Email
   %tbody
-    - User.where(role: "admin").each do |user|
+    - @admins.each do |user|
       %tr
         %td= user.username
         %td= user.email
@@ -16,4 +16,4 @@
 
 = link_to 'Back', :back
 = link_to 'Games list', games_path
-= link_to 'Contact Admins',new_contactadm_path(:useremail=>current_user.email)
+= link_to 'Contact Admins',new_contactadm_path(:user=>current_user)

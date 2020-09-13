@@ -1,9 +1,10 @@
 class FriendshipsController < ApplicationController
     def create
-      authorize! :follow, User.find(params[:friend_id])
+      @friend = User.find(params[:friend_id])
+      authorize! :follow, @friend
       @friendship = current_user.friendships.build(:friend_id => params[:friend_id])
       if @friendship.save
-        flash[:notice] = "Following #{User.find(@friendship.friend_id).username}"
+        flash[:notice] = "Following #{@friend.username}"
         redirect_to root_url
       else
         flash[:error] = "Unable to follow"

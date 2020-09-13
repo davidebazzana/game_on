@@ -29,12 +29,15 @@ class ReviewsController < ApplicationController
    
     def index
       @reviews = Review.where(game_id: @game.id)
+      authorize! :read, Review
     end
 
+    # not implemented!
     def edit
     
     end
 
+    # not implemented!
     def update
       authorize! :update, @review
       @review.update(review_params)
