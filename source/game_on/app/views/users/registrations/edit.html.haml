@@ -47,7 +47,8 @@
       = f.collection_select(:role, User::ROLES, :to_s, lambda{|i| i.to_s.humanize})
   .actions
     = f.submit "Update"
-%h3 Cancel my account
-%p
-  Unhappy? #{button_to "Cancel my account", user_destroy_path(@user), data: { confirm: "Are you sure?" }, method: :delete}
+- if can? :destroy, @user
+  %h3 Cancel my account
+  %p
+    Unhappy? #{button_to "Cancel my account", user_destroy_path(@user), data: { confirm: "Are you sure?" }, method: :delete}
 = link_to "Back", user_path(@user)

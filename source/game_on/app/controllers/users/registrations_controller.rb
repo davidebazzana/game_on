@@ -47,13 +47,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       @user.update_without_password account_update_params.except(:current_password)
     end
-    if current_user.role == "admin"
+    if !successfully_updated
+      render 'edit'
+    elsif current_user.role == "admin"
       redirect_to user_path(@user)
-    elsif successfully_updated
+    else
       bypass_sign_in @user
       redirect_to root_path
-    else
-      render 'edit'
     end
   end
 

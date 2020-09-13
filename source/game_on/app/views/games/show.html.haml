@@ -23,15 +23,11 @@
       %vote= link_to 'dislike', dislike_game_path(@game), method: :put, remote: true, class: 'dislike-btn disliked'
     - else
       %vote= link_to 'dislike', dislike_game_path(@game), method: :put, remote: true, class: 'dislike-btn'
-  - if can? [:add_to_favorites, :remove_from_favorites], @game
+  - if can? :add_to_favorites, @game
     = link_to favorite_text, favorite_game_path(game_id: @game), id: 'favorite_link', remote: true, method: :patch
 
 
 %div
-
-
-
-= link_to 'Games list', games_path
 
 - if can? :contact, @game.user
   = link_to 'Report bug to developers', new_contactdev_path(:dev=>@game.user,:game=>@game,:user=>current_user)

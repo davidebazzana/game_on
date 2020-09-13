@@ -95,9 +95,9 @@ class Game < ApplicationRecord
     self.find_by_sql(query)
   end
 
-  def self.favorited_by(user)
+  def favorited_by?(user)
     favorites = user.favorite_games
-    favorites.find(favorited: self) != nil
+    !favorites.where(id: self).empty?
   end
 
   private

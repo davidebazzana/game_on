@@ -40,6 +40,7 @@ class Ability
     can [:destroy, :assign_role], User do |u|
       u.id != user.id
     end
+    cannot [:destroy], User, id: user.id
     can [:manage], Game
 
     #
