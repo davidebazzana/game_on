@@ -10,3 +10,7 @@ end
 Then("I should be on the Game-on home page") do
   expect(current_url).to eq("http://www.example.com/games")
 end
+
+When("I click on {string}") do |button|
+  click_button(button)
+end
