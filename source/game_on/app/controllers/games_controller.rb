@@ -47,6 +47,7 @@ class GamesController < ApplicationController
       return
     end
 
+    @game.version = nil if game_params[:version].empty?
     if @game.save
       if @game.files.attached? && !@game.version.nil?
         flash[:notice] = "'#{@game.title}' v:#{@game.version} added successfully"
