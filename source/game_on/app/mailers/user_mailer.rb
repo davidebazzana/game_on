@@ -14,4 +14,10 @@ class UserMailer < ActionMailer::Base
     @game=game
     mail to: devemail , subject:"Bug report"
   end
+
+  def contact_adm(useremail)
+    @useremail=useremail
+    user_name= ENV["user_name"]
+    mail to: user_name , subject:"assistance request"
+  end
 end

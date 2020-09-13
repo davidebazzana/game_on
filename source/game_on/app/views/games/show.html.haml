@@ -47,8 +47,6 @@
   - if current_user && (current_user.role == "moderator" || current_user.role == "admin") && can?(:destroy, Game)
     #{button_to 'Delete game', game_path(@game), data: { confirm: "Are you sure?" }, method: :delete}
 
-
-
 - if can?(:play, @game)
   - if @game.files.attached?
     %table
