@@ -53,12 +53,12 @@
         %th Invite a friend
 
     %tbody
-      - for friendship in current_user.friendships
-        - if can? :invite, friendship.friend
+      - for user in current_user.inverse_friends
+        - if can? :invite, user
           %tr
             %td
-              = h friendship.friend.username
-              = link_to 'invite friend', new_invitefriend_path(:friend=>friendship.friend,:user=>friendship.user.email,:game=>@game.title,:gameid=>@game.id)
+              = h user.username
+              = link_to 'invite friend', new_invitefriend_path(:friend=> user,:user=>current_user.email,:game=>@game.title,:gameid=>@game.id)
 
   .gameplay{:id => "play_game"}
     = link_to 'Play', launch_game_path(@game), method: :patch, remote: true
