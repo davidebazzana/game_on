@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 2020_09_12_103405) do
     t.integer "cached_weighted_score", default: 0
     t.integer "cached_weighted_total", default: 0
     t.float "cached_weighted_average", default: 0.0
+    t.string "version"
     t.index ["user_id"], name: "index_games_on_user_id"
   end
 

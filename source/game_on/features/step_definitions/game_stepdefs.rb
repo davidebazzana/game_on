@@ -21,7 +21,6 @@ end
 
 When("I change the title of the game to {string}") do |new_title|
   fill_in 'Title', :with => new_title
-  click_button("Commit updates")
 end
 
 Then("I should see the game's title changed to {string}, not {string} anymore") do |new_title, old_title|
@@ -64,6 +63,15 @@ end
 
 Then("I should only see the games with the word {string} in their name and with category {string}") do |title, category|
   check_games games, title, category
+end
+
+When("I change the description of the game to {string}") do |new_description|
+  fill_in 'Info', :with => new_description
+end
+
+Then("I should see the game's description changed to {string}, not {string} anymore") do |new_info, old_info|
+  expect(page).to have_content(new_info)
+  expect(page).to have_no_content(old_info)
 end
 
 private
