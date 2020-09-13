@@ -18,7 +18,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = 'game_on@noreplay.com'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -259,8 +259,8 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  config.omniauth :google_oauth2, '222655653205-fjqirncvn9grk7e3gpmmrgpo335cioe4.apps.googleusercontent.com', '4vTrYQd8uJlj2s9znpmvN1fk', skip_jwt: true
-  config.omniauth :github, '50dce1c0417a60bb633a', 'c47862f1064b94b6d5f802b69742360ee8f901be', skip_jwt: true, scope: 'user:email'
+  config.omniauth :google_oauth2, ENV["GOOGLE_OAUTH2_API_KEY"], ENV["GOOGLE_OAUTH2_API_SECRET"], skip_jwt: true
+  config.omniauth :github, ENV["GITHUB_API_KEY"], ENV["GITHUB_API_SECRET"], skip_jwt: true, scope: 'user:email'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

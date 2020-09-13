@@ -13,3 +13,9 @@
 
  user_name: "renatogiamba99@gmail.com"
  password: "Renato99!"
+
+ GOOGLE_OAUTH2_API_KEY: "222655653205-fjqirncvn9grk7e3gpmmrgpo335cioe4.apps.googleusercontent.com"
+ GOOGLE_OAUTH2_API_SECRET: "4vTrYQd8uJlj2s9znpmvN1fk"
+
+ GITHUB_API_KEY: "50dce1c0417a60bb633a"
+ GITHUB_API_SECRET: "c47862f1064b94b6d5f802b69742360ee8f901be"
