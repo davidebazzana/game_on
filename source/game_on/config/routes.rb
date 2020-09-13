@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
+    passwords: 'users/passwords',
+    confirmations: 'users/confirmations',
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
   devise_scope :user do
@@ -44,6 +46,7 @@ Rails.application.routes.draw do
   resources :invitefriend
   resources :invitetoplaygame
   resources :contactdev
+  resources :contactadm
 
   root to: 'games#index'
 end

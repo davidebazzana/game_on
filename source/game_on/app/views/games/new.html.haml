@@ -11,6 +11,9 @@
     = label :game, :category, 'Category'
     = select(:game, :category, options_for_select(Game::CATEGORIES, 'Other'))
 
+    = label :game, :version, 'Version (For reference and examples on semantic versioning, visit semver.org)'
+    = text_field :game, :version
+
     = label :game, :files, 'Attach build files (Not every file of the build is needed, select just the files in foo/Build/*)'
     = file_field :game, :files, multiple: true
    

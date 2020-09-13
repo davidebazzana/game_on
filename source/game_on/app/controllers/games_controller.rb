@@ -25,7 +25,7 @@ class GamesController < ApplicationController
   def show
     respond_to do |format|
       format.html { 
-        @game = Game.find(params[:id]) 
+        @game = Game.find(params[:id])
         authorize! :read, @game
 
         @favorite_exists = !(Favorite.where(user: current_user, favorited: @game) == [])
@@ -38,35 +38,72 @@ class GamesController < ApplicationController
     @game = Game.new(game_params)
     authorize! :create, Game
     @game.user = current_user
-    
+
     begin
-      if @game.save
-        if @game.files.attached?
-          flash[:notice] = "'#{@game.title}' was added successfully"
-        else
-          flash[:notice] = "'#{@game.title}' added, no file provided"
-        end
-        redirect_to games_path
+      @game.input_handler(params[:game])
+    rescue ArgumentError => e
+      flash[:error] = "Error while creating a new game: " + e.message
+      redirect_to games_path
+      return
+    end
+
+    @game.version = nil if game_params[:version].empty?
+    if @game.save
+      if @game.files.attached? && !@game.version.nil?
+        flash[:notice] = "'#{@game.title}' v:#{@game.version} added successfully"
+      elsif @game.files.attached? && @game.version.nil?
+        flash[:notice] = "'#{@game.title}' added successfully, no version provided"
+      elsif !@game.files.attached? && !@game.version.nil?
+        flash[:notice] = "'#{@game.title}' v:#{@game.version} added, no file provided"
       else
-        flash[:error] = @game.errors.full_messages
-        redirect_to games_path
+        flash[:notice] = "'#{@game.title}' added, no version neither file provided"
       end
-    rescue SecurityError => e
-      flash[:error] = e.message
+      redirect_to games_path
+    else
+      flash[:error] = @game.errors.full_messages
       redirect_to games_path
     end
+    
   end
 
   def update
     @game = Game.find(params[:id])
     authorize! :update, @game
+
+    begin
+      @game.input_handler(params[:game])
+    rescue ArgumentError => e
+      flash[:error] = "Error while creating a new game: " + e.message
+      redirect_to games_path
+      return
+    end
+
+    if !params[:game][:files].nil? && params[:game][:files].length() == 5
+        # Delete old files
+        @game.files.purge
+        # Attach new ones
+        @game.files.attach(params[:game][:files])
+    end
     if @game.update(edit_game_params)
-      flash[:notice] = "'#{@game.title}' updated successfully"
+      if edit_game_params[:version].empty?
+        @game.version = nil
+        @game.save
+      end
+      if params[:game][:files].nil?
+        flash[:notice] = "'#{@game.title}' updated successfully"
+      elsif params[:game][:files].length() == 5 && !@game.version.nil?
+        flash[:notice] = "'#{@game.title}' updated successfully, released patch v:#{@game.version}"
+      elsif params[:game][:files].length() == 5 && @game.version.nil?
+        flash[:notice] = "'#{@game.title}' updated successfully, released new patch"
+      else
+        flash[:error] = "Error while releasing new patch: provide 5 files"
+      end
       redirect_to games_path
     else
       flash[:error] = @game.errors.full_messages
       render 'edit'
     end
+    
   end
   
   def new
@@ -141,7 +178,7 @@ class GamesController < ApplicationController
   private
     
   def game_params
-    params.require(:game).permit(:title, :info, :category, files: [])
+    params.require(:game).permit(:title, :info, :category, :version, files: [])
   end
 
   def require_permission
@@ -152,7 +189,7 @@ class GamesController < ApplicationController
   end
 
   def edit_game_params
-    params.require(:game).permit(:title, :info, :category)
+    params.require(:game).permit(:title, :info, :category, :version)
   end
 
   def search_game_params
@@ -160,16 +197,12 @@ class GamesController < ApplicationController
   end
 
   def send_build_file file_name
-    if cookies.signed[:game] != nil
-      game = Game.find(cookies.signed[:game])
-      game.files.each do |file|
-        if file.filename == file_name || file_name == "json" && file.filename.to_s.include?(".json")
-          send_data file.download, filename: file.filename.to_s, content_type: file.content_type
-          return
-        end
-      end
+    begin
+      file = Game.build_file(file_name, cookies.signed[:game])
+      send_data file.download, filename: file.filename.to_s, content_type: file.content_type
+    rescue IOError => e
+      head :no_content # HTTP 204 no content
     end
-    head :no_content # HTTP 204 no content
   end
 end
 

@@ -1,12 +1,15 @@
 %h3= link_to 'Games list', games_path
-%h2 Details about #{@game.title}
+%h1 #{@game.title}
+
+- if @game.version != nil
+  %p Version: #{@game.version}
 
 - if @game.category != 'Other'
-  %h4 Category: #{@game.category}
+  %h3 Category: #{@game.category}
 
 %h3 Description:
-
 %p#description= @game.info
+
 %div
   - if can? :vote, @game
     %vote.likes-count= @game.get_likes.size
@@ -47,26 +50,30 @@
 
 
 - if can? :play, @game
-  %table
-    %thead
-      %tr
-        %th Invite a friend
+  - if @game.files.attached?
+    %table
+      %thead
+        %tr
+          %th Invite a friend
 
-    %tbody
-      - for user in current_user.inverse_friends
-        - if can? :invite, user
-          %tr
-            %td
-              = h user.username
-              = link_to 'invite friend', new_invitefriend_path(:friend=> user,:user=>current_user.email,:game=>@game.title,:gameid=>@game.id)
+      %tbody
+        - for user in current_user.inverse_friends
+          - if can? :invite, user
+            %tr
+              %td
+                = h user.username
+                = link_to 'invite friend', new_invitefriend_path(:friend=> user,:user=>current_user.email,:game=>@game.title,:gameid=>@game.id)
 
-  .gameplay{:id => "play_game"}
-    = link_to 'Play', launch_game_path(@game), method: :patch, remote: true
-  .webgl-content{:id => "webglCanvas", :style => "position: relative; width: 960px; height: 0px"}
-    #unityContainer{:style => "width: 960px; height: 600px; background: #202020;"}
-    .footer
-      .webgl-logo
-      .fullscreen{:id => "unity_fullscreen", :style => "visibility: hidden;", :onclick => "unityInstance.SetFullscreen(1)"}
+    .gameplay{:id => "play_game"}
+      = link_to 'Play', launch_game_path(@game), method: :patch, remote: true
+    .webgl-content{:id => "webglCanvas", :style => "position: relative; width: 960px; height: 0px"}
+      #unityContainer{:style => "width: 960px; height: 600px; background: #202020;"}
+      .footer
+        .webgl-logo
+        .fullscreen{:id => "unity_fullscreen", :style => "visibility: hidden;", :onclick => "unityInstance.SetFullscreen(1)"}
+  - else
+    %br
+    %h4 Work in progress!
 
   .canvas-placeholder{:style => "width: 0px; height: 650px; position: relative;"}
   %footer{:style => "width: 100%; height: 50px; position: absolute;"}
