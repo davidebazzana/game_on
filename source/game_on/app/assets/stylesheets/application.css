@@ -36,6 +36,10 @@ a {
   text-decoration: underline;
   font-weight: bold;
 }
+a#play {
+  text-decoration: none;
+  font-size: xxx-large;
+}
 h1 {
   color: maroon;
   font-size: 150%;
@@ -131,4 +135,10 @@ ul.hmenu li {
   text-transform: uppercase;
 }
 
+.center {
+  text-align: center;
+}
+.right {
+  text-align: right;
+}
 

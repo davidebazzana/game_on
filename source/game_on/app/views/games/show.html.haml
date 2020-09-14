@@ -1,14 +1,37 @@
 %h3= link_to 'Games list', games_path
 %h1 #{@game.title}
+.right
+  - if @game.version != nil
+    Version: #{@game.version}
+  - if @game.category != 'Other'
+    Category: #{@game.category}
+- if can? :play, @game
+  - if @game.files.attached?
+    
+    .webgl-content{:id => "webglCanvas", :style => "position: relative; width: 960px; height: 0px"}
+      #unityContainer{:style => "width: 960px; height: 600px; background: #202020;"}
+        .gameplay{:id => "play_game", :style => "text-align: center; padding-top: 270px"}
+          = link_to 'Play', launch_game_path(@game), method: :patch, remote: true, id: "play"
+      .footer
+        .webgl-logo
+        .fullscreen{:id => "unity_fullscreen", :style => "visibility: hidden;", :onclick => "unityInstance.SetFullscreen(1)"}
+  - else
+    %br
+    %h4 Work in progress!
 
-- if @game.version != nil
-  %p Version: #{@game.version}
+  .canvas-placeholder{:style => "width: 0px; height: 650px; position: relative;"}
+  %footer{:style => "width: 100%; height: 50px; position: absolute;"}
+- else
+  %br
 
-- if @game.category != 'Other'
-  %h3 Category: #{@game.category}
+  You have to be signed in to play!
 
-%h3 Description:
-%p#description= @game.info
+
+
+
+.center
+  %h3 Description:
+  %p#description= @game.info
 
 %div
   - if can? :vote, @game
@@ -24,56 +47,34 @@
     - else
       %vote= link_to 'dislike', dislike_game_path(@game), method: :put, remote: true, class: 'dislike-btn'
   - if can? :add_to_favorites, @game
-    = link_to favorite_text, favorite_game_path(game_id: @game), id: 'favorite_link', remote: true, method: :patch
+    %br= link_to favorite_text, favorite_game_path(game_id: @game), id: 'favorite_link', remote: true, method: :patch
 
-
-%div
+- if can? :play, @game
+  %table
+    %thead
+      %tr
+        %th Invite a friend
+    %tbody
+      - for user in current_user.inverse_friends
+        - if can? :invite, user
+          %tr
+            %td
+              = h user.username
+              = link_to 'invite friend', new_invitefriend_path(:friend=> user,:user=>current_user,:game=>@game)
 
 - if can? :contact, @game.user
   = link_to 'Report bug to developers', new_contactdev_path(:dev=>@game.user,:game=>@game,:user=>current_user)
+%br
+%br
 - if can? :create, Review
   = link_to 'Add a review', new_game_review_path(@game)
 - if can? :read, Review
   = link_to 'View the reviews', game_reviews_path(@game)
 
-
+%br
+%br
 %div
   - if can? :update, @game
     = link_to 'Edit game', edit_game_path(@game)
   - if (can?(:destroy, @game) && !can?(:update, @game)) || can?(:manage, @game)
     #{button_to 'Delete game', game_path(@game), data: { confirm: "Are you sure?" }, method: :delete}
-
-
-
-- if can? :play, @game
-  - if @game.files.attached?
-    %table
-      %thead
-        %tr
-          %th Invite a friend
-
-      %tbody
-        - for user in current_user.inverse_friends
-          - if can? :invite, user
-            %tr
-              %td
-                = h user.username
-                = link_to 'invite friend', new_invitefriend_path(:friend=> user,:user=>current_user,:game=>@game)
-
-    .gameplay{:id => "play_game"}
-      = link_to 'Play', launch_game_path(@game), method: :patch, remote: true
-    .webgl-content{:id => "webglCanvas", :style => "position: relative; width: 960px; height: 0px"}
-      #unityContainer{:style => "width: 960px; height: 600px; background: #202020;"}
-      .footer
-        .webgl-logo
-        .fullscreen{:id => "unity_fullscreen", :style => "visibility: hidden;", :onclick => "unityInstance.SetFullscreen(1)"}
-  - else
-    %br
-    %h4 Work in progress!
-
-  .canvas-placeholder{:style => "width: 0px; height: 650px; position: relative;"}
-  %footer{:style => "width: 100%; height: 50px; position: absolute;"}
-- else
-  %br
-
-  You have to be signed in to play!
