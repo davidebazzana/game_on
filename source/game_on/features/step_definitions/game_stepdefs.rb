@@ -39,6 +39,10 @@ Given("there are many games uploaded") do
   end
 end
 
+Given("there are no games uploaded") do
+  expect(Game.all).to be_empty
+end
+
 Given("I type {string} in the search area") do |input|
   fill_in 'game_title', :with => input
 end
@@ -58,6 +62,12 @@ end
 
 Then("I should only see the games with the word {string} in their name and with category {string}") do |title, category|
   check_games games, title, category
+end
+
+Then("there should be no game in the list") do
+  games.each do |game|
+    expect(page).to have_no_content(game[:title])
+  end
 end
 
 private
