@@ -19,7 +19,7 @@
     - if current_user.friend_with? @user
       %p you already follow #{@user.username}
     - else
-      = link_to "Follow", friendships_path(:friend_id => @user), :method => :post
+      = link_to "Follow", friendships_path(:friend_id => @user), :method => :post, class: "btn"
 
 - else
 
@@ -27,18 +27,19 @@
     %thead
       %tr
         %th Follow
-
+        %th Status
     %tbody
       - for friendship in @user.friendships
         %tr
           %td
             = h friendship.friend.username
             - if can? :unfollow, friendship.friend
-              = link_to "remove", friendship, :method => :delete
+              = link_to "remove", friendship, :method => :delete, class: "btn"
           %td
-            - for user in @online_users 
-              - if friendship.friend == user  
-                .onlinestatus Online
+            - if @online_users.include?(friendship.friend)
+              .onlinestatus Online
+            - else
+              .offlinestatus Offline
              
   %table
     %thead
@@ -52,9 +53,9 @@
 
 %br
 
-%p= link_to "Find people", users_path
+%p= link_to "Find people", users_path, class: "link"
 - if (can? :update, @user) || (can? :assign_role, @user)
-  = link_to 'Edit', edit_user_path
+  = link_to 'Edit', edit_user_path, class: "btn"
 - if can? :read_favorites_list, @user
-  %p= link_to 'Favorite games', favorite_games_path
-= link_to 'HomePage', games_path
+  %p= link_to 'Favorite games', favorite_games_path, class: "link"
+= link_to 'HomePage', games_path, class: "link"

@@ -17,7 +17,7 @@
 
     %td= submit_tag 'Search'
 
-    %td= link_to 'Show all', games_path
+    %td= link_to 'Show all', games_path, class: "btn"
 
 %table#games
   %thead
@@ -28,9 +28,9 @@
     - @games.each do |game|
       %tr
         %td= game.title
-        %td= link_to "More about #{game.title}", game_path(game)
+        %td= link_to "More about #{game.title}", game_path(game), class: "link"
 
 
-= link_to 'Add new game', new_game_path
+= link_to 'Add new game', new_game_path, class: "btn"
 - if can? :read, Favorite
-  = link_to 'Favorite games', favorite_games_path
+  = link_to 'Favorite games', favorite_games_path, class: "link"

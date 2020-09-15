@@ -1,7 +1,6 @@
 function adjustView() {
     document.getElementById("play_game").style.visibility = "hidden";
     document.getElementById("unity_fullscreen").style.visibility = "visible";
-    window.scrollTo(0,document.body.scrollHeight);
 }
 
 function downloadLoader() {

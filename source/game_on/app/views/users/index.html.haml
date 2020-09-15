@@ -5,17 +5,19 @@
     %tr
       %th Username
       %th Email
+      %th
+      %th
   %tbody
     - @users.each do |user|
       %tr
         %td= user.username
         %td= user.email
-        %td= link_to 'Show', user
+        %td= link_to 'Show', user, class: "link"
         - if can?(:update, user) || can?(:assign_role, user)
-          %td= link_to 'Edit', edit_user_path(user)
+          %td= link_to 'Edit', edit_user_path(user), class: "btn"
          
   
 %br
-= link_to 'Admins', admins_path
+= link_to 'Admins', admins_path, class: "link"
 %p
-= link_to 'Games list', games_path
+= link_to 'Games list', games_path, class: "link"
