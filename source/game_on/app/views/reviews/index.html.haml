@@ -1,5 +1,5 @@
 %div
-  = link_to "Back to #{@game.title}", game_path(@game)
+  = link_to "Back to #{@game.title}", game_path(@game), class: "link"
   - if @reviews.blank?
     %h3 No reviews yet. Be the first to write one!
   - else
@@ -7,5 +7,5 @@
       %p.nomicoloratiperpif= review.user.username
       %p= review.comments
       - if can? :destroy, review
-        #{button_to "Cancel review", game_review_path(@game, review), data: { confirm: "Are you sure?" }, method: :delete}
+        =link_to "Cancel review", game_review_path(@game, review), data: { confirm: "Are you sure?" }, method: :delete, class: "btn"
     

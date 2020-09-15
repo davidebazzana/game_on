@@ -1,4 +1,4 @@
-= link_to "Back to #{@game.title}", game_path(@game)
+= link_to "Back to #{@game.title}", game_path(@game), class: "link"
 %h2 Create a Review
 
 = form_tag game_reviews_path, :method => :post do

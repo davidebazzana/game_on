@@ -1,5 +1,5 @@
-= link_to 'Back to main menu', games_path
-= link_to "Back to #{@game.title}", game_path(@game)
+= link_to 'Back to main menu', games_path, class: "link"
+= link_to "Back to #{@game.title}", game_path(@game), class: "link"
 %h2 Edit #{@game.title}
 
 = form_tag game_path(@game), :method => :put, :multipart=>true do
@@ -21,4 +21,4 @@
 
   = submit_tag 'Commit updates'
 %br
-= link_to 'Delete game', game_path(@game), :method => :delete
+= link_to 'Delete game', game_path(@game), :method => :delete, class: "btn"

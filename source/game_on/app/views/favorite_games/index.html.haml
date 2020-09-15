@@ -9,7 +9,7 @@
     - @favorites.each do |game|
       %tr
         %td= game.title
-        %td= link_to "More about #{game.title}", game_path(game)
+        %td= link_to "More about #{game.title}", game_path(game), class: "link"
 
 
-= link_to 'HomePage', games_path
+= link_to 'HomePage', games_path, class: "link"

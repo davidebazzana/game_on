@@ -22,7 +22,7 @@ html, body {
   margin: 0;
   padding: 0;
   background: White;
-  color: DarkSlateGrey;
+  color: black;
   font-family: Tahoma, Verdana, sans-serif;
   font-size: 10pt;
 }
@@ -32,16 +32,58 @@ div#main {
 }
 a {
   background: transparent;
-  color: maroon;
+  color: darkred;
   text-decoration: underline;
   font-weight: bold;
 }
+a.link {
+  text-decoration: none;
+  color: red;
+}
+a.link:hover {
+  text-decoration: underline;
+}
+
 a#play {
   text-decoration: none;
   font-size: xxx-large;
 }
+
+a#play:hover {
+  color: red;
+}
+
+a.btn{
+  text-decoration: none;
+  border: 0;
+  line-height: 2.5;
+  padding: 2px 5px;
+  font-size: 1rem;
+  font-weight: lighter;
+  text-align: center;
+  color: black;
+  border-radius: 2px;
+  background-color: goldenrod;
+}
+
+a.btn:hover {
+  background-color: rgba(218,165,32, 0.8);
+}
+a.btn:active {
+  box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.6),
+  inset 2px 2px 3px rgba(255, 255, 255, 0.6);
+}
+
+a.btn.logout {
+  background-color: red;
+  color: white
+}
+a.btn.logout:hover {
+  background-color: darkred;
+}
+
 h1 {
-  color: maroon;
+  color: darkred;
   font-size: 150%;
   font-style: italic;
   display: block;
@@ -66,7 +108,7 @@ table {
 table th {
   border: 2px solid white;
   font-weight: bold;
-  background-color: wheat;
+  background-color: goldenrod;
 }
 table th, table td {
   padding: 4px;
@@ -81,7 +123,7 @@ form label {
   display: block;
   line-height: 25px;
   font-weight: bold;
-  color: maroon;
+  color: darkred;
 }
 .message {
   color: darkred;
@@ -135,10 +177,35 @@ ul.hmenu li {
   text-transform: uppercase;
 }
 
-.center {
-  text-align: center;
+.offlinestatus{
+  color: red;
+  text-transform: uppercase;
 }
-.right {
+
+/* .center {
+  text-align: center;
+} */
+/* .right {
   text-align: right;
+} */
+
+.column {
+  float: left;
+  padding: 10px;
+}
+
+.left {
+  width: 73%;
+}
+
+.right {
+  width: 22%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
