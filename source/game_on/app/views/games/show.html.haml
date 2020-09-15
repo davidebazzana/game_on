@@ -61,7 +61,7 @@
                 = link_to 'invite friend', new_invitefriend_path(:friend=> user,:user=>current_user,:game=>@game)
 
     .gameplay{:id => "play_game"}
-      = link_to 'Play', launch_game_path(@game), method: :patch, remote: true
+      = link_to 'Play', launch_game_path(@game), method: :get, remote: true
     .webgl-content{:id => "webglCanvas", :style => "position: relative; width: 960px; height: 0px"}
       #unityContainer{:style => "width: 960px; height: 600px; background: #202020;"}
       .footer

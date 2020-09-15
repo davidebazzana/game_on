@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     member do
       put 'like' => 'games#like'
       put 'dislike' => 'games#dislike'
-      patch :launch
+      get :launch
     end
 
     collection do
