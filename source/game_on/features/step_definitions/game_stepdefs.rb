@@ -29,7 +29,11 @@ Then("I should see the game's title changed to {string}, not {string} anymore") 
 end
 
 Given("I am the owner of the game {string}") do |game_title|
-  create(:game, title: game_title, user_id: @test_user[:id])
+  create(:game, title: game_title, user_id: User.find_by_email(@test_user_email)[:id])
+end
+
+Given("I am the owner of the game {string} with info {string}") do |game_title, info|
+  create(:game, title: game_title, user_id: User.find_by_email(@test_user_email)[:id], info: info)
 end
 
 Given("there are many games uploaded") do
@@ -63,10 +67,6 @@ end
 
 Then("I should only see the games with the word {string} in their name and with category {string}") do |title, category|
   check_games games, title, category
-end
-
-When("I change the description of the game to {string}") do |new_description|
-  fill_in 'Info', :with => new_description
 end
 
 Then("I should see the game's description changed to {string}, not {string} anymore") do |new_info, old_info|
