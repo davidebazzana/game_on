@@ -1,5 +1,34 @@
 \chapter{Requisiti, tecnologie e metodologie}
 
+\section{Funzionalità offerte}
+
+Come detto in precedenza, il sistema informativo progettato intende offrire agli utenti la possibilità di codividere, modificare e giocare ai videogiochi da loro sviluppati.
+\newline
+Chiunque voglia usufruire di questo servizio può creare un proprio account all'interno del sistema. I giochi caricati saranno visibili e giocabili da tutti gli altri utenti.
+\newline
+Per entrare nello scpecifico, passiamo ora alla descrizione delle funzionalità principali. Per comodità di esposizione, nella descrizione di queste divideremo l'analisi in sezioni e faremo riferimento diretto alle \textit{user stories}
+
+\subsection{Sezione utenti}
+
+Un visitatore del sito web che intende accedere al servizio deve ottenere le autorizzazione del sistema creando un account personale. Alla registrazione vengono richiesti un \textit{username}, un'\textit{email} valida e una \textit{password} per gli accessi futuri. In alternativa può registrarsi attraverso l'utilizzo della tecnologia \textit{OAuth}. Da questo momento in poi sarà definito \textit{giocatore}. Dopo aver confermato la sua registrazione, potrà accedere nuovamente al servizio fornendo le proprie credenziali. Avrà anche la possibilità di modificare le informazioni relative al proprio account.
+\newline
+Le user stories relative agli utenti sono le seguenti:
+\newline
+\begin{enumerate}
+\item Come visitatore, voglio creare un nuovo account, in modo che il sistema possa ricordarsi di me.
+\item Come giocatore, voglio effettuare il login, in modo che possa interagire col sistema.
+\item Come giocatore, voglio poter effettuare l'accesso con un account Google o Github.
+\item Come giocatore, voglio poter terminare la sessione, così che il mio account sia protetto da usi non autorizzati.
+\item Come giocatore, voglio poter modificare i dati del mio account, così che lo possa mantenere aggiornato.
+\end{enumerate}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.5\textwidth]{mockup_registration}\includegraphics[width=0.5\textwidth]{mockup_login}
+\caption{Mockup relativo alle user stories 1, 2 e 3}
+\end{figure}
+
+
 \section{Metodologia utilizzata di conduzione del progetto ed organizzazione del lavoro}
 
 Il gruppo di lavoro è formato da tre componenti: Davide Bazzana,
