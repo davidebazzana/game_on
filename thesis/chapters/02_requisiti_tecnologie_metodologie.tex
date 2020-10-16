@@ -13,7 +13,7 @@ Per entrare nello scpecifico, passiamo ora alla descrizione delle funzionalità 
 Un visitatore del sito web che intende accedere al servizio deve ottenere le autorizzazione del sistema creando un account personale. Alla registrazione vengono richiesti un \textit{username}, un'\textit{email} valida e una \textit{password} per gli accessi futuri. In alternativa può registrarsi attraverso l'utilizzo della tecnologia \textit{OAuth}. Da questo momento in poi sarà definito \textit{giocatore}. Dopo aver confermato la sua registrazione, potrà accedere nuovamente al servizio fornendo le proprie credenziali. Avrà anche la possibilità di modificare le informazioni relative al proprio account.
 \newline
 Le user stories relative agli utenti sono le seguenti:
-\newline
+\textit{
 \begin{enumerate}
 \item Come visitatore, voglio creare un nuovo account, in modo che il sistema possa ricordarsi di me.
 \item Come giocatore, voglio effettuare il login, in modo che possa interagire col sistema.
@@ -21,11 +21,40 @@ Le user stories relative agli utenti sono le seguenti:
 \item Come giocatore, voglio poter terminare la sessione, così che il mio account sia protetto da usi non autorizzati.
 \item Come giocatore, voglio poter modificare i dati del mio account, così che lo possa mantenere aggiornato.
 \end{enumerate}
+}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.5\textwidth]{mockup_registration}\includegraphics[width=0.5\textwidth]{mockup_login}
-\caption{Mockup relativo alle user stories 1, 2 e 3}
+\includegraphics[width=0.45\textwidth]{mockup_registration}\includegraphics[width=0.45\textwidth]{mockup_login}
+\caption{Mockup relativi alle user stories 1, 2 e 3}
+\end{figure}
+
+\subsection{Sezione giochi}
+
+Ogni utente (anche un visitatore) può vedere l'elenco dei giochi presenti sulla piattaforma, mentre solo i giocatori possono giocare, caricare giochi e modificare o eliminare i propri. Per caicare un suo gioco sviluppato con \textit{Unity} un giocatore deve compilare il form presente in una pagina dedicata. Ogni giocatore può esprimere una preferenza su un gioco o fornire un voto positivo o negativo. Può inoltre vedere la lista dei suoi giochi preferiti.
+\newline
+Le user stories relative a queste funzionalità sono le seguenti:
+
+\textit{
+\begin{enumerate}
+\item Come utente generico, voglio visualizzare l'elenco di tutti i giochi aggiunti nella piattaforma dagli altri giocatori.
+\item Come giocatore, voglio inserire un gioco nella piattaforma, in modo che sia visibile agli altri utenti.
+\item Come giocatore, voglio rimuovere un mio gioco dalla piattaforma, in modo che non sia più disponibile su di essa.
+\item Come utente generico, voglio vedere le informazioni di un gioco.
+\item Come giocatore, voglio giocare a un gioco.
+\item Come giocatore proprietario di un gioco, voglio modificare la descrizione del gioco, così che lo possa mantenere aggiornato.
+\item Come giocatore proprietario di un gioco, voglio rilasciare una patch del gioco, così da mostrare solo la versione più aggiornata.
+\item Come giocatore, voglio assegnare o rimuovere un like o un dislike ad un gioco, in modo da fornire un feedback pubblico allo sviluppatore.
+\item Come giocatore, voglio aggiungere/rimuovere un gioco ai miei preferiti, in modo che lo possa trovare nella mia lista preferiti.
+\item Come giocatore, voglio visualizzare una pagina con tutti i miei giochi preferiti, in modo che siano tutti raggruppati in un unico posto.
+\end{enumerate}
+}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.45\textwidth]{mockup_games}
+\includegraphics[width=0.45\textwidth]{mockup_add_game}
+\caption{Mockup relativi alle user stories 1 e 2}
 \end{figure}
 
 
