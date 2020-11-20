@@ -22,6 +22,10 @@ Rails.application.routes.draw do
   
   resources :users, only: [:index, :show]
 
+  get 'users/:id/typing', to: 'users#typing_new'
+  post 'users/:id/typing', to: 'users#typing_create', :as => :typing
+  
+
   get 'admins' => 'users#admins', as: :admins
   
 

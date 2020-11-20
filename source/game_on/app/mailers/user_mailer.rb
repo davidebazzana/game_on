@@ -17,7 +17,7 @@ class UserMailer < ActionMailer::Base
 
   def contact_adm(useremail)
     @useremail=useremail
-    user_name= ENV["user_name"]
+    user_name= ENV["MAIL_USERNAME"]
     mail to: user_name , subject:"assistance request"
   end
 end

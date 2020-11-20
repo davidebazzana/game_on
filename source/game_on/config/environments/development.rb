@@ -36,6 +36,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   ActionMailer::Base.default :from => 'Game_on@noreplay.com'
+  config.action_mailer.default :charset => "utf-8"
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
@@ -46,8 +47,8 @@ Rails.application.configure do
     domain: "gmail.com",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: ENV["user_name"],
-    password: ENV["password"],
+    user_name: ENV["MAIL_USERNAME"],
+    password: ENV["MAIL_PASSWORD"],
   }
 
   # Print deprecation notices to the Rails logger.

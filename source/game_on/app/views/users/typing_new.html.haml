@@ -1,0 +1,52 @@
+%h2 Prove that you're YOU!
+- counter = @counter || 0
+
+= form_tag typing_path(@user), :method => :post, :onSubmit => "return setPattern('#{@user.email}')", autocomplete: :off do
+  .field
+    = label_tag :text, "Type your email, #{@user.email}"
+    = text_field_tag :text
+    = hidden_field_tag :tp
+    = hidden_field_tag :counter
+  .actions
+    = submit_tag "Send typing info"
+
+:javascript
+  var tdna = new TypingDNA();
+  tdna.start();
+  function setPattern(text) {
+    var textToType = text;
+    var tp = tdna.getTypingPattern({type: 1, text: textToType});
+    var typedText = document.getElementById('text').value;
+    var isValid = true;
+    
+    if (!tp) {
+        isvalid = false;
+    } 
+    if ((typedText.length / textToType.length) < 0.8) {
+        isValid = false;
+    }
+    if (compareTexts(textToType, typedText)<0.8) {
+        isValid = false;
+    }
+    
+    if (isValid) {
+      document.getElementById('tp').value = tp;
+      document.getElementById('counter').value = #{counter};
+    }
+  }
+
+  function compareTexts (t1, t2) {
+    var dt1 = t1.split( ' ' );
+    var dt2 = t2.split( ' ' );
+    var total2 = 0 ;
+    var total1 = 0 ;
+    for ( var i in dt2) {
+    total2 += (dt1.indexOf(dt2[i]) > -1 ) ? 1 : 0 ;
+    }
+    for ( var i in dt1) {
+    total1 += (dt2.indexOf(dt1[i]) > -1 ) ? 1 : 0 ;
+    }
+    var total = (dt1.length > dt2.length) ? dt1.length : dt2.length;
+    var length = (dt1.length > dt2.length) ? dt1.length : dt2.length;
+    return total / length;
+  }

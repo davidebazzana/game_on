@@ -93,6 +93,9 @@ ActiveRecord::Schema.define(version: 2020_09_12_103405) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.integer "typing_tries", default: 0
+    t.boolean "enrolled", default: false
+    t.integer "logs", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "provider"

@@ -37,6 +37,15 @@ class ApplicationController < ActionController::Base
 
   end
 
+  def after_sign_in_path_for(resource)
+    if resource.logs? && resource.typing_tries?
+      resource.logs += 1
+      resource.typing_tries = 0
+      resource.save
+    end
+    games_path
+  end
+
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
       format.json { head :forbidden, content_type: 'text/html' }
