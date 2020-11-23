@@ -3,10 +3,10 @@
 
 = form_tag typing_path(@user), :method => :post, :onSubmit => "return setPattern('#{@user.email}')", autocomplete: :off do
   .field
-    = label_tag :text, "Type your email, #{@user.email}"
+    = label_tag :text, "Type your email, #{@user.email}, and don't copy-paste it!"
     = text_field_tag :text
     = hidden_field_tag :tp
-    = hidden_field_tag :counter
+    
   .actions
     = submit_tag "Send typing info"
 

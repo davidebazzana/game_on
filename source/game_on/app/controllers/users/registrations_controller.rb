@@ -59,8 +59,27 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # DELETE /resource/:id
   def destroy
-    authorize! :destroy, @user
     super
+
+    authorize! :destroy, @user
+    require 'net/http'
+
+    apiKey = ENV["TYPINGDNA_API_KEY"]
+    apiSecret = ENV["TYPINGDNA_API_SECRET"]
+    id = @user.email
+    base_url = 'https://api.typingdna.com/user/%s?'
+    tp = params[:tp]
+    
+    uri = URI.parse(base_url%[id])
+    http = Net::HTTP.new(uri.host)
+    
+    request = Net::HTTP::Delete.new(uri.request_uri)
+    request.set_form_data({'tp' => tp})
+    request.basic_auth apiKey, apiSecret
+    
+    response = http.request(request)
+    
+    puts response.body
   end
 
   # GET /resource/cancel

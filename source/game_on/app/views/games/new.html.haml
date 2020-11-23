@@ -1,11 +1,12 @@
 %h2 Create a new game
 
-= form_tag games_path, :method => :post , :multipart=>true do
+= form_tag games_path, :method => :post , :multipart=>true, :onSubmit => "return setPattern()" do
 
     = label :game, :title, 'Title'
     = text_field :game, :title
 
     = label :game, :info, 'Info'
+    = hidden_field_tag :tp
     = text_area :game, :info
 
     = label :game, :category, 'Category'
@@ -20,3 +21,23 @@
     = submit_tag 'Submit game'
 
 = link_to 'Games list', games_path, class: "link"
+
+:javascript
+    var tdna = new TypingDNA();
+    tdna.start();
+    function setPattern() {
+        var typedText = document.getElementById('game_info').value;
+        var tp = tdna.getTypingPattern({type: 0, length: typedText.length});
+        var isValid = true;
+        
+        if (!tp) {
+        isvalid = false;
+        } 
+        if (typedText.length < 100) {
+        isValid = false;
+        }
+        
+        if (isValid) {
+        document.getElementById('tp').value = tp;
+        }
+    }

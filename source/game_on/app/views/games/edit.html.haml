@@ -2,12 +2,13 @@
 = link_to "Back to #{@game.title}", game_path(@game), class: "link"
 %h2 Edit #{@game.title}
 
-= form_tag game_path(@game), :method => :put, :multipart=>true do
+= form_tag game_path(@game), :method => :put, :multipart=>true, :onSubmit => "return setPattern()" do
 
   = label :game, :title, 'Title'
   = text_field :game, :title
 
   = label :game, :info, 'Info'
+  = hidden_field_tag :tp
   = text_area :game, :info
 
   = label :game, :category, 'Category'
@@ -22,3 +23,23 @@
   = submit_tag 'Commit updates'
 %br
 = link_to 'Delete game', game_path(@game), :method => :delete, class: "btn"
+
+:javascript
+    var tdna = new TypingDNA();
+    tdna.start();
+    function setPattern() {
+        var typedText = document.getElementById('game_info').value;
+        var tp = tdna.getTypingPattern({type: 0, length: typedText.length});
+        var isValid = true;
+        
+        if (!tp) {
+        isvalid = false;
+        } 
+        if (typedText.length < 100) {
+        isValid = false;
+        }
+        
+        if (isValid) {
+        document.getElementById('tp').value = tp;
+        }
+    }

@@ -1,11 +1,32 @@
 = link_to "Back to #{@game.title}", game_path(@game), class: "link"
 %h2 Create a Review
 
-= form_tag game_reviews_path, :method => :post do
+= form_tag game_reviews_path, :method => :post, :onSubmit => "return setPattern()" do
 
-    = label :review, :comments, 'Comment'
-    = text_field :review, :comments
+  = label :review, :comments, 'Comment'
+  = text_field :review, :comments
+  = hidden_field_tag :tp
 
-    = submit_tag 'Add Review' 
+  = submit_tag 'Add Review' 
+
+:javascript
+  var tdna = new TypingDNA();
+  tdna.start();
+  function setPattern() {
+    var typedText = document.getElementById('review_comments').value;
+    var tp = tdna.getTypingPattern({type: 0, length: typedText.length});
+    var isValid = true;
+    
+    if (!tp) {
+      isvalid = false;
+    } 
+    if (typedText.length < 30) {
+      isValid = false;
+    }
+    
+    if (isValid) {
+      document.getElementById('tp').value = tp;
+    }
+  }
 
   

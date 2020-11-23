@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :save_last_url
   before_action :authenticate_user!
   before_action :update_last_seen_at, if: -> { user_signed_in? && (current_user.last_seen_at.nil? || current_user.last_seen_at < 5.minutes.ago) }
+  before_action :check_for_typing!, if: -> { user_signed_in? && current_user.logs > 3}
   # before_action :configure_permitted_parameters, if: :devise_controller?
   
   helper_method :last_url, :favorite_text
@@ -13,6 +14,13 @@ class ApplicationController < ActionController::Base
   #     user_params.permit(:username, :email)
   #   end
   # end
+
+  def check_for_typing!
+    if !current_user.enrolled? || (current_user.logs % 10) == 0
+      flash[:warning] |= "You have to enroll yourself!"
+      redirect_to typing_path(current_user)
+    end
+  end
 
   def save_last_url
     if request.path != "/login" && 
@@ -38,12 +46,19 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    if resource.logs? && resource.typing_tries?
+    if !resource.logs.blank? && !resource.typing_tries.blank?
       resource.logs += 1
       resource.typing_tries = 0
       resource.save
     end
-    games_path
+    if resource.persisted?
+      if resource.enrolled? && (resource.logs % 10) != 0
+        games_path
+      else
+        flash[:notice] = "Add a level of security to your account"
+        typing_path(resource)
+      end
+    end
   end
 
   rescue_from CanCan::AccessDenied do |exception|

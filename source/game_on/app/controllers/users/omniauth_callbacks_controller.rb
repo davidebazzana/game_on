@@ -10,13 +10,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
 
     if @user.persisted?
-      if @user.enrolled? && (@user.logs % 10) != 0 && @user.last_seen_at > 2.days.ago
-        sign_in_and_redirect @user, event: :authentication
-        set_flash_message(:notice, :success, kind: 'Google') if is_navigational_format?
-      else
-        flash[:notice] = "Add a level of security to your account"
-        redirect_to typing_path(@user)
-      end
+      sign_in_and_redirect @user, event: :authentication
+      set_flash_message(:notice, :success, kind: 'Google') if is_navigational_format?
     else
       session['devise.google_data'] = request.env['omniauth.auth']
       redirect_to new_user_registration_url, alert: @user.errors.full_messages.join
@@ -32,13 +27,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
 
     if @user.persisted?
-      if @user.enrolled? && (@user.logs % 10) != 0 && @user.last_seen_at > 2.days.ago
-        sign_in_and_redirect @user, event: :authentication
-        set_flash_message(:notice, :success, kind: 'Github') if is_navigational_format?
-      else
-        flash[:notice] = "Add a level of security to your account"
-        redirect_to typing_path(@user)
-      end
+      sign_in_and_redirect @user, event: :authentication
+      set_flash_message(:notice, :success, kind: 'Github') if is_navigational_format?
     else
       session['devise.github_data'] = request.env['omniauth.auth']
       redirect_to new_user_registration_url, alert: @user.errors.full_messages.join
