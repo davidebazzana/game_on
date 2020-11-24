@@ -8,14 +8,14 @@
     = yield :head
 
   %body
-    - if flash[:notice]
-      #notice.message= flash[:notice]
+    - if flash[:error]
+      #error.message= flash[:error]
     - elsif flash[:warning]
       #warning.message= flash[:warning]
+    - elsif flash[:notice]
+      #notice.message= flash[:notice]
     - elsif flash[:alert]
       #alert.message= flash[:alert]
-    - elsif flash[:error]
-      #error.message= flash[:error]
     #main
       %ul.hmenu
         - if user_signed_in?

@@ -1,7 +1,8 @@
 %h2 Prove that you're YOU!
-- counter = @counter || 0
 
-= form_tag typing_path(@user), :method => :post, :onSubmit => "return setPattern('#{@user.email}')", autocomplete: :off do
+%h3 Add a level of security to your account
+
+= form_tag typing_dna_path, :method => :post, :onSubmit => "return setPattern('#{@user.email}')", autocomplete: :off do
   .field
     = label_tag :text, "Type your email, #{@user.email}, and don't copy-paste it!"
     = text_field_tag :text
@@ -31,7 +32,6 @@
     
     if (isValid) {
       document.getElementById('tp').value = tp;
-      document.getElementById('counter').value = #{counter};
     }
   }
 

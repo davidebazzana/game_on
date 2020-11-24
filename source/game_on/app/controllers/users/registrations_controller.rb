@@ -36,7 +36,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       authorize! :assign_role, @user
     end
-
+    old_email = @user.email
     email_changed = @user.email != params[:user][:email]
     is_oauth_account = !@user.provider.blank?
 
@@ -49,11 +49,33 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
     if !successfully_updated
       render 'edit'
+      return
     elsif current_user.role == "admin"
       redirect_to user_path(@user)
     else
       bypass_sign_in @user
       redirect_to root_path
+    end
+    if email_changed
+      key = ENV['KEY'].freeze
+      crypt = ActiveSupport::MessageEncryptor.new(key)
+      require 'net/http'
+
+      apiKey = ENV["TYPINGDNA_API_KEY"]
+      apiSecret = ENV["TYPINGDNA_API_SECRET"]
+      id = BCrypt::Engine.hash_secret((old_email, key)
+      base_url = 'https://api.typingdna.com/changeuser/%s?'
+      newuserid = BCrypt::Engine.hash_secret(params[:user][:email], key)
+      uri = URI.parse(base_url%[id])
+      http = Net::HTTP.new(uri.host)
+      
+      request = Net::HTTP::Post.new(uri.request_uri)
+      request.set_form_data({'newuserid' => newuserid})
+      request.basic_auth apiKey, apiSecret
+      
+      response = http.request(request)
+      
+      puts response.body
     end
   end
 
@@ -62,19 +84,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
 
     authorize! :destroy, @user
+
+    key = ENV['KEY'].freeze
+    crypt = ActiveSupport::MessageEncryptor.new(key)
     require 'net/http'
 
     apiKey = ENV["TYPINGDNA_API_KEY"]
     apiSecret = ENV["TYPINGDNA_API_SECRET"]
-    id = @user.email
+    id = BCrypt::Engine.hash_secret((@user.email, key)
     base_url = 'https://api.typingdna.com/user/%s?'
-    tp = params[:tp]
     
     uri = URI.parse(base_url%[id])
     http = Net::HTTP.new(uri.host)
     
     request = Net::HTTP::Delete.new(uri.request_uri)
-    request.set_form_data({'tp' => tp})
     request.basic_auth apiKey, apiSecret
     
     response = http.request(request)

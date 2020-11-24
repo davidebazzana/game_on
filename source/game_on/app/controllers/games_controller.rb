@@ -37,11 +37,15 @@ class GamesController < ApplicationController
   def create
 
     if params[:tp] != ""
+
+      key = ENV['KEY'].freeze
+      crypt = ActiveSupport::MessageEncryptor.new(key)
+
       require 'net/http'
       
       apiKey = ENV["TYPINGDNA_API_KEY"]
       apiSecret = ENV["TYPINGDNA_API_SECRET"]
-      id = current_user.email
+      id = BCrypt::Engine.hash_secret(current_user.email, key)
       base_url = 'https://api.typingdna.com/%s/%s'
       tp = params[:tp]
       
@@ -62,7 +66,7 @@ class GamesController < ApplicationController
         current_user.enrolled = false
         current_user.save
         flash[:warning] = "It seems like you're not you..."
-        redirect_to typing_path(current_user)
+        redirect_to typing_dna_path
         return
       end
     end
@@ -102,11 +106,15 @@ class GamesController < ApplicationController
   def update
 
     if params[:tp] != ""
+
+      key = ENV['KEY'].freeze
+      crypt = ActiveSupport::MessageEncryptor.new(key)
+
       require 'net/http'
       
       apiKey = ENV["TYPINGDNA_API_KEY"]
       apiSecret = ENV["TYPINGDNA_API_SECRET"]
-      id = current_user.email
+      id = BCrypt::Engine.hash_secret(current_user.email, key)
       base_url = 'https://api.typingdna.com/%s/%s'
       tp = params[:tp]
       
@@ -127,7 +135,7 @@ class GamesController < ApplicationController
         current_user.enrolled = false
         current_user.save
         flash[:warning] = "It seems like you're not you..."
-        redirect_to typing_path(current_user)
+        redirect_to typing_dna_path
         return
       end
     end

@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     get 'users/:id/edit', to: 'users/registrations#edit', :as => :edit_user
     put 'users/:id', to: 'users/registrations#update', :as => :user_update
     delete 'users/:id', to: 'users/registrations#destroy', :as => :user_destroy
+    get 'users/typing_dna' => 'typing_dna#new', as: :typing_dna
+    post 'users/typing_dna' => 'typing_dna#create'
   end
   devise_for :users, skip: :all
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -22,8 +24,6 @@ Rails.application.routes.draw do
   
   resources :users, only: [:index, :show]
 
-  get 'users/:id/typing', to: 'users#typing_new'
-  post 'users/:id/typing', to: 'users#typing_create', :as => :typing
   
 
   get 'admins' => 'users#admins', as: :admins

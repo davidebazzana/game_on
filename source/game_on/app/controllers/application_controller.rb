@@ -17,8 +17,8 @@ class ApplicationController < ActionController::Base
 
   def check_for_typing!
     if !current_user.enrolled? || (current_user.logs % 10) == 0
-      flash[:warning] |= "You have to enroll yourself!"
-      redirect_to typing_path(current_user)
+      flash[:warning] = "You have to demonstrate your identity!"
+      redirect_to typing_dna_path
     end
   end
 
@@ -46,17 +46,15 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    if !resource.logs.blank? && !resource.typing_tries.blank?
+    if !resource.logs.blank?
       resource.logs += 1
-      resource.typing_tries = 0
       resource.save
     end
     if resource.persisted?
       if resource.enrolled? && (resource.logs % 10) != 0
         games_path
       else
-        flash[:notice] = "Add a level of security to your account"
-        typing_path(resource)
+        typing_dna_path
       end
     end
   end
