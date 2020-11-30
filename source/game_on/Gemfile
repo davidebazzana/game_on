@@ -42,6 +42,8 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 4.0.0'
+  gem 'railroady'
+  gem 'rails-erd'
 end
 
 group :development do
@@ -92,6 +94,4 @@ gem 'omniauth-google-oauth2'
 gem 'cancancan'
 gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
 
-gem 'attr_encrypted'
-gem 'blind_index'
 

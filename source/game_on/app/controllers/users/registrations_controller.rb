@@ -63,7 +63,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
       apiKey = ENV["TYPINGDNA_API_KEY"]
       apiSecret = ENV["TYPINGDNA_API_SECRET"]
-      id = BCrypt::Engine.hash_secret((old_email, key)
+      id = BCrypt::Engine.hash_secret(old_email, key)
       base_url = 'https://api.typingdna.com/changeuser/%s?'
       newuserid = BCrypt::Engine.hash_secret(params[:user][:email], key)
       uri = URI.parse(base_url%[id])
@@ -81,9 +81,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # DELETE /resource/:id
   def destroy
+    authorize! :destroy, @user
     super
 
-    authorize! :destroy, @user
 
     key = ENV['KEY'].freeze
     crypt = ActiveSupport::MessageEncryptor.new(key)
@@ -91,7 +91,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     apiKey = ENV["TYPINGDNA_API_KEY"]
     apiSecret = ENV["TYPINGDNA_API_SECRET"]
-    id = BCrypt::Engine.hash_secret((@user.email, key)
+    id = BCrypt::Engine.hash_secret(@user.email, key)
     base_url = 'https://api.typingdna.com/user/%s?'
     
     uri = URI.parse(base_url%[id])

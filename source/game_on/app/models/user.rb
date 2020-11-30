@@ -11,17 +11,19 @@ class User < ApplicationRecord
   has_many :reviews
 
   ROLES = %i[admin moderator player]
-  
+
   has_many :favorites
   has_many :favorite_games, through: :favorites, source: :favorited, source_type: 'Game'
-  
-  has_many :friendships
-  has_many :friends, :through => :friendships
-  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
-  has_many :inverse_friends, :through => :inverse_friendships, :source => :user
 
-  def friend_with?(other_user)
-    friendships.find_by(friend_id: other_user.id)
+  
+  has_many :following_relationships, foreign_key: :follower_id, class_name: 'Relationship', dependent: :destroy
+  has_many :following, through: :following_relationships, source: :followed
+  
+  has_many :follower_relationships, foreign_key: :followed_id, class_name: 'Relationship', dependent: :destroy
+  has_many :followers, through: :follower_relationships
+
+  def follows?(other_user)
+    following.include?(other_user)
   end
 
   def self.from_omniauth(auth)

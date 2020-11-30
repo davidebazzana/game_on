@@ -45,12 +45,11 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :friendships
+  resources :relationships, only: [:create, :destroy]
 
-  resources :invitefriend
-  resources :invitetoplaygame
-  resources :contactdev
-  resources :contactadm
+  resources :invitefriend, only: [:new]
+  resources :contactdev, only: [:new]
+  resources :contactadm, only: [:new]
 
   root to: 'games#index'
 end

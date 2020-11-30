@@ -43,7 +43,7 @@ class TypingDnaController < ApplicationController
 
     if parsed_json["action"] == "enroll" && parsed_json["status"] == 200
       redirect_to games_path
-    elsif parsed_json["action"] == "verify;enroll" && parsed_json["result"] == 1
+    elsif (parsed_json["action"] == "verify;enroll" || parsed_json["action"] == "verify") && parsed_json["result"] == 1
       if !@user.enrolled?
         @user.enrolled = true
       end

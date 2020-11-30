@@ -13,30 +13,28 @@
 
 - if can? :follow, @user
 
-  %h1 Add Follow:
-
   %ul
-    - if current_user.friend_with? @user
+    - if current_user.follows? @user
       %p you already follow #{@user.username}
     - else
-      = link_to "Follow", friendships_path(:friend_id => @user), :method => :post, class: "btn"
+      = link_to "Follow", relationships_path(:followed_id => @user), :method => :post, class: "btn"
 
 - else
 
   %table
     %thead
       %tr
-        %th Follow
+        %th Following
         %th Status
     %tbody
-      - for friendship in @user.friendships
+      - for followed in @user.following
         %tr
           %td
-            = h friendship.friend.username
-            - if can? :unfollow, friendship.friend
-              = link_to "remove", friendship, :method => :delete, class: "btn"
+            = h followed.username
+            - if can? :unfollow, followed
+              = link_to "remove", relationship_path(followed), :method => :delete, class: "btn"
           %td
-            - if @online_users.include?(friendship.friend)
+            - if @online_users.include?(followed)
               .onlinestatus Online
             - else
               .offlinestatus Offline
@@ -44,12 +42,12 @@
   %table
     %thead
       %tr
-        %th Follower
+        %th Followers
 
     %tbody
-      - for user in @user.inverse_friends
+      - for follower in @user.followers
         %tr
-          %td= h user.username
+          %td= h follower.username
 
 %br
 
